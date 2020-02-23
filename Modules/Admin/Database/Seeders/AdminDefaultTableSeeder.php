@@ -4,8 +4,10 @@ namespace Modules\Admin\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class AdminDatabaseSeeder extends Seeder
+class AdminDefaultTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +18,10 @@ class AdminDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(UserTypeTableSeeder::class);
-        $this->call(AdminDefaultTableSeeder::class);
-        
+        User::create([
+            'username' => 'admin',
+            'type_id' => '1',
+            'password' => Hash::make('admin'),
+        ]);
     }
 }
