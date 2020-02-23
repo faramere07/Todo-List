@@ -17,7 +17,7 @@
               <h1 class=" lead">User accounts</h1>
             </div>
             <div class="col-md-4">
-              <a href="{{ route('register') }}" class="btn btn-outline-primary col-md-6 float-right">Add User</a>
+              <a href="" class="btn btn-outline-primary col-md-6 float-right">Add User</a>
             </div>
         </div>
         <hr>
@@ -25,7 +25,7 @@
 		    <thead class="thead thead-dark">
 	            <tr>
                   <th>Picture</th>
-                  <th>Usesrname</th>
+                  <th>Username</th>
 	                <th>Name</th>
                   <th>Actions</th>
 	            </tr>
@@ -77,42 +77,7 @@
         $('.empty').hide();
         $('.emptyUpdate').hide();
 
-        var dataTable= $('#table_id').DataTable( {
-            processing: true,
-            serverSide: true,
-            dataType: 'json',
-            language:{
-              emptyTable: "No User Added.",
-            },
-            "ajax": "{{route('usersShow')}}",
-            "columns": [
-                { "data": "userDetail.profile_picture"},
-                { "data": "username" },
-                { "data": "first_name" },
-                { "data": "actions" },
-            ],
-            columnDefs:[
-                {
-                  "targets":[0],
-                  "render": function(data, type, row){
-
-                        var aa = "<img style='width:150px; id='imageid' height:150px;' src=''/>";
-                        document.getElementById("imageid").src="{{ asset('images/"+row.profile_picture+"') }}";
-                        return aa;
-                  }
-                },
-                {
-                  "targets":[2],
-                  "render": function(data, type, row){
-                        if(row.first_name == null){
-                            return "<i>(To be Fill-up)</i>"
-                        }else{
-                          return row.first_name + " " + row.mid_name + " " + row.last_name;
-                        }
-                  }
-                }
-            ],
-          });
+        
 
 
 
