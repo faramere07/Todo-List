@@ -26,10 +26,7 @@ class AdminController extends Controller
     }
 
     public function usersShow(){
-        $users = UserDetail::join('users', 'users.id', 'user_details.user_id')
-                ->where('type_id', '!=', 1)
-                ->select('*','user_details.id as ud_id')
-                ->get();
+        $users = User::with('userDetail');
               
          // $users = DB::table('user')->get();
          // dd($users);
