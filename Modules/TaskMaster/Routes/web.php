@@ -27,10 +27,15 @@ Route::prefix('taskmaster')->group(function() {
     Route::post('/saveEditTask', 'TaskMasterController@saveEditTask')->name('saveEditTask');
     Route::post('/destroyTask', 'TaskMasterController@destroyTask')->name('destroyTask');
     
+
+    //update on first visit
     Route::post('/updateUserDetails', 'TaskMasterController@updateUserDetails')->name('updateUserDetails');
     
-
+    //passwords
     Route::get('/changePassword', 'TaskMasterController@changePassword')->name('changePasswordTaskMaster');
     Route::post('/', 'TaskMasterController@savePassword')->name('savePasswordTaskMaster');
+
+    Route::get('/viewProfile', 'TaskMasterController@viewProfile')->name('viewProfile');
+
 
 });

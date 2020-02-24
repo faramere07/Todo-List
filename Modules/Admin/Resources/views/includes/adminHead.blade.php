@@ -5,28 +5,34 @@
 
   <title>Admin</title>
   
-  <link href="{{ asset('css/font.googleapis.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.10.2-web/css/all.css') }}">
+ 
+<!--CSS-->
+<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"> -->
 
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+<!--JS-->
+<!-- <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-3.4.1.slim.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script> -->
 
-     
-  <script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" ></script>
-  <script src="{{ asset('js/jquery-3.4.1.min.js') }}" ></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="{{ asset('js/popper.min.js') }}" ></script>
-  <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
-  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    
-  
+ <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
 
-          
+        <!-- asdasdasd -->
 
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+        <!-- JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" ></script>
        {{-- Laravel Mix - CSS File --}}
        {{-- <link rel="stylesheet" href="{{ mix('css/admin.css') }}"> --}}
 

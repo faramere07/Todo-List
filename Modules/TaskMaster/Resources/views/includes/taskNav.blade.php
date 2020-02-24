@@ -33,6 +33,10 @@
                                         {{ __('Generate Report') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('viewProfile') }}">
+                                        {{ __('View Profile') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
                                         {{ __('Change Password') }}
                                     </a>

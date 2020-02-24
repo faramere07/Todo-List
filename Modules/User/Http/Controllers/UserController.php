@@ -46,20 +46,22 @@ class UserController extends Controller
         $user = User::find(Auth::id());
         $userDetails = UserDetail::where('user_id', Auth::id())->first();
 
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        if($request->image != null){
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $imageName);
+        $userDetails->profile_picture = $imageName;
+        }
 
         $userDetails->first_name= $request->firstName;
         $userDetails->mid_name = $request->midName;
         $userDetails->last_name =$request->lastName;
-        $userDetails->profile_picture = $imageName;
         $userDetails->save();
 
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return view('user::index');
+        return redirect()->route('userHome');
 
     }
 

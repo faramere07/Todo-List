@@ -2640,6 +2640,8 @@ class ComposerStaticInit784e12682920af1cbc4668a97185136c
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
         'Modules\\Admin\\Database\\Seeders\\AdminDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Admin/Database/Seeders/AdminDatabaseSeeder.php',
+        'Modules\\Admin\\Database\\Seeders\\AdminDefaultTableSeeder' => __DIR__ . '/../..' . '/Modules/Admin/Database/Seeders/AdminDefaultTableSeeder.php',
+        'Modules\\Admin\\Database\\Seeders\\UserTypeTableSeeder' => __DIR__ . '/../..' . '/Modules/Admin/Database/Seeders/UserTypeTableSeeder.php',
         'Modules\\Admin\\Entities\\TaskType' => __DIR__ . '/../..' . '/Modules/Admin/Entities/TaskType.php',
         'Modules\\Admin\\Entities\\UserDetail' => __DIR__ . '/../..' . '/Modules/Admin/Entities/UserDetail.php',
         'Modules\\Admin\\Entities\\UserType' => __DIR__ . '/../..' . '/Modules/Admin/Entities/UserType.php',

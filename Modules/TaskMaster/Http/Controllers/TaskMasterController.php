@@ -278,20 +278,22 @@ class TaskMasterController extends Controller
         $user = User::find(Auth::id());
         $userDetails = UserDetail::where('user_id', Auth::id())->first();
 
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        if($request->image != null){
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $imageName);
+        $userDetails->profile_picture = $imageName;
+        }
 
         $userDetails->first_name= $request->firstName;
         $userDetails->mid_name = $request->midName;
         $userDetails->last_name =$request->lastName;
-        $userDetails->profile_picture = $imageName;
         $userDetails->save();
 
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return view('taskmaster::index');
+        return redirect()->route('taskmasterHome');
 
     }
 
@@ -325,6 +327,14 @@ class TaskMasterController extends Controller
             ->with('success', 
     'Password Changed');
         
+    }
+
+    public function viewProfile(){
+
+      $id =  Auth::id();
+      $userDetails = UserDetail::where('user_id', $id)->first();
+
+        return view('taskmaster::viewProfile', compact('userDetails'));
     }
 
 }

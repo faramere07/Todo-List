@@ -2138,6 +2138,8 @@ return array(
     'Mockery\\VerificationDirector' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationDirector.php',
     'Mockery\\VerificationExpectation' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
     'Modules\\Admin\\Database\\Seeders\\AdminDatabaseSeeder' => $baseDir . '/Modules/Admin/Database/Seeders/AdminDatabaseSeeder.php',
+    'Modules\\Admin\\Database\\Seeders\\AdminDefaultTableSeeder' => $baseDir . '/Modules/Admin/Database/Seeders/AdminDefaultTableSeeder.php',
+    'Modules\\Admin\\Database\\Seeders\\UserTypeTableSeeder' => $baseDir . '/Modules/Admin/Database/Seeders/UserTypeTableSeeder.php',
     'Modules\\Admin\\Entities\\TaskType' => $baseDir . '/Modules/Admin/Entities/TaskType.php',
     'Modules\\Admin\\Entities\\UserDetail' => $baseDir . '/Modules/Admin/Entities/UserDetail.php',
     'Modules\\Admin\\Entities\\UserType' => $baseDir . '/Modules/Admin/Entities/UserType.php',
