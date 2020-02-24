@@ -11,14 +11,14 @@ class UserTypeSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('user_types')->insert([
-        //     'type_name' => 'Admin',
-        // ]);
-        // DB::table('user_types')->insert([
-        //     'type_name' => 'Task Master',
-        // ]);
-        // DB::table('user_types')->insert([
-        //     'type_name' => 'User',
-        // ]);
+        DB::table('user_types')->insert([
+            'type_name' => 'Admin',
+        ]);
+        DB::table('user_types')->insert([
+            'type_name' => 'Task Master',
+        ]);
+        DB::table('user_types')->insert([
+            'type_name' => 'User',
+        ]);
     }
 }
