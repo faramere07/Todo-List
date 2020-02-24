@@ -29,7 +29,7 @@
 
     <br>
 
-    <!-- Modal -->
+    <!-- Modal for viewing Details-->
 
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -50,6 +50,25 @@
 
               </div>
 
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for finishing tasks-->
+
+    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title lead" id="exampleModalLabel">Task Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+              <div class="modal-body" id="finishBody">
+
+                  
+              </div>
         </div>
       </div>
     </div>
@@ -81,7 +100,7 @@
         } );
         } );
 
-     //show Modal
+  //show Modal Details
   $(document).on('click','.details',function(){
           var id = $(this).attr('taskId');
 
@@ -96,6 +115,26 @@
               $('#detailModal').modal('show');
              
               $('#detailBody').html(data);
+             
+            }   
+          });  
+        });
+
+  //show Modal Finish
+  $(document).on('click','.finish',function(){
+          var id = $(this).attr('taskId');
+
+          $.ajax({
+            url:"{{ route('finishTask') }}",
+            method:"POST",
+            data:{
+              id:id,
+              _token:token
+            },
+            success:function(data){
+              $('#finishModal').modal('show');
+             
+              $('#finishBody').html(data);
              
             }   
           });  
