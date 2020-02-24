@@ -97,4 +97,69 @@ class UserController extends Controller
         
     }
 
+    public function user_dtb(){
+
+        $tasks = Tasks::where('user_id', Auth::id())
+        ->get();
+                   
+         return DataTables::of($tasks)
+            ->addColumn('actions', function($task) {
+                    return '<button class="btn btn-outline-info details" taskId="'.$task->id.'">Details</button>
+                            <button class="btn btn-outline-primary finish" taskId="'.$task->id.'">Finish</button>
+                            ';
+                })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function taskDetails(Request $request)
+    {
+
+        $taskDetail = Tasks::where('id', $request->id)->first();
+
+
+        echo
+                ' 
+                <div class="form-row">
+                    <div class="col-md-8">
+                <label class="small">Project Name:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.$taskDetail->project_id.'">
+                    </div>
+                    <div class="col-md-4">
+                <label class="small">Status:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.$taskDetail->status.'">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                <label class="small">Task Name:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.$taskDetail->task_title.'">
+                    </div>
+
+                    <div class="col-md-6">
+                <label class="small">Task Type:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.$taskDetail->task_type_id.'">
+                    </div>
+
+                </div>
+
+                  <label class="small">Task Description:</label>
+                <textarea type="text" rows="4" disabled class="form-control mb-1 firstNameEdit">'.$taskDetail->task_description.'</textarea>
+              
+                 <div class="form-row">
+                    <div class="col-md-6">
+                <label class="small">Due Date:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.date('d-M-y', strtotime($taskDetail->due_date)).'">
+                    </div>
+
+                    <div class="col-md-6">
+                <label class="small">Time:</label>
+                <input type="text" disabled class="form-control mb-1 " value="'.date('h:i A', strtotime($taskDetail->date_time)).'">
+                    </div>
+
+                </div>';
+
+    }
+
 }

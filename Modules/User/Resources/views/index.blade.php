@@ -1,11 +1,7 @@
 @extends('user::layouts.master')
 
 @section('content')
-
-<div class="alert alertOld alert-info alert-dismissible fade show alertOld" role="alert">
-            <button type="button" class="close" data-dismiss="alert">×</button>
   
-</div>  
 @if(session('success'))
     <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -14,35 +10,95 @@
 @endif
 
     <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have # task(s) assigned</p>
+    
+
     <hr>
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+      <table id="table_id" class="table table-bordered">
+        <thead class="thead thead-dark">
+              <tr>
+                  <th>Project Name</th>
+                  <th>Task</th>
+                  <th>Task Type</th>
+                  <th>Due Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th class="thwidth">Form Action</th>
+              </tr>
+        </thead>   
+    </table>
+
+    <br>
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title lead" id="exampleModalLabel">Task Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          @csrf
+              <div class="modal-body" id="detailBody">
+
+                  
+              </div>
+              <div class="modal-footer">
+
+              </div>
+
+        </div>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $.ajaxSetup({
+    headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          var token = $("input[name='_token']").val();
+
+    $(document).ready(function(){
+
+        var dataTable= $('#table_id').DataTable( {
+        "ajax": "{{ route('user_dtb') }}",
+        "columns": [
+            { "data": "project_id" },
+            { "data": "task_title" },
+            { "data": "task_type_id" },
+            { "data": "due_date" },
+            { "data": "date_time" },
+            { "data": "status" },
+            { "data": "actions" },
+           
+        ]
+        } );
+        } );
+
+     //show Modal
+  $(document).on('click','.details',function(){
+          var id = $(this).attr('taskId');
+
+          $.ajax({
+            url:"{{ route('taskDetails') }}",
+            method:"POST",
+            data:{
+              id:id,
+              _token:token
+            },
+            success:function(data){
+              $('#detailModal').modal('show');
+             
+              $('#detailBody').html(data);
+             
+            }   
+          });  
+        });
+</script>
 @endsection

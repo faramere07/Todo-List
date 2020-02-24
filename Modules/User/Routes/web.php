@@ -17,5 +17,7 @@ Route::prefix('user')->group(function() {
 
     Route::get('/changePassword', 'UserController@changePassword')->name('changePasswordUser');
     Route::post('/', 'UserController@savePassword')->name('savePasswordUser');
+    Route::get('/user_dtb', 'UserController@user_dtb')->name('user_dtb');
+    Route::post('/taskDetails', 'UserController@taskDetails')->name('taskDetails');
 
 });
