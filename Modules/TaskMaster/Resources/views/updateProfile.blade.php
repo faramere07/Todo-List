@@ -22,7 +22,7 @@
                 <div class="card-header">{{ __('Update Account') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('editProfileTaskMaster') }}"  enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('updateUserDetails') }}"  enctype="multipart/form-data">
                         @csrf
 
 
