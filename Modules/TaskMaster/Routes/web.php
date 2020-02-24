@@ -36,6 +36,7 @@ Route::prefix('taskmaster')->group(function() {
     Route::post('/', 'TaskMasterController@savePassword')->name('savePasswordTaskMaster');
 
     Route::get('/viewProfile', 'TaskMasterController@viewProfile')->name('viewProfile');
+    Route::post('/editProfile', 'TaskMasterController@editProfile')->name('editProfileTaskMaster');
 
 
 });

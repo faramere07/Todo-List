@@ -324,8 +324,7 @@ class TaskMasterController extends Controller
         // return view('admin::index')->with('success', 'User Updated');
         return redirect()
             ->route('taskmasterHome')
-            ->with('success', 
-    'Password Changed');
+            ->with('success', 'Password Changed');
         
     }
 
@@ -337,4 +336,27 @@ class TaskMasterController extends Controller
         return view('taskmaster::viewProfile', compact('userDetails'));
     }
 
+    public function editProfile (Request $request){
+        $user = User::find(Auth::id());
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        if($request->image != null){
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+        $userDetails->profile_picture = $imageName;
+        }
+
+        $userDetails->first_name= $request->firstName;
+        $userDetails->mid_name = $request->middleName;
+        $userDetails->last_name =$request->lastName;
+        $userDetails->save();
+
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('viewProfile')->with('success', 'Profile Updated');
+        
+
+    }
 }

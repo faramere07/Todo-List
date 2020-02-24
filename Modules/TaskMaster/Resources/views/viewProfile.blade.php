@@ -3,6 +3,14 @@
 @section('content')
 
 
+@if(session('success'))
+    <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+         <strong>{{ session('success') }}</strong>
+    </div>
+@endif
+
+   
   <div class="container" style="margin-top: 2%;">
       <div class="form-row col-md-12 no-gutters">
         <div class="form-row col-md-4 no-gutters">
@@ -34,7 +42,7 @@
                 
                 <div >
                
-                   <button type="button" class="btn btn-outline-primary float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Edit profile</button>
+                   <button type="button" class="btn btn-outline-primary float-right" id="addBtn" data-target="#editModal" data-toggle="modal" >Edit profile</button>
                 </div>
               </div>
             </div>
@@ -47,7 +55,7 @@
 
 
     <!-- Modal for Adding -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -57,7 +65,7 @@
             </button>
           </div>
 
-          <form  id="addForm" method="POST">
+          <form  id="editForm" method="POST" action="{{ route('editProfileTaskMaster') }}"  enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
              
@@ -83,11 +91,12 @@
             <div class="modal-footer">
              
                   <input type="hidden" name="date" id="dateAdd">
-                  <button type="submit" class="btn btn-outline-primary add">Save project</button>
+                  <button type="submit" class="btn btn-outline-primary add">Update Profile</button>
             </div>
           </form>
         </div>
       </div>
     </div>
+
 
 @endsection
