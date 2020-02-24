@@ -9,7 +9,7 @@
     </div>
 @endif
 
-    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have # task(s) assigned</p>
+    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have {{ $taskDetails }} task(s) assigned</p>
     
 
     <hr>

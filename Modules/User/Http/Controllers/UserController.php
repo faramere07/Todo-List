@@ -30,11 +30,12 @@ class UserController extends Controller
 
       $id =  Auth::id();
       $userDetails = UserDetail::where('user_id', $id)->first();
+      $taskDetails = Tasks::where('user_id', $id)->count();
       $user = User::find($id);
       if (Hash::check('123123123', $user->password)) {
         return view('user::updateProfile', compact('userDetails'));
       } else{
-        return view('user::index', compact('userDetails'));
+        return view('user::index', compact('userDetails', 'taskDetails'));
       }
 
     
