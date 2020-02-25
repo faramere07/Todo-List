@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tasks extends Model
 {
     protected $guarded = [];
+    protected $table = 'tasks';
 
-     public function user()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

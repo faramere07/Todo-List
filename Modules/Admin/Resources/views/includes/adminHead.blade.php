@@ -48,6 +48,10 @@
               width: 50%;
               z-index: 9;
             }
+            #calendar {
+              float: left;
+              width: 100%;
+            }
        </style>
 </head>
         

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
+use Modules\TaskMaster\Entities\Tasks;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -20,26 +21,26 @@ class AdminController extends Controller
     public function index()
     {
 
-         $types = UserType::where('type_name','!=','Admin')->get();
+        $types = UserType::where('type_name','!=','Admin')->get();
          
-        return view('admin::index', compact('types'));
+        return view('admin::index');
     }
 
-    public function usersShow(){
-        //fixthis bruh
-        $users = UserDetail::join('users', 'users.id', 'user_details.user_id')
-                ->where('type_id', '!=', 1)
-                ->select('*','user_details.id as ud_id')
-                ->get();
-              
+    public function viewTask()
+    {
+        //$tasks = 
+    }
 
+    public function viewUsers()
+    {
+        return view('admin::users');
+    }
 
-        // $users = User::with('userDetail')->get();
-              
-         // $users = DB::table('user')->get();
-    
+    public function usersShow()
+    {
+        $users = User::with('userDetail')->where('id','!=', Auth::id())->get();
 
-         return DataTables::of($users)
+        return DataTables::of($users)
             ->addColumn('actions', function($user) {
                     return '<button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'" fname="'.$user->firstName.'">Delete</button>
                             <button class="btn btn-outline-info col-md-5 edit" userId="'.$user->id.'">Edit</button>
@@ -49,12 +50,9 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    
-
     public function editUser(Request $request)
     {
         $user = User::where('id', $request->id)->first();
-// dd($user);
         $userDetail = UserDetail::where('user_id', $request->id)->first();
 
 

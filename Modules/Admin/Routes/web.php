@@ -13,6 +13,12 @@
 
 Route::prefix('admin')->group(function() {
     Route::get('/', 'AdminController@index')->name('adminHome');
+    Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers');
+    Route::get('/tasks', 'AdminController@viewTask')->name('viewTask');
+
+
+
+
     Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow');
     Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd');
     Route::post('/editUser', 'AdminController@editUser')->name('editUser');
