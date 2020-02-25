@@ -10,10 +10,12 @@ use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
 use Modules\TaskMaster\Entities\Tasks;
+use Modules\TaskMaster\Entities\Project;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 use Auth;
-
+use Session;
+use Redirect;
 
 class AdminController extends Controller
 {
@@ -22,32 +24,66 @@ class AdminController extends Controller
     {
 
         $types = UserType::where('type_name','!=','Admin')->get();
-         
+
         return view('admin::index');
     }
 
     public function viewTask()
     {
-        //$tasks = 
+        $tasks = Tasks::with(['project','user']);
+
+        return Datatables::of($tasks)->make(true);
     }
 
     public function viewUsers()
     {
-        return view('admin::users');
+        $user_types = UserType::all();
+
+        return view('admin::users', compact('user_types'));
     }
 
     public function usersShow()
     {
-        $users = User::with('userDetail');
+        $users = User::with('userDetail')->where('users.id','!=',Auth::id());
 
         return DataTables::of($users)
             ->addColumn('actions', function($user) {
-                    return '<button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'" fname="'.$user->firstName.'">Delete</button>
-                            <button class="btn btn-outline-info col-md-5 edit" userId="'.$user->id.'">Edit</button>
+                    return '
+                    <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'">
+                        <i class="fas fa-user-minus"></i>
+                        <div class="buttonText">
+                            Deactivate
+                        </div>
+                    </button>
+                    <button class="btn btn-outline-info col-md-5 view" userId="'.$user->id.'">
+                        <i class="fas fa-eye"></i>
+                        <div class="buttonText2">
+                            View
+                        </div>
+                    </button>
                             ';
                 })
             ->rawColumns(['actions'])
             ->make(true);
+    }
+
+    public function addUser(Request $request)
+    {
+        $username = User::where('username',$request->get('username'))->first();
+
+        if(empty($username)){
+            User::create([
+                'username' => $request->get('username'),
+                'type_id' => $request->get('type_id'),
+                'password' => $request->get('password'),
+            ]);
+
+            Session::flash('message', "New User Added!");
+        }else{
+            Session::flash('message', "Failed to add User, Username already Exists!");
+        }
+
+        return Redirect::back();
     }
 
     public function editUser(Request $request)
@@ -128,10 +164,7 @@ class AdminController extends Controller
         $user->save();
 
         // return view('admin::index')->with('success', 'User Updated');
-        return redirect()
-            ->route('adminHome')
-            ->with('success', 
-    'Password Changed');
+        return redirect()->route('adminHome')->with('success','Password Changed');
         
     }
 

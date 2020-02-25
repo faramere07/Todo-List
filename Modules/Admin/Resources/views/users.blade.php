@@ -1,30 +1,105 @@
 @extends('admin::layouts.master')
 
 @section('content')
+  <style type="text/css">
+    .destroy, .view{
+      position: relative;
+    }
+    .buttonText{
+      display: none;
+      position: absolute;
+      top:-70%;
+      right: -30%;
+      color:#000;
+    }
+    .buttonText2{
+      display: none;
+      position: absolute;
+      top:-70%;
+      right: 13%;
+      color:#000;
+    }
+    .destroy:hover .buttonText{
+      display: block;
+    }
+    .view:hover .buttonText2{
+      display: block;
+    }
+  </style>
 
   <div class="container-fluid" style="margin-top: 70px; margin-bottom: 150px;">
-      <div class="form-row col-md-12" style="margin-top: 20px;">
+      <div class="form-row col-md-12"> 
+          @if (Session::has('message'))
+              <div class="alert alert-warning alert-dismissible fade show" style="display: block; position: relative; margin-bottom: 1%; text-align: left;">
+                <strong>{{ Session::get('message') }}!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          @endif
           <div class="form-row col-md-12" style="background-color: #FFF0F5; padding:10px;"> 
-              <button type="button" class="form-control col-md-2 ml-auto btn btn-outline-info">
+              <button type="button" class="form-control col-md-2 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
                   Add User
               </button>
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
-              
+              <div class="col-md-12">
+                  <table id="user_table" class="display" style="width: 100%;">
+                      <thead>
+                          <tr>
+                              <th>Profile Picture</th>
+                              <th>Username</th>
+                              <th>Name</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>       
+                  </table>
+              </div>
           </div>
-          <table id="user_table" class="display" style="width: 100%;">
-                  <thead>
-                      <tr>
-                          <th>Profile Picture</th>
-                          <th>Username</th>
-                          <th>Name</th>
-                          <th>Actions</th>
-                      </tr>
-                  </thead>       
-              </table>
       </div>
   </div>
 
+  <!-- Add user modal -->
+  <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="POST" action="{{ route('addUser') }}">
+        @csrf
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row col-md-12 justify-content-center">
+                    <div class="form-group col-md-8">
+                      <label for="exampleInputPassword1">Username</label>
+                      <input type="text" class="form-control" name="username"max="25" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="exampleInputPassword1">Username</label>
+                      <select type="text" class="form-control" name="type_id"required>
+                          @foreach($user_types as $types)
+                              <option value="{{ $types->id }}">{{ $types->type_name }}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="exampleInputPassword1">Password (Default: 123456789)</label>
+                      <input type="password" class="form-control" name="password"max="25" value="123456789" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add User</button>
+            </div>
+          </div>
+      </form>
+      
+    </div>
+  </div>
 
 <script type="text/javascript">
 
@@ -46,12 +121,18 @@
             ],
             columnDefs:[
                 {
+                  "width":"150px","targets":[0],
+                },
+                {
+                  "width":"100px","targets":[3],
+                },
+                {
                   "targets":[0],
                   "render": function(data, type, row){
                       if(row.profile_picture == null){
-                          return "<img style='width:150px; height:150px;' src='{{ asset('images/default-profile.png') }}'/>";
+                          return "<img style='width:100px; height:100px;' src='{{ asset('images/default-profile.png') }}'/>";
                       }else{
-                          return "<img style='width:150px; height:150px;' src='../public/images/default-profile.png'/>";
+                          return "<img style='width:100px; height:100px;' src='../images/"+row.profile_picture+"'/>";
                       }
                   }
                 },

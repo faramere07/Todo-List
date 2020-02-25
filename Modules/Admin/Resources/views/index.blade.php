@@ -34,6 +34,9 @@
                       <li>
                           Edit your own profile and password.
                       </li>
+                      <li>
+                          Deactivate user accounts.
+                      </li>
                   </ul>
               </div>
               <div class="col-md-12">
@@ -74,16 +77,19 @@
               </select>
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5">
-              <table class="display" id="task_table">
-                  <thead>
-                      <tr>
-                          <th>Dates</th>
-                          <th>Project Name</th>
-                          <th>Task Title</th>
-                          <th>Task Description</th>
-                      </tr>
-                  </thead>
-              </table>
+              <div class="col-md-12">
+                  <table class="display" id="task_table">
+                      <thead>
+                          <tr>
+                              <th>Dates</th>
+                              <th>Project Name</th>
+                              <th>Task Title</th>
+                              <th>Task Description</th>
+                          </tr>
+                      </thead>
+                  </table>
+              </div>
+              
           </div>
       </div>
   </div>
@@ -92,14 +98,51 @@
 <script type="text/javascript">
 
   //DataTables Ajax
-      // $('#task_table').DataTable({
-      //     processing: true,
-      //     serverSide: true,
-      //     language:{
-      //       emptyTable: "No Task Added.",
-      //     },
-      //     ajax: '{{ route('viewTask') }}'
-      // });
+      $('#task_table').DataTable({
+          processing: true,
+          serverSide: true,
+          language:{
+            emptyTable: "No Task Added.",
+          },
+          "ajax": "{{route('viewTask')}}",
+            "columns": [
+                { "data": "date_time"},
+                { "data": "project.project_name"},
+                { "data": "task_title" },
+                { "data": "task_description" },
+          ],
+          columnDefs:[
+                {
+                  "targets": [ 0 ],
+                  "render":function(data, type, row){
+                      var formattedDate = new Date(row.date_time);
+                      var d = formattedDate.getDate();
+                      var m =  formattedDate.getMonth() + 1;
+                      var y = formattedDate.getFullYear();
+
+                      if (formattedDate.getHours()>=12){
+                          var hour = parseInt(formattedDate.getHours()) - 12;
+                          var amPm = "PM";
+                      } else {
+                          var hour = formattedDate.getHours(); 
+                          var amPm = "AM";
+                      }
+
+                      var time = hour + ":" + formattedDate.getMinutes() + " " + amPm;
+
+                      var newdate = m + "/" + d + "/" + y
+
+                      return time+"</br>"+newdate;
+                  }
+                },
+                {
+                  "targets": [1],
+                  "render":function(data, type, row){
+                      return row.project.project_name +"</br><small>By: "+row.user.username+ " "+row.last_name+"</small>";
+                  }
+                },
+          ],
+      });
 
   //Calendar
     document.addEventListener('DOMContentLoaded', function() {

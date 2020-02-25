@@ -23,7 +23,7 @@ class CreateTasksTable extends Migration
             $table->foreign('task_type_id')->references('id')->on('task_types');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->time('date_time');
+            $table->datetime('date_time');
             $table->date('due_date');
             $table->string('status')->default('Ongoing');
             $table->string('remarks')->nullable();

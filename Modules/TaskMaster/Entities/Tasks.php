@@ -13,12 +13,13 @@ class Tasks extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     public function project()
     {
         return $this->belongsTo('Modules\TaskMaster\Entities\Project');
     }
     public function taskType()
     {
-        return $this->hasOne('Modules\Admin\Entities\TaskTyoe');
+        return $this->belongsTo('Modules\Admin\Entities\TaskType');
     }
 }
