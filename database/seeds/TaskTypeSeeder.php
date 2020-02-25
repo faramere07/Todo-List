@@ -27,5 +27,9 @@ class TaskTypeSeeder extends Seeder
             'type_name' => 'Documents',
             'type_desc' => 'Document all the functionalities and the requirements of the system',
         ]);
+        DB::table('task_types')->insert([
+            'type_name' => 'Development',
+            'type_desc' => 'Develop and design the system',
+        ]);
     	}
 }

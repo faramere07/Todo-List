@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/Activation', 'HomeController@index')->name('Activation');
+
 Route::get('Admin', '\Modules\Admin\Http\Controllers\AdminController@index')->name('Admin');
 Route::get('taskMaster', '\Modules\TaskMaster\Http\Controllers\TaskMasterController@index')->name('TaskMaster');
 Route::get('User', '\Modules\User\Http\Controllers\UserController@index')->name('User');

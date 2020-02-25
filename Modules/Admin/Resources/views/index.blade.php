@@ -87,7 +87,7 @@
             },
             "ajax": "{{route('usersShow')}}",
             "columns": [
-                { "data": "userDetail.profile_picture"},
+                { "data": "profile_picture"},
                 { "data": "username" },
                 { "data": "first_name" },
                 { "data": "actions" },

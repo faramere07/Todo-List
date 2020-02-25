@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Admin\Entities\UserType;
 
 trait RegistersUsers
 {
@@ -18,8 +17,7 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        $taskTypes = UserType::all();
-        return view('auth.register', compact('taskTypes'));
+        return view('auth.register');
     }
 
     /**
@@ -33,6 +31,8 @@ trait RegistersUsers
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
