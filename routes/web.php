@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/Activation', 'HomeController@index')->name('Activation');
+Route::post('/Activate', 'HomeController@userDetails')->name('Activate');
 
 Route::get('Admin', '\Modules\Admin\Http\Controllers\AdminController@index')->name('Admin');
 Route::get('taskMaster', '\Modules\TaskMaster\Http\Controllers\TaskMasterController@index')->name('TaskMaster');

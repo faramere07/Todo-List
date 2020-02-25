@@ -6,6 +6,9 @@
   <title>Admin</title>
   
 <!-- Fonts -->
+        {{-- Laravel Mix - CSS File --}}
+        {{-- <link rel="stylesheet" href="{{ mix('css/admin.css') }}"> --}}
+        
         <link href="{{ asset('css/font.googleapis.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.10.2-web/css/all.css') }}">
 

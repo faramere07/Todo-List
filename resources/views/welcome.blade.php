@@ -36,20 +36,44 @@
     
     <body style="background-color: #DCDCDC;">
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <ul class="navbar-nav ml-auto">
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-            <div class="container" style="margin-top: 50px; margin-bottom: 150px;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+              </div>
+            </nav>
+            <div class="container" style="margin-top: 80px; margin-bottom: 150px;">
                 <div class="form-row col-md-12 justify-content-center">
                     <div class="alert alert-success alert-block">
                         <strong>Your Account is Not Yet Activated, Please fill-up the form to Activate your Account!</strong>
@@ -58,27 +82,35 @@
                         <div class="form-row col-md-12 justify-content-center" style="background-color: #000; color: #fff; padding:5px 0px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
                             <h5>User Details</h5>
                         </div>
-                        <form class="form-row col-md-12 justify-content-center" style="background-color: #fff; padding:50px 50px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+                        <form class="form-row col-md-12 justify-content-center" style="background-color: #fff; padding:50px 50px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" method="POST" action="{{ route('Activate') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-row col-md-12">
-                                <div class="col-md-12" style="border:1px solid; width: 100%; height: 200px;">
-                                    <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-12">
-                                    <input type='file' name="files" accept='image/*' onchange='openFile(event)' id="files" hidden>
-                                    <center>
-                                        <button type="button" class="btn btn-primary" id="upBtn">Upload Picture</button>
-                                    </center>
-                                </div>
+                                <center>
+                                    <div class="col-md-8" style="border:1px solid; width: 100%; height: 200px;">
+                                        <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 100%; height: 100%;"><br>
+                                        (Optional)
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type='file' name="files" accept='image/*' onchange='openFile(event)' id="files" hidden>
+                                        <center>
+                                            (Optional)<br>
+                                            <button type="button" class="btn btn-primary" id="upBtn">Upload Picture</button>
+                                        </center>
+                                    </div>
+                                </center>
                             </div>
                             <div class="form-group col-md-12">
                                 <br>
-                                <input type="text" class="form-control" id="exampleInputPassword1" max="25" required="" placeholder="First Name">
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="first_name" max="25" required="" placeholder="First Name">
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="exampleInputPassword1" max="25" required="" required="" placeholder="Middle Name">
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="mid_name" max="25" required="" required="" placeholder="Middle Name">
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="exampleInputPassword1" max="25" required="" required="" placeholder="Last Name">
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="last_name" max="25" required="" required="" placeholder="Last Name">
+                            </div>
+                            <div class="form-row col-md-12">
+                                <button type="submit" class="btn btn-outline-primary col-md-12">Submit</button>
                             </div>
                         </form>
                     </div>
