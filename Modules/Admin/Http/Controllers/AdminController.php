@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     public function usersShow()
     {
-        $users = User::with('userDetail')->where('id','!=', Auth::id())->get();
+        $users = User::with('userDetail');
 
         return DataTables::of($users)
             ->addColumn('actions', function($user) {

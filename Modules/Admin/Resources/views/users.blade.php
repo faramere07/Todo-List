@@ -9,8 +9,10 @@
                   Add User
               </button>
           </div>
-          <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5">
-              <table id="table_id" class="display">
+          <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
+              
+          </div>
+          <table id="user_table" class="display" style="width: 100%;">
                   <thead>
                       <tr>
                           <th>Profile Picture</th>
@@ -20,7 +22,6 @@
                       </tr>
                   </thead>       
               </table>
-          </div>
       </div>
   </div>
 
@@ -30,7 +31,7 @@
     $(document).ready(function(){
 
       //DataTables Ajax
-        $('#table_id').DataTable({
+        $('#user_table').DataTable({
             processing: true,
             serverSide: true,
             language:{
@@ -38,7 +39,7 @@
             },
             "ajax": "{{route('usersShow')}}",
             "columns": [
-                { "data": "profile_picture"},
+                { "data": "userDetail.profile_picture"},
                 { "data": "username" },
                 { "data": "first_name" },
                 { "data": "actions" },
@@ -48,9 +49,9 @@
                   "targets":[0],
                   "render": function(data, type, row){
                       if(row.profile_picture == null){
-                          return "<img style='width:150px; height:150px;' src='{{ asset('images/default.png') }}'/>";
+                          return "<img style='width:150px; height:150px;' src='{{ asset('images/default-profile.png') }}'/>";
                       }else{
-                          return "<img style='width:150px; height:150px;' src='../public/images/"+row.profile_picture+"'/>";
+                          return "<img style='width:150px; height:150px;' src='../public/images/default-profile.png'/>";
                       }
                   }
                 },
