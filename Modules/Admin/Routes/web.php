@@ -12,22 +12,22 @@
 */
 
 Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index')->name('adminHome');
-    Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers');
-    Route::get('/tasks', 'AdminController@viewTask')->name('viewTask');
-    Route::post('/AddUser', 'AdminController@addUser')->name('addUser');
+    Route::get('/', 'AdminController@index')->name('adminHome')->middleware('admin');
+    Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers')->middleware('admin');
+    Route::get('/tasks', 'AdminController@viewTask')->name('viewTask')->middleware('admin');
+    Route::post('/AddUser', 'AdminController@addUser')->name('addUser')->middleware('admin');
 
 
 
-    Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow');
-    Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd');
-    Route::post('/editUser', 'AdminController@editUser')->name('editUser');
-    Route::post('/saveEditUser', 'AdminController@saveEditUser')->name('saveEditUser');
-    Route::post('/destroyUser', 'AdminController@destroyUser')->name('destroyUser');
+    Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow')->middleware('admin');
+    Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd')->middleware('admin');
+    Route::post('/editUser', 'AdminController@editUser')->name('editUser')->middleware('admin');
+    Route::post('/saveEditUser', 'AdminController@saveEditUser')->name('saveEditUser')->middleware('admin');
+    Route::post('/destroyUser', 'AdminController@destroyUser')->name('destroyUser')->middleware('admin');
 
-    Route::get('/adduser', 'AdminController@adduser')->name('adduser');
-    Route::get('/changePassword', 'AdminController@changePassword')->name('changePassword');
-    Route::post('/', 'AdminController@savePassword')->name('savePassword');
+    Route::get('/adduser', 'AdminController@adduser')->name('adduser')->middleware('admin');
+    Route::get('/changePassword', 'AdminController@changePassword')->name('changePassword')->middleware('admin');
+    Route::post('/', 'AdminController@savePassword')->name('savePassword')->middleware('admin');
 
     
 

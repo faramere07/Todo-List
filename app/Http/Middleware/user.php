@@ -3,12 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
 use Auth;
-
-
-
-class CheckUserType
+class user
 {
     /**
      * Handle an incoming request.
@@ -19,23 +15,13 @@ class CheckUserType
      */
     public function handle($request, Closure $next)
     {
-       if (!Auth::check()) {
+         if (!Auth::check()) {
             return redirect()->route('login');
         }
-
-        if (Auth::user()->type_id == 1) {
-            return redirect()->route('adminHome');
-        }
-
-        if (Auth::user()->type_id == 2) {
-            return redirect()->route('taskmasterHome');
-        }
-
         if (Auth::user()->type_id == 3) {
-            return redirect()->route('userHome');
+            return $next($request);
+        }else{
+            return redirect()->route('unauthorized');
         }
-
-
-        // return $next($request);
     }
 }

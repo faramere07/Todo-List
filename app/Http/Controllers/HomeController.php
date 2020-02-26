@@ -29,6 +29,10 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
+    public function unauthorized()
+    {
+        return view('unauthorize');
+    }
 
     public function userDetails(Request $request){
         

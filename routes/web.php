@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/Activation', 'HomeController@index')->name('Activation');
+Route::get('/unauthorized', 'HomeController@unauthorized')->name('unauthorized');
+
 Route::post('/Activate', 'HomeController@userDetails')->name('Activate');
 
 Route::get('Admin', '\Modules\Admin\Http\Controllers\AdminController@index')->name('Admin');
