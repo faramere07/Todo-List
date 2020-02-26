@@ -16,7 +16,6 @@
       <table id="table_id" class="table table-bordered">
 
         <thead class="thead thead-dark">
-          <p>asdadsa</p>
               <tr>
                   <th>Project Name</th>
                   <th>Task</th>

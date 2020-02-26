@@ -23,35 +23,33 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle lead" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> Welcome! &nbsp;
+                                {{ Auth::user()->userDetail->first_name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('viewProfile') }}">
+                                    <i class="fas fa-user-circle"></i> {{ __('View Profile') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="">
-                                        {{ __('Generate Report') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
+                                    <i class="fas fa-lock"></i> {{ __('Change Password') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('viewProfile') }}">
-                                        {{ __('View Profile') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
-                                        {{ __('Change Password') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                           
                         @endguest
                     </ul>
   </div>
