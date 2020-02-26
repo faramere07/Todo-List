@@ -38,5 +38,6 @@ Route::prefix('taskmaster')->group(function() {
     Route::get('/viewProfile', 'TaskMasterController@viewProfile')->name('viewProfile')->middleware('taskmaster');
     Route::post('/editProfile', 'TaskMasterController@editProfile')->name('editProfileTaskMaster')->middleware('taskmaster');
 
+    // Route::get('/taskReport', 'TaskMasterController@taskReport')->name('taskReport')->middleware('taskmaster');
 
 });

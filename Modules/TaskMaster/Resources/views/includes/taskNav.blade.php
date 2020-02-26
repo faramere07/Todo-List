@@ -8,6 +8,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav lead">
       <a class="nav-item nav-link active" href="{{ route('taskmasterHome') }}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="">
+            <i class="fas fa-file-pdf"></i> Reports
+        </a>
     </div>
 
     <!-- Right Side Of Navbar -->

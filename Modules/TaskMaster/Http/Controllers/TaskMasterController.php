@@ -359,4 +359,8 @@ class TaskMasterController extends Controller
         
 
     }
+
+    // public function taskReport(){
+    //     return view('taskmaster::report', compact('tasks'));
+    // }
 }
