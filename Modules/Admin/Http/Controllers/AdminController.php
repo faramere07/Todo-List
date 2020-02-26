@@ -73,9 +73,10 @@ class AdminController extends Controller
 
         if(empty($username)){
             User::create([
+                'password' => Hash::make($request->get('password')),
                 'username' => $request->get('username'),
                 'type_id' => $request->get('type_id'),
-                'password' => $request->get('password'),
+                
             ]);
 
             Session::flash('message', "New User Added!");
