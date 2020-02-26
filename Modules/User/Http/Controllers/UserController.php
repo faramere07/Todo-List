@@ -215,15 +215,8 @@ class UserController extends Controller
                 <textarea type="text" rows="4" disabled class="form-control mb-1 firstNameEdit">'.$taskDetail->task_description.'</textarea>
 
                 <hr>
-                <form method="POST" action="'.route('updateTask').'"
-                '.csrf_field().'
-                <input type="hidden" value="'.$taskDetail->id.'" name="taskId">
-                 <label class="small">Remarks:</label>
-                <input type="text" class="form-control mb-1" name="remarks">
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-dark col-md-12">Finish</button>
-              </div>
-            </form>';
+                  <input type="hidden" value="'.$taskDetail->id.'" name="taskId">
+                ';
 
     }
 

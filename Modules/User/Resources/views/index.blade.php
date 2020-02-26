@@ -14,7 +14,9 @@
 
     <hr>
       <table id="table_id" class="table table-bordered">
+
         <thead class="thead thead-dark">
+          <p>asdadsa</p>
               <tr>
                   <th>Project Name</th>
                   <th>Task</th>
@@ -24,7 +26,18 @@
                   <th>Status</th>
                   <th class="thwidth">Form Action</th>
               </tr>
-        </thead>   
+        </thead>  
+        <tfoot>
+          <tr>
+                  <th>Project Name</th>
+                  <th>Task</th>
+                  <th>Task Type</th>
+                  <th>Due Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th class="thwidth">Form Action</th>
+              </tr>
+        </tfoot> 
     </table>
 
     <br>
@@ -65,10 +78,24 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-              <div class="modal-body" id="finishBody">
+
+               <form method="POST" action="{{route('updateTask')}}">
+                @csrf
+
+                <div class="modal-body" id="finishBody">
 
                   
-              </div>
+                </div>
+
+                
+               
+                   <label class="small">Remarks:</label>
+                  <input type="text" class="form-control mb-1" name="remarks">
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark col-md-12">Finish</button>
+                </div>
+              </form>
+
         </div>
       </div>
     </div>
@@ -96,9 +123,32 @@
             { "data": "status" },
             { "data": "actions" },
            
-        ]
+        ],
+
+        initComplete: function () {
+            this.api().columns([5]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.header()) )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
         } );
         } );
+
+  
 
   //show Modal Details
   $(document).on('click','.details',function(){
