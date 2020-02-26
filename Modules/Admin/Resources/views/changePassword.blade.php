@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div class="container mb-2">
+<div class="container mb-2" style="margin-top: 70px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Change Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('savePasswordTaskMaster') }}">
+                    <form method="POST" action="{{ route('savePassword') }}">
                         @csrf
 
  
