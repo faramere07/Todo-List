@@ -101,10 +101,13 @@ class UserController extends Controller
 
     public function user_dtb(){
 
-        $tasks = Tasks::where('user_id', Auth::id())
+        $tasks = Tasks::with(['project','taskType'])->where('user_id', Auth::id())
         ->get();
                    
          return DataTables::of($tasks)
+            ->addColumn('task_name', function($task) { 
+                return $task->taskType->type_name;
+            })
             ->addColumn('actions', function($task) {    
                 if($task->status == "Ongoing"){
                     return '<button class="btn btn-outline-info details" taskId="'.$task->id.'">Details</button>
@@ -113,14 +116,14 @@ class UserController extends Controller
                     return '<button class="btn btn-outline-info details" taskId="'.$task->id.'">Details</button>';
                 }
                 })
-            ->rawColumns(['actions'])
+            ->rawColumns(['actions','task_name'])
             ->make(true);
     }
 
     public function taskDetails(Request $request)
     {
 
-        $taskDetail = Tasks::where('id', $request->id)->first();
+        $taskDetail = Tasks::with(['project','taskType'])->where('id', $request->id)->first();
 
 
         echo
@@ -128,7 +131,7 @@ class UserController extends Controller
                 <div class="form-row">
                     <div class="col-md-8">
                 <label class="small">Project Name:</label>
-                <input type="text" disabled class="form-control mb-1" value="'.$taskDetail->project_id.'">
+                <input type="text" disabled class="form-control mb-1" value="'.$taskDetail->project->project_name.'">
                     </div>
                     <div class="col-md-4">
                 <label class="small">Status:</label>
@@ -144,7 +147,7 @@ class UserController extends Controller
 
                     <div class="col-md-6">
                 <label class="small">Task Type:</label>
-                <input type="text" disabled class="form-control mb-1" value="'.$taskDetail->task_type_id.'">
+                <input type="text" disabled class="form-control mb-1" value="'.$taskDetail->taskType->type_name.'">
                     </div>
 
                 </div>

@@ -102,9 +102,9 @@
         var dataTable= $('#table_id').DataTable( {
         "ajax": "{{ route('user_dtb') }}",
         "columns": [
-            { "data": "project_id" },
+            { "data": "project.project_name" },
             { "data": "task_title" },
-            { "data": "task_type_id" },
+            { "data": "task_name" },
             { "data": "due_date" },
             { "data": "date_time" },
             { "data": "status" },
