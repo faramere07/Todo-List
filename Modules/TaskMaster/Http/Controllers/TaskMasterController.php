@@ -161,7 +161,7 @@ class TaskMasterController extends Controller
             'user_id' => $request->userId,
             'date_time' => $request->dateTime,
             'due_date' => $request->dueDate,
-            'status' => 'pending',
+            'status' => 'Ongoing',
 
 
         ]);

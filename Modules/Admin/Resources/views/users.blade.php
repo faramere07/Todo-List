@@ -37,15 +37,15 @@
                 </button>
               </div>
           @endif
-          <div class="form-row col-md-12" style="background-color: #FFF0F5; padding:10px;"> 
+          <div class="form-row col-md-12" style="padding:10px;"> 
               <button type="button" class="form-control col-md-2 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
-                  Add User
+                  Add New User
               </button>
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
               <div class="col-md-12">
-                  <table id="user_table" class="display" style="width: 100%;">
-                      <thead>
+                  <table id="user_table" class="display table-bordered" style="width: 100%;">
+                      <thead class="thead thead-dark">
                           <tr>
                               <th>Profile Picture</th>
                               <th>Username</th>
@@ -140,7 +140,7 @@
                   "targets":[2],
                   "render": function(data, type, row){
                       if(row.first_name == null){
-                        return "<i>(To Be Fill-up)</i>"
+                        return "<i>(To Be Filled-up)</i>"
                       }else{
                         return row.first_name + " " + row.mid_name + " " + row.last_name;
                       }
