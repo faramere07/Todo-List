@@ -36,7 +36,7 @@ class UserController extends Controller
       if (Hash::check('123123123', $user->password)) {
         return view('user::updateProfile', compact('userDetails'));
       } else{
-        return view('user::index', compact('userDetails', 'taskDetails'));
+        return view('user::index', compact('userDetails', 'taskDetails', 'user'));
       }
 
     
@@ -233,8 +233,10 @@ class UserController extends Controller
     public function updateTask (Request $request){
         $taskDetails = Tasks::where('id', $request->taskId)->first();
 
-        $date = new Carbon;
-        if($date > $taskDetails->due_date)
+        $date = Carbon::now();
+        $combinedDT = date('Y-m-d H:i:s', strtotime("$taskDetails->due_date $taskDetails->date_time"));
+
+        if($date > $combinedDT)
         {
             $taskDetails->status = 'Finished(Late)';
         } else {
