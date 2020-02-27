@@ -55,7 +55,7 @@ class AdminController extends Controller
                             Deactivate
                         </div>
                     </button>
-                    <a class="btn btn-outline-info col-md-5 view" href="'.route('viewUser',$user->id).'">
+                    <a class="btn btn-outline-info col-md-5 view" href="'.route('viewUser',$user->username).'">
                         <i class="fas fa-eye"></i>
                         <div class="buttonText2">
                             View
@@ -87,10 +87,9 @@ class AdminController extends Controller
     }
 
     public function viewUser($id){
-        $users = UserDetail::find($id);
-        $usertype = UserType::find($users->user->type_id);
-
-        return view('admin::userProfile',compact('users','usertype'));
+        $users = User::with('userType')->where('users.username',$id)->first();
+       
+        return view('admin::userProfile',compact('users'));
     }
 
     public function editUser(Request $request)

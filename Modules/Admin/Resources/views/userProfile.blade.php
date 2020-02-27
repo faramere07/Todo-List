@@ -15,7 +15,8 @@
 
           <div class="form-row col-md-12">
               <div class="col-md-4">
-                  {{ $usertype->type_name }}
+                  
+                {{ $users->userType->type_name }}
                   <img src="{{ asset('images/'.$users->profile_picture) }}" style="width:100%;">
               </div>
           </div>
