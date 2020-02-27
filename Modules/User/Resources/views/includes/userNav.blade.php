@@ -8,7 +8,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav lead">
       <a class="nav-item nav-link active" href="{{route('userHome')}}">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Finished Tasks</a>
+      <a class="nav-item nav-link active" href="">
+            <i class="fas fa-file-pdf"></i> Reports
+        </a>
     </div>
 
     <!-- Right Side Of Navbar -->
@@ -27,8 +29,8 @@
 
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> Welcome!
-                                    {{ Auth::user()->userDetail->first_name }} <span class="caret"></span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->userDetail->first_name }} {{ Auth::user()->userDetail->last_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
