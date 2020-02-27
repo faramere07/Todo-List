@@ -34,25 +34,47 @@ class AdminController extends Controller
 
     public function viewTask()
     {
-        $tasks = Tasks::with(['project','project.user.userDetail','taskType'])->get();
+        $tasks = Tasks::with(['project','project.user.userDetail','taskType','user.userDetail'])->get();
 
         return Datatables::of($tasks)
                 ->addColumn('created', function($tasks){
-                    return $tasks->created_at;
+                    $startTime = date('g:i A',strtotime($tasks->created_at));
+                    $startDate = date('M j, Y',strtotime($tasks->created_at));
+                    return $startDate."</br><small>".$startTime."</small>";
                 })
                 ->addColumn('due', function($tasks){
-                    return $tasks->due_date;
+                    $endTime = date('g:i A',strtotime($tasks->date_time));
+                    $endDate = date('M j, Y',strtotime($tasks->due_date));
+                    return $endDate."</br><small>".$endTime."</small>";
                 })
                 ->addColumn('project', function($tasks){
-                    return $tasks->project->user->userDetail->first_name;
+                    $proj_name = "<b>".$tasks->project->project_name."</b>";
+                    $creator_name = "<small>by: ".$tasks->project->user->userDetail->first_name." ".$tasks->project->user->userDetail->last_name."</small>";
+                    return $proj_name."</br>".$creator_name;
                 })
                 ->addColumn('task', function($tasks){
-                    return $tasks->task_title;
+                    $task_title = "<b>".$tasks->task_title."</b>";
+                    if(empty($tasks->user->userDetail->first_name)){
+                        $user_name = "<small>Task of: <i>(To be fill-up user details)</i></small>";
+                    }else{
+                        $user_name = "<small>Task of: ".$tasks->user->userDetail->first_name." ".$tasks->user->userDetail->first_name."</small>";
+                    }
+                    
+                    return $task_title."</br>".$user_name;
                 })
                 ->addColumn('description', function($tasks){
                     return $tasks->task_description;
                 })
-                ->rawColumns(['created','due','project','task','description'])
+                ->addColumn('actions', function($tasks) {
+                    return '
+                    <button class="btn btn-outline-info col-md-5 view taskview" taskid="'.$tasks->id.'">
+                        <i class="fas fa-eye"></i>
+                        <div class="buttonText2">
+                            View
+                        </div>
+                    </button>';
+                })
+                ->rawColumns(['created','due','project','task','description','actions'])
                 ->make(true);
     }
 
@@ -65,9 +87,12 @@ class AdminController extends Controller
 
     public function usersShow()
     {
-        $users = User::with('userDetail')->where('users.id','!=',Auth::id());
+        $users = User::with(['userDetail','userType'])->where('users.id','!=',Auth::id());
 
         return DataTables::of($users)
+            ->addColumn('type_name', function($user){
+                    return $user->userType->type_name;
+                })
             ->addColumn('actions', function($user) {
                     return '
                     <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'">

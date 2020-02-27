@@ -86,6 +86,7 @@
                               <th>Project Name</th>
                               <th>Task Title</th>
                               <th>Task Description</th>
+                              <th>Actions</th>
                           </tr>
                       </thead>
                   </table>
@@ -93,6 +94,27 @@
               
           </div>
       </div>
+  </div>
+
+
+<!--Task View Modal -->
+  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Task Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -112,59 +134,8 @@
                 { "data": "project"},
                 { "data": "task" },
                 { "data": "description" },
+                { "data": "actions" },
           ],
-          // columnDefs:[
-          //       {
-          //         "targets": [ 0 ],
-          //         "render":function(data, type, row){
-          //             var formattedDate = new Date(row.created_at);
-          //             var d = formattedDate.getDate();
-          //             var m =  formattedDate.getMonth() + 1;
-          //             var y = formattedDate.getFullYear();
-
-          //             if (formattedDate.getHours()>=12){
-          //                 var hour = parseInt(formattedDate.getHours()) - 12;
-          //                 var amPm = "PM";
-          //             } else {
-          //                 var hour = formattedDate.getHours(); 
-          //                 var amPm = "AM";
-          //             }
-
-          //             var time = hour + ":" + formattedDate.getMinutes() + " " + amPm;
-
-          //             var newdate = m + "/" + d + "/" + y
-
-          //             return time+"</br>"+newdate;
-          //         }
-          //       },
-          //       {
-          //         "targets": [ 1 ],
-          //         "render":function(data, type, row){
-          //             var time = row.date_time;
-          //             var timeArr = time.split(":");
-          //             var hours = timeArr[0];
-          //             var min = timeArr[1];
-
-          //             if (hours >= 12){
-          //                 var hour = parseInt(hours) - 12;
-          //                 var amPm = "PM";
-          //             } else {
-          //                 var hour = hours; 
-          //                 var amPm = "AM";
-          //             }
-
-          //             var newtime = hour + ":" + min + " " + amPm;
-
-          //             return newtime+"</br>"+row.due_date;
-          //         }
-          //       },
-          //       {
-          //         "targets": [2],
-          //         "render":function(data, type, row){
-          //             return row.project.project_name +"</br><small>By: "+row.project.user.userDetail.first_name+ " "+row.first_name+"</small>";
-          //         }
-          //       },
-          // ],
       });
 
   //Calendar
@@ -195,6 +166,12 @@
       calendar.render();
 
     });
+
+    //Task Modal
+    $(document).on('click','.taskview', function(){
+        var taskid = $(this).attr('taskid');
+        $('#taskModal').modal('show');
+    })
 </script>
 
 @endsection

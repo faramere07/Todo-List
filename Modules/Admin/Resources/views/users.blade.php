@@ -2,29 +2,7 @@
 
 @section('content')
   <style type="text/css">
-    .destroy, .view{
-      position: relative;
-    }
-    .buttonText{
-      display: none;
-      position: absolute;
-      top:-70%;
-      right: -30%;
-      color:#000;
-    }
-    .buttonText2{
-      display: none;
-      position: absolute;
-      top:-70%;
-      right: 13%;
-      color:#000;
-    }
-    .destroy:hover .buttonText{
-      display: block;
-    }
-    .view:hover .buttonText2{
-      display: block;
-    }
+    
   </style>
 
   <div class="container-fluid" style="margin-top: 70px; margin-bottom: 150px;">
@@ -50,6 +28,7 @@
                               <th>Profile Picture</th>
                               <th>Username</th>
                               <th>Name</th>
+                              <th>User Type</th>
                               <th>Actions</th>
                           </tr>
                       </thead>       
@@ -118,6 +97,7 @@
                 { "data": "userDetail.profile_picture"},
                 { "data": "username" },
                 { "data": "first_name" },
+                { "data": "type_name" },
                 { "data": "actions" },
             ],
             columnDefs:[
@@ -146,7 +126,7 @@
                         return row.first_name + " " + row.mid_name + " " + row.last_name;
                       }
                   }
-                }
+                },
             ],
         });
 

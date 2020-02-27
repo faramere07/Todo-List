@@ -52,6 +52,29 @@
               float: left;
               width: 100%;
             }
+            .destroy, .view{
+              position: relative;
+            }
+            .buttonText{
+              display: none;
+              position: absolute;
+              top:-70%;
+              right: -30%;
+              color:#000;
+            }
+            .buttonText2{
+              display: none;
+              position: absolute;
+              top:-70%;
+              right: 13%;
+              color:#000;
+            }
+            .destroy:hover .buttonText{
+              display: block;
+            }
+            .view:hover .buttonText2{
+              display: block;
+            }
        </style>
 </head>
         
