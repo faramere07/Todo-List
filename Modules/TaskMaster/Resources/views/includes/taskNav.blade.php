@@ -27,6 +27,32 @@
 
             </div>
         </li>
+
+        <li class="nav-item dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle" data-target="#" href="/page.html">
+                Dropdown 
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('projectReport') }}">
+                    {{ __('Projects') }}
+                </a>
+
+                <a class="dropdown-item" href="{{ route('viewTaskReport') }}">
+                     {{ __('Tasks') }}
+                </a>
+                <!-- submenu -->
+               <!-- <div class="dropdown-submenu">
+                    <a tabindex="-1" href="#" class="dropdown-item">Tasks</a>
+                    <ul class="dropdown-menu">
+                        
+                      <li><a tabindex="-1" href="#" class="dropdown-item">Second level</a></li>
+                    </ul>
+              </div> -->
+            </div>
+
+            
+        </li>
                            
     </div>
 
