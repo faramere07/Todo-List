@@ -35,6 +35,12 @@ class HomeController extends Controller
     }
 
     public function userDetails(Request $request){
+
+
+        $this->validate($request, [
+        'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+        'password_confirmation' => 'min:8'
+        ]);
         
         $user = User::find(Auth::id());
         $picture = 'default-profile.png';
@@ -44,6 +50,9 @@ class HomeController extends Controller
             $picture = $file->getClientOriginalName();
             $file->move(base_path('\public\images'), $picture);
         }
+
+        $user->password = $request->get('password');
+        $user->save();
 
         UserDetail::create([
             'user_id' => Auth::id(),
