@@ -32,7 +32,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('viewProfileUser') }}">
                                         <i class="fas fa-user-circle"></i> {{ __('View Profile') }}
                                     </a>
 

@@ -22,4 +22,6 @@ Route::prefix('user')->group(function() {
     Route::post('/finishTask', 'UserController@finishTask')->name('finishTask')->middleware('user');
     Route::post('/updateTask', 'UserController@updateTask')->name('updateTask')->middleware('user');
 
+    Route::get('/viewProfileUser', 'UserController@viewProfileUser')->name('viewProfileUser')->middleware('user');
+
 });

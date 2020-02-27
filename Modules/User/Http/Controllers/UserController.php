@@ -248,5 +248,13 @@ class UserController extends Controller
 
     }
 
+    public function viewProfileUser(){
+
+      $id =  Auth::id();
+      $userDetails = UserDetail::where('user_id', $id)->first();
+
+        return view('user::viewProfile', compact('userDetails'));
+    }
+
 
 }

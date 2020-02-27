@@ -39,7 +39,7 @@
           @endif
           <div class="form-row col-md-12" style="padding:10px;"> 
               <button type="button" class="form-control col-md-2 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
-                  Add New User
+                  Add New User Account
               </button>
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
@@ -66,18 +66,18 @@
         @csrf
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Add User Account</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
                 <div class="form-row col-md-12 justify-content-center">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-12">
                       <label for="exampleInputPassword1">Username</label>
                       <input type="text" class="form-control" name="username"max="25" required>
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-12">
                       <label for="exampleInputPassword1">Username</label>
                       <select type="text" class="form-control" name="type_id"required>
                           @foreach($user_types as $types)
@@ -85,15 +85,16 @@
                           @endforeach
                       </select>
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-12">
                       <label for="exampleInputPassword1">Password (Default: 123456789)</label>
                       <input type="password" class="form-control" name="password"max="25" value="123456789" readonly>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Add User</button>
+              <div class="form-group col-md-12">
+              <button type="submit" class="btn btn-outline-primary col-md-12">Create User Account</button>
+            </div>
             </div>
           </div>
       </form>
