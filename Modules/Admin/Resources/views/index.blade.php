@@ -81,7 +81,8 @@
                   <table class="display table-bordered" id="task_table">
                       <thead>
                           <tr>
-                              <th>Dates</th>
+                              <th>Star Date</th>
+                              <th>Due Date</th>
                               <th>Project Name</th>
                               <th>Task Title</th>
                               <th>Task Description</th>
@@ -106,42 +107,64 @@
           },
           "ajax": "{{route('viewTask')}}",
             "columns": [
-                { "data": "date_time"},
-                { "data": "project.project_name"},
-                { "data": "task_title" },
-                { "data": "task_description" },
+                { "data": "created"},
+                { "data": "due"},
+                { "data": "project"},
+                { "data": "task" },
+                { "data": "description" },
           ],
-          columnDefs:[
-                {
-                  "targets": [ 0 ],
-                  "render":function(data, type, row){
-                      var formattedDate = new Date(row.date_time);
-                      var d = formattedDate.getDate();
-                      var m =  formattedDate.getMonth() + 1;
-                      var y = formattedDate.getFullYear();
+          // columnDefs:[
+          //       {
+          //         "targets": [ 0 ],
+          //         "render":function(data, type, row){
+          //             var formattedDate = new Date(row.created_at);
+          //             var d = formattedDate.getDate();
+          //             var m =  formattedDate.getMonth() + 1;
+          //             var y = formattedDate.getFullYear();
 
-                      if (formattedDate.getHours()>=12){
-                          var hour = parseInt(formattedDate.getHours()) - 12;
-                          var amPm = "PM";
-                      } else {
-                          var hour = formattedDate.getHours(); 
-                          var amPm = "AM";
-                      }
+          //             if (formattedDate.getHours()>=12){
+          //                 var hour = parseInt(formattedDate.getHours()) - 12;
+          //                 var amPm = "PM";
+          //             } else {
+          //                 var hour = formattedDate.getHours(); 
+          //                 var amPm = "AM";
+          //             }
 
-                      var time = hour + ":" + formattedDate.getMinutes() + " " + amPm;
+          //             var time = hour + ":" + formattedDate.getMinutes() + " " + amPm;
 
-                      var newdate = m + "/" + d + "/" + y
+          //             var newdate = m + "/" + d + "/" + y
 
-                      return time+"</br>"+newdate;
-                  }
-                },
-                {
-                  "targets": [1],
-                  "render":function(data, type, row){
-                      return row.project.project_name +"</br><small>By: "+row.user.username+ " "+row.last_name+"</small>";
-                  }
-                },
-          ],
+          //             return time+"</br>"+newdate;
+          //         }
+          //       },
+          //       {
+          //         "targets": [ 1 ],
+          //         "render":function(data, type, row){
+          //             var time = row.date_time;
+          //             var timeArr = time.split(":");
+          //             var hours = timeArr[0];
+          //             var min = timeArr[1];
+
+          //             if (hours >= 12){
+          //                 var hour = parseInt(hours) - 12;
+          //                 var amPm = "PM";
+          //             } else {
+          //                 var hour = hours; 
+          //                 var amPm = "AM";
+          //             }
+
+          //             var newtime = hour + ":" + min + " " + amPm;
+
+          //             return newtime+"</br>"+row.due_date;
+          //         }
+          //       },
+          //       {
+          //         "targets": [2],
+          //         "render":function(data, type, row){
+          //             return row.project.project_name +"</br><small>By: "+row.project.user.userDetail.first_name+ " "+row.first_name+"</small>";
+          //         }
+          //       },
+          // ],
       });
 
   //Calendar
