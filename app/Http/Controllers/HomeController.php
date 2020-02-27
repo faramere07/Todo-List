@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Admin\Entities\UserDetail;
 use App\User;
 use Redirect;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -51,7 +52,7 @@ class HomeController extends Controller
             $file->move(base_path('\public\images'), $picture);
         }
 
-        $user->password = $request->get('password');
+        $user->password = Hash::make($request->password);
         $user->save();
 
         UserDetail::create([
