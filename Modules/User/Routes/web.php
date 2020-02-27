@@ -24,4 +24,8 @@ Route::prefix('user')->group(function() {
 
     Route::get('/viewProfileUser', 'UserController@viewProfileUser')->name('viewProfileUser')->middleware('user');
 
+    Route::post('/editProfile', 'UserController@editProfile')->name('editProfile');
+
+    Route::post('/storeProfile', 'UserController@storeProfile')->name('storeProfile');
+
 });

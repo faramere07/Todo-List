@@ -256,5 +256,43 @@ class UserController extends Controller
         return view('user::viewProfile', compact('userDetails'));
     }
 
+    public function editProfile(Request $request)
+    {
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
 
+        echo '
+        <div class="form-row">
+        <div class="col-md-4">
+        <label class="small" for="fname">First Name</label>
+            <input name="fname" class="form-control" type="text" value="'.$userDetails->first_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="mname">Middle Name</label>
+            <input name="mname" class="form-control" type="text" value="'.$userDetails->mid_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="lname">Last Name</label>
+            <input required name="lname" class="form-control" type="text" value="'.$userDetails->last_name.'">
+        </div>
+
+        </div>
+        ';
+
+
+    }
+
+    public function storeProfile(Request $request)
+    {
+
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        $userDetails->first_name= $request->fname;
+        $userDetails->mid_name = $request->mname;
+        $userDetails->last_name =$request->lname;
+        $userDetails->save();
+
+        return redirect()->route('viewProfileUser')->with('success', 'Profile Updated');
+    }
 }
