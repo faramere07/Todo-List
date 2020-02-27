@@ -55,12 +55,12 @@ class AdminController extends Controller
                             Deactivate
                         </div>
                     </button>
-                    <button class="btn btn-outline-info col-md-5 view" userId="'.$user->id.'">
+                    <a class="btn btn-outline-info col-md-5 view" href="'.route('viewUser',$user->id).'">
                         <i class="fas fa-eye"></i>
                         <div class="buttonText2">
                             View
                         </div>
-                    </button>
+                    </a>
                             ';
                 })
             ->rawColumns(['actions'])
@@ -76,7 +76,6 @@ class AdminController extends Controller
                 'password' => Hash::make($request->get('password')),
                 'username' => $request->get('username'),
                 'type_id' => $request->get('type_id'),
-                
             ]);
 
             Session::flash('message', "New User Added!");
@@ -85,6 +84,13 @@ class AdminController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    public function viewUser($id){
+        $users = UserDetail::find($id);
+        $usertype = UserType::find($users->user->type_id);
+
+        return view('admin::userProfile',compact('users','usertype'));
     }
 
     public function editUser(Request $request)
@@ -123,8 +129,6 @@ class AdminController extends Controller
 
         
         $userDetail->save();
-
-       
     }
 
 
