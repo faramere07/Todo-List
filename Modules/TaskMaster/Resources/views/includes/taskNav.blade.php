@@ -8,9 +8,26 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav lead">
       <a class="nav-item nav-link active" href="{{ route('taskmasterHome') }}">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="">
+   
+
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             <i class="fas fa-file-pdf"></i> Reports
-        </a>
+
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('projectReport') }}">
+                    {{ __('Projects') }}
+                </a>
+
+                <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
+                     {{ __('Tasks') }}
+                </a>
+
+            </div>
+        </li>
+                           
     </div>
 
     <!-- Right Side Of Navbar -->

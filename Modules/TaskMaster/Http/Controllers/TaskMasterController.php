@@ -12,7 +12,8 @@ use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
 use Auth;
-
+use PDF;
+use \Carbon\Carbon;
 
 
 use Illuminate\Support\Facades\DB;
@@ -360,7 +361,18 @@ class TaskMasterController extends Controller
 
     }
 
-    // public function taskReport(){
-    //     return view('taskmaster::report', compact('tasks'));
-    // }
+    public function projectReport(){
+
+        $month = date('M Y', strtotime('first day of last month'));
+        $projects = Project::whereMonth(
+            'created_at', '=', Carbon::now()->subMonth()->month)->get();
+      
+      
+        $pdf = PDF::loadView('taskmaster::pdf.projReport', compact('month', 'projects'));
+
+        $pdf->save(storage_path().'_filename.pdf');
+
+        return $pdf->stream('project_'.$month.'.pdf');
+      
+    }
 }
