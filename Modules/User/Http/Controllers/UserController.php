@@ -17,6 +17,7 @@ use Auth;
 
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -30,7 +31,7 @@ class UserController extends Controller
 
       $id =  Auth::id();
       $userDetails = UserDetail::where('user_id', $id)->first();
-      $taskDetails = Tasks::where('user_id', $id)->count();
+      $taskDetails = Tasks::where('user_id', $id)->where('status', 'ongoing')->count();
       $user = User::find($id);
       if (Hash::check('123123123', $user->password)) {
         return view('user::updateProfile', compact('userDetails'));
@@ -104,10 +105,13 @@ class UserController extends Controller
         ->get();
                    
          return DataTables::of($tasks)
-            ->addColumn('actions', function($task) {
+            ->addColumn('actions', function($task) {    
+                if($task->status == "Ongoing"){
                     return '<button class="btn btn-outline-info details" taskId="'.$task->id.'">Details</button>
-                            <button class="btn btn-outline-primary finish" taskId="'.$task->id.'">Finish</button>
-                            ';
+                            <button class="btn btn-outline-primary finish" taskId="'.$task->id.'">Finish</button>';
+                }else{
+                    return '<button class="btn btn-outline-info details" taskId="'.$task->id.'">Details</button>';
+                }
                 })
             ->rawColumns(['actions'])
             ->make(true);
@@ -161,7 +165,12 @@ class UserController extends Controller
                 <input type="text" disabled class="form-control mb-1 " value="'.date('h:i A', strtotime($taskDetail->date_time)).'">
                     </div>
 
-                </div>';
+                </div>
+                <label class="small">Remarks:</label>
+                <input type="text" disabled class="form-control mb-1" value="'.$taskDetail->remarks.'">
+
+                <hr>
+                ';
 
     }
 
@@ -224,7 +233,13 @@ class UserController extends Controller
     public function updateTask (Request $request){
         $taskDetails = Tasks::where('id', $request->taskId)->first();
 
-        $taskDetails->status = 'Finished';
+        $date = new Carbon;
+        if($date > $taskDetails->due_date)
+        {
+            $taskDetails->status = 'Finished(Late)';
+        } else {
+            $taskDetails->status = 'Finished(On-Time)';
+        }
         $taskDetails->remarks = $request->remarks;
         $taskDetails->save();
 

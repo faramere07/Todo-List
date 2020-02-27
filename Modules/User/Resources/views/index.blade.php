@@ -9,7 +9,7 @@
     </div>
 @endif
 
-    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have {{ $taskDetails }} task(s) assigned</p>
+    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have {{ $taskDetails }} ongoing task(s)</p>
     
 
     <hr>
@@ -26,17 +26,6 @@
                   <th class="thwidth">Form Action</th>
               </tr>
         </thead>  
-        <tfoot>
-          <tr>
-                  <th>Project Name</th>
-                  <th>Task</th>
-                  <th>Task Type</th>
-                  <th>Due Date</th>
-                  <th>Time</th>
-                  <th>Status</th>
-                  <th class="thwidth">Form Action</th>
-              </tr>
-        </tfoot> 
     </table>
 
     <br>
@@ -85,14 +74,13 @@
 
                   
                 </div>
-
-                
-               
+                <div class="container">
                    <label class="small">Remarks:</label>
                   <input type="text" class="form-control mb-1" name="remarks">
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-outline-dark col-md-12">Finish</button>
                 </div>
+              </div>
               </form>
 
         </div>

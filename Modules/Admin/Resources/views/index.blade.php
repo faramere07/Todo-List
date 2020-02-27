@@ -66,7 +66,7 @@
       </div>
       
       <div class="form-row col-md-12" style="margin-top: 20px;">
-          <div class="form-row col-md-12" style="background-color: #FFF0F5; padding:10px;"> 
+          <div class="form-row col-md-12" style="background-color: #0b1e42; padding:10px;"> 
               <select class="form-control col-md-2 ml-auto">
                   <option disabled selected>-- Choose Filter --</option>
                   <option>All</option>
@@ -78,7 +78,7 @@
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5">
               <div class="col-md-12">
-                  <table class="display" id="task_table">
+                  <table class="display table-bordered" id="task_table">
                       <thead>
                           <tr>
                               <th>Dates</th>
