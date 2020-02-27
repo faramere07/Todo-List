@@ -76,22 +76,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $users = new User([
-            'password' => Hash::make($data['password']),
-            'username' => $data['username'],
-            'type_id' => $data['type_id'],
-            
-        ]);
-        $users->save();
-        $users->id;
-        $userDetail = new UserDetail([
-            
-            'user_id' => $users->id,
-            'profile_picture' => 'default-profile.png'
-            
-        ]);
-        $userDetail->save();
+        $username = User::where('username',$request->get('username'))->first();
 
+        if(empty($username)){
+            User::create([
+                'password' => Hash::make($request->get('password')),
+                'username' => $request->get('username'),
+                'type_id' => $request->get('type_id'),
+                
+            ]);
 
+            Session::flash('message', "New User Added!");
+        }else{
+            Session::flash('message', "Failed to add User, Username already Exists!");
+        }
+
+        return Redirect::back();
     }
 }

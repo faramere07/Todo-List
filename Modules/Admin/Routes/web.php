@@ -16,6 +16,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers')->middleware('admin');
     Route::get('/tasks', 'AdminController@viewTask')->name('viewTask')->middleware('admin');
     Route::post('/AddUser', 'AdminController@addUser')->name('addUser')->middleware('admin');
+    Route::get('/user_profile/{id}', 'AdminController@viewUser')->name('viewUser')->middleware('admin');
 
 
 
