@@ -10,6 +10,8 @@ class UserDetail extends Model
 
     protected $table = 'user_details';
 
+    protected $foreignkey = 'user_id';
+
     protected $fillable = [ 
     	'first_name', 'user_id', 'mid_name', 'last_name', 'profile_picture' 
     ];

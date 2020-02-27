@@ -24,15 +24,36 @@ class AdminController extends Controller
     {
 
         $types = UserType::where('type_name','!=','Admin')->get();
-
+        // $tasks = Tasks::with(['project','project.user.userDetail','taskType'])->get();
+        // foreach ($tasks as $key) {
+        //     # code...
+        // }
+        // dd($key->project->user->userDetail->first_name);
         return view('admin::index');
     }
 
     public function viewTask()
     {
-        $tasks = Tasks::with(['project','user']);
+        $tasks = Tasks::with(['project','project.user.userDetail','taskType'])->get();
 
-        return Datatables::of($tasks)->make(true);
+        return Datatables::of($tasks)
+                ->addColumn('created', function($tasks){
+                    return $tasks->created_at;
+                })
+                ->addColumn('due', function($tasks){
+                    return $tasks->due_date;
+                })
+                ->addColumn('project', function($tasks){
+                    return $tasks->project->user->userDetail->first_name;
+                })
+                ->addColumn('task', function($tasks){
+                    return $tasks->task_title;
+                })
+                ->addColumn('description', function($tasks){
+                    return $tasks->task_description;
+                })
+                ->rawColumns(['created','due','project','task','description'])
+                ->make(true);
     }
 
     public function viewUsers()
