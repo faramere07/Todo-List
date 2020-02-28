@@ -179,7 +179,7 @@
         var taskid = $(this).attr('taskid');
         
         $.ajax({
-            url:'<?php echo route('taskDetails') ?>',
+            url:'<?php echo route('taskDetailsAdmin') ?>',
             method:"POST",
             data:{taskid:taskid, _token:_token},
             success:function(data){
