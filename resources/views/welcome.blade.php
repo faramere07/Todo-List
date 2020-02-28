@@ -1,16 +1,6 @@
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-        <title>TodoLIst</title>
-
-        <!-- Fonts -->
-          <!-- MDB icon -->
-          
-
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="{{ asset('css/font.googleapis.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.10.2-web/css/all.css') }}">
@@ -21,15 +11,10 @@
         <link href="{{ asset('fullcalendar/packages/daygrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/timegrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/list/main.css') }}" rel='stylesheet' />
-            <link rel="icon" href="{{ asset('MDB/img/mdb-favicon.ico') }}" type="image/x-icon">
-          <!-- Font Awesome 
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-           Google Fonts Roboto -->
-          <!-- Bootstrap core CSS -->
-          <!-- Material Design Bootstrap -->
-          <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
-          <!-- Your custom styles (optional) -->
-          <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
+
+        <link rel="icon" href="{{ asset('MDB/img/mdb-favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 
         <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
         <script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" ></script>
@@ -44,6 +29,7 @@
         <script src="{{ asset('fullcalendar/packages/timegrid/main.js') }}"></script>
         <script src="{{ asset('fullcalendar/packages/list/main.js') }}"></script>
         <script src="{{ asset('js/filereader.js-master/filereader.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('MDB/js/mdb.min.js') }}"></script>
     </head>
     
     <body style="background-color: #DCDCDC;">
@@ -91,60 +77,66 @@
                     <div class="alert alert-success alert-block">
                         <strong>Your Account is Not Yet Activated, Please fill-up the form to Activate your Account!</strong>
                     </div>
-                    <div class="form-row col-md-6" style="margin-top: 30px;">
-                        <div class="form-row col-md-12 justify-content-center" style="background-color: #000; color: #fff; padding:5px 0px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-                            <h5>User Details</h5>
-                        </div>
-                        <form class="form-row col-md-12 justify-content-center" style="background-color: #fff; padding:50px 50px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" method="POST" action="{{ route('Activate') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-row col-md-12">
-                                <center>
-                                    <div class="col-md-8" style="border:1px solid; width: 100%; height: 200px;">
-                                        <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 100%; height: 100%;"><br>
-                                        (Optional)
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input type='file' name="files" accept='image/*' onchange='openFile(event)' id="files" hidden>
+                    <div class="form-row col-md-6">
+                        <div class="card">
+                            <h5 class="card-header info-color white-text text-center py-4">
+                                <strong>User Details</strong>
+                            </h5>
+                            <div class="card-body px-lg-5 pt-0">
+                                <form class="text-center" style="color: #757575;" method="POST" action="{{ route('Activate') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-row col-md-12">
                                         <center>
-                                            (Optional)<br>
-                                            <button type="button" class="btn btn-primary" id="upBtn">Upload Picture</button>
+                                            <div class="col-md-10" style="border:1px solid; height: 200px;">
+                                                <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 100%; height: 100%;"><br>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input type='file' name="files" accept='image/*' onchange='openFile(event)' id="files" hidden>
+                                                <center>
+                                                    (Optional)<br>
+                                                    <button type="button" class="btn btn-primary" id="upBtn">Upload Picture</button>
+                                                </center>
+                                            </div>
                                         </center>
                                     </div>
-                                </center>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <br>
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="first_name" max="25" required="" placeholder="First Name">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="mid_name" max="25" required="" required="" placeholder="Middle Name">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="last_name" max="25" required="" required="" placeholder="Last Name">
-                            </div>
-                            <div class="form-group col-md-12">
+                                    <div class="md-form mt-1">
+                                        <input type="text" id="materialRegisterFormFirstName" class="form-control" name="first_name" max="25" required="">
+                                        <label for="materialRegisterFormEmail">First Name</label>
+                                    </div>
+                                    <div class="md-form mt-1">
+                                        <input type="text" id="materialRegisterFormMiddleName" class="form-control" name="mid_name" max="25" required="">
+                                        <label for="materialRegisterFormEmail">Middle Name</label>
+                                    </div>
+                                    <div class="md-form mt-1">
+                                        <input type="text" id="materialRegisterFormLastName" class="form-control" name="last_name" max="25" required="">
+                                        <label for="materialRegisterFormEmail">Last Name</label>
+                                    </div>
+                                    <div class="md-form mt-1">
+                                        <input type="password" id="materialRegisterFormPassword" class="form-control @error('password') is-invalid @enderror" name="password" max="25" required="" autocomplete="new-password">
+                                        <label for="materialRegisterFormEmail">Password</label>
 
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="md-form mt-1">
+                                        <input type="password" id="materialRegisterFormPassword" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" max="25" required="" autocomplete="new-password">
+                                        <label for="materialRegisterFormEmail">Confirm Password</label>
 
-                                <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-row col-md-12">
+                                        <button type="submit" class="btn btn-outline-primary col-md-12">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-
-                        <div class="form-group col-md-12">
-
-                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-
-                        </div>
-
-                            <div class="form-row col-md-12">
-                                <button type="submit" class="btn btn-outline-primary col-md-12">Submit</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
