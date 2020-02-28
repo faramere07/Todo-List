@@ -64,7 +64,7 @@
               
 
               <div class="input-group input-group-lg mb-2">
-                  <input type="text" name="taskTitle" class="form-control" placeholder="Task title">   
+                  <input type="text" name="taskTitle" class="form-control" placeholder="Task title" required>   
               </div>
 
               <div class="mb-2">
@@ -88,12 +88,12 @@
               <div class="row mb-2">
                 <div class="col-md-6">
                   <label>Due Date:</label>
-                  <input type="date" name="dueDate" class="form-control">
+                  <input type="date" name="dueDate" class="form-control" required>
                 </div>
                 
                 <div class="col-md-6">
                   <label>Due Time:</label>
-                  <input type="time" name="dateTime" class="form-control">
+                  <input type="time" name="dateTime" class="form-control" required>
                 </div>
               </div>
               

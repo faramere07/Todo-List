@@ -9,11 +9,12 @@
     </div>
 @endif
 
-    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have {{ $taskDetails }} task(s) assigned</p>
+    <p class="Lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}! You have {{ $taskDetails }} ongoing task(s)</p>
     
 
     <hr>
       <table id="table_id" class="table table-bordered">
+
         <thead class="thead thead-dark">
               <tr>
                   <th>Project Name</th>
@@ -24,7 +25,7 @@
                   <th>Status</th>
                   <th class="thwidth">Form Action</th>
               </tr>
-        </thead>   
+        </thead>  
     </table>
 
     <br>
@@ -65,10 +66,23 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-              <div class="modal-body" id="finishBody">
+
+               <form method="POST" action="{{route('updateTask')}}">
+                @csrf
+
+                <div class="modal-body" id="finishBody">
 
                   
+                </div>
+                <div class="container">
+                   <label class="small">Remarks:</label>
+                  <input type="text" class="form-control mb-1" name="remarks">
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark col-md-12">Finish</button>
+                </div>
               </div>
+              </form>
+
         </div>
       </div>
     </div>
@@ -88,17 +102,40 @@
         var dataTable= $('#table_id').DataTable( {
         "ajax": "{{ route('user_dtb') }}",
         "columns": [
-            { "data": "project_id" },
+            { "data": "project.project_name" },
             { "data": "task_title" },
-            { "data": "task_type_id" },
+            { "data": "task_name" },
             { "data": "due_date" },
             { "data": "date_time" },
             { "data": "status" },
             { "data": "actions" },
            
-        ]
+        ],
+
+        initComplete: function () {
+            this.api().columns([5]).every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.header()) )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
         } );
         } );
+
+  
 
   //show Modal Details
   $(document).on('click','.details',function(){

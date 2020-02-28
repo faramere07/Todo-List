@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class UserType extends Model
 {
     protected $guarded = [];
+    protected $primaryKey = 'id';
 
-     public function user()
+    public function user()
     {
         return $this->hasMany('App\User');
     }

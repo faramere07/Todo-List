@@ -34,8 +34,8 @@
 		    <thead class="thead thead-dark">
 	            <tr>
 	                <th>Project Name</th>
-                  <th>Project Description</th>
-                  <th class="thwidth">Form Actions</th>
+                    <th>Project Description</th>
+                    <th class="thwidth">Form Actions</th>
 	            </tr>
 		    </thead>   
 		</table>

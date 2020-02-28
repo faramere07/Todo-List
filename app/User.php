@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function userType()
     {
-        return $this->belongsTo('Modules\Admin\Entities\UserType');
+        return $this->belongsTo('Modules\Admin\Entities\UserType','type_id');
     }
 
     public function task()

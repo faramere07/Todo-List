@@ -12,7 +12,8 @@ use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
 use Auth;
-
+use PDF;
+use \Carbon\Carbon;
 
 
 use Illuminate\Support\Facades\DB;
@@ -161,7 +162,7 @@ class TaskMasterController extends Controller
             'user_id' => $request->userId,
             'date_time' => $request->dateTime,
             'due_date' => $request->dueDate,
-            'status' => 'pending',
+            'status' => 'Ongoing',
 
 
         ]);
@@ -358,5 +359,68 @@ class TaskMasterController extends Controller
         return redirect()->route('viewProfile')->with('success', 'Profile Updated');
         
 
+    }
+
+    public function projectReport(){
+
+        $month = date('M Y', strtotime('first day of last month'));
+        $projects = Project::whereMonth(
+            'created_at', '=', Carbon::now()->subMonth()->month)->get();
+      
+      
+        $pdf = PDF::loadView('taskmaster::pdf.projReport', compact('month', 'projects'));
+
+        $pdf->save(storage_path().'_filename.pdf');
+
+        return $pdf->stream('project_'.$month.'.pdf');
+      
+    }
+
+    public function viewTaskReport(){
+
+        $projects = Project::all();
+        $types = TaskType::all();
+
+        $users = User::join('user_types', 'user_types.id', 'users.type_id')
+                    ->join('user_details', 'user_details.user_id', 'users.id')
+                    ->where('type_name', 'User')
+                    ->where('first_name', '!=', 'null')
+                    ->select('*','users.id as u_id')
+                    ->get();
+                  
+
+        return view('taskmaster::viewTaskReport', compact('projects', 'types', 'users'));
+    }
+    public function taskReport_dtb(){
+
+        $tasks = Tasks::all();
+
+         return DataTables::of($tasks)
+            ->addColumn('actions', function($task) {
+                    return '<button class="btn btn-outline-danger col-md-5 float-right mx-2 destroy" taskId="'.$task->id.'" >Delete</button>
+                            <button class="btn btn-outline-primary col-md-5 float-right edit" taskId="'.$task->id.'">Edit</button>
+                            
+                            ';
+                })
+            ->addColumn('project_name', function($task) {
+                    return $task->project->project_name;
+                })
+            ->rawColumns(['actions', 'project_name'])
+            ->make(true);
+    }
+
+    public function taskReport(Request $request){
+
+        // $month = date('M Y', strtotime('first day of last month'));
+        // $projects = Project::whereMonth(
+        //     'created_at', '=', Carbon::now()->subMonth()->month)->get();
+      
+      
+        // $pdf = PDF::loadView('taskmaster::pdf.projReport', compact('month', 'projects'));
+
+        // $pdf->save(storage_path().'_filename.pdf');
+
+        // return $pdf->stream('project_'.$month.'.pdf');
+      
     }
 }

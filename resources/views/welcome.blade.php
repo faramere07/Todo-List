@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -109,6 +109,25 @@
                             <div class="form-group col-md-12">
                                 <input type="text" class="form-control" id="exampleInputPassword1" name="last_name" max="25" required="" required="" placeholder="Last Name">
                             </div>
+                            <div class="form-group col-md-12">
+
+
+                                <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+                                <input id="password-confirm" type="password" placeholder="Confirm Password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+
+                        </div>
+
                             <div class="form-row col-md-12">
                                 <button type="submit" class="btn btn-outline-primary col-md-12">Submit</button>
                             </div>

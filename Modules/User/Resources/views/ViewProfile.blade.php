@@ -1,4 +1,4 @@
-@extends('taskmaster::layouts.master')
+@extends('user::layouts.master')
 
 @section('content')
 
@@ -17,7 +17,7 @@
           </div>
           <div class="col-md-8">
             <div class="card" style="width: 100%;">
-              <h5 class="card-header">About Me <button type="button" class="btn btn-outline-primary float-right" id="addBtn" data-target="#editModal" data-toggle="modal" >Edit profile</button></h5>
+              <h5 class="card-header">About Me <button type="button" class="btn btn-outline-primary float-right editProfile" id="{{ $userDetails->id }}">Edit profile</button></h5>
               <div class="card-body" style="width: 100%;">
                 <div class='form-row container'>
                   <div class="col-md-4">
@@ -51,28 +51,10 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
-          <form  id="editForm" method="POST" action="{{ route('editProfileTaskMaster') }}"  enctype="multipart/form-data">
+          <form method="POST" action="{{ route('storeProfile') }}">
             @csrf
             <div class="modal-body">
-             
-              
-              <div class="input-group input-group-lg mb-2">
-                  <input type="text" maxlength="30" name="firstName" class="form-control" placeholder="First Name">   
-              </div>
-              <div class="input-group input-group-lg mb-2">
-                  <input type="text" maxlength="30" name="middleName" class="form-control" placeholder="Middle Name">   
-              </div>
-              <div class="input-group input-group-lg mb-2">
-                  <input type="text" maxlength="30" name="lastName" class="form-control" placeholder="Last Name">   
-              </div>
-
-               <div class="input-group input-group-lg mb-2">
-                  <label class="small">Image:</label>
-                  <input type="file" name="image" class="form-control"> 
-              </div>
-              
-
+              ...
             </div>
 
             <div class="modal-footer">
@@ -85,5 +67,31 @@
       </div>
     </div>
 
+<script type="text/javascript">
+    $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var token = $("input[name='_token']").val();
+
+  $(document).on('click','.editProfile', function(){
+
+    var profId = $(this).attr('id');
+
+    $.ajax({
+        url:"<?php echo route('editProfile')?>",
+        method:"POST",
+        cache: false,
+        data:{profId:profId, _token:token},
+        success: function(data){
+            $('.modal-body').html(data);
+            $('#editModal').modal('show');
+        }
+    });
+    
+  });
+
+</script>
 
 @endsection

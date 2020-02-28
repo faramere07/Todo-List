@@ -12,14 +12,20 @@
 */
 
 Route::prefix('user')->group(function() {
-    Route::get('/', 'UserController@index')->name('userHome');
-    Route::post('/updateUserDetailsUsers', 'UserController@updateUserDetailsUsers')->name('updateUserDetailsUsers');
+    Route::get('/', 'UserController@index')->name('userHome')->middleware('user');
+    Route::post('/updateUserDetailsUsers', 'UserController@updateUserDetailsUsers')->name('updateUserDetailsUsers')->middleware('user');
 
-    Route::get('/changePassword', 'UserController@changePassword')->name('changePasswordUser');
-    Route::post('/', 'UserController@savePassword')->name('savePasswordUser');
-    Route::get('/user_dtb', 'UserController@user_dtb')->name('user_dtb');
-    Route::post('/taskDetails', 'UserController@taskDetails')->name('taskDetails');
-    Route::post('/finishTask', 'UserController@finishTask')->name('finishTask');
-    Route::post('/updateTask', 'UserController@updateTask')->name('updateTask');
+    Route::get('/changePassword', 'UserController@changePassword')->name('changePasswordUser')->middleware('user');
+    Route::post('/', 'UserController@savePassword')->name('savePasswordUser')->middleware('user');
+    Route::get('/user_dtb', 'UserController@user_dtb')->name('user_dtb')->middleware('user');
+    Route::post('/taskDetails', 'UserController@taskDetails')->name('taskDetails')->middleware('user');
+    Route::post('/finishTask', 'UserController@finishTask')->name('finishTask')->middleware('user');
+    Route::post('/updateTask', 'UserController@updateTask')->name('updateTask')->middleware('user');
+
+    Route::get('/viewProfileUser', 'UserController@viewProfileUser')->name('viewProfileUser')->middleware('user');
+
+    Route::post('/editProfile', 'UserController@editProfile')->name('editProfile');
+
+    Route::post('/storeProfile', 'UserController@storeProfile')->name('storeProfile');
 
 });

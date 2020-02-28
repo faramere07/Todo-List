@@ -8,6 +8,52 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav lead">
       <a class="nav-item nav-link active" href="{{ route('taskmasterHome') }}">Home <span class="sr-only">(current)</span></a>
+   
+
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <i class="fas fa-file-pdf"></i> Reports
+
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('projectReport') }}">
+                    {{ __('Projects') }}
+                </a>
+
+                <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
+                     {{ __('Tasks') }}
+                </a>
+
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle" data-target="#" href="/page.html">
+                Dropdown 
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('projectReport') }}">
+                    {{ __('Projects') }}
+                </a>
+
+                <a class="dropdown-item" href="{{ route('viewTaskReport') }}">
+                     {{ __('Tasks') }}
+                </a>
+                <!-- submenu -->
+               <!-- <div class="dropdown-submenu">
+                    <a tabindex="-1" href="#" class="dropdown-item">Tasks</a>
+                    <ul class="dropdown-menu">
+                        
+                      <li><a tabindex="-1" href="#" class="dropdown-item">Second level</a></li>
+                    </ul>
+              </div> -->
+            </div>
+
+            
+        </li>
+                           
     </div>
 
     <!-- Right Side Of Navbar -->
@@ -23,35 +69,32 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle lead" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->userDetail->first_name }} {{ Auth::user()->userDetail->last_name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('viewProfile') }}">
+                                    <i class="fas fa-user-circle"></i> {{ __('View Profile') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="">
-                                        {{ __('Generate Report') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
+                                    <i class="fas fa-lock"></i> {{ __('Change Password') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('viewProfile') }}">
-                                        {{ __('View Profile') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
-                                        {{ __('Change Password') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                           
                         @endguest
                     </ul>
   </div>

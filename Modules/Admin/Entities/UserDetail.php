@@ -10,12 +10,14 @@ class UserDetail extends Model
 
     protected $table = 'user_details';
 
+    protected $foreignkey = 'user_id';
+
     protected $fillable = [ 
     	'first_name', 'user_id', 'mid_name', 'last_name', 'profile_picture' 
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'type_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

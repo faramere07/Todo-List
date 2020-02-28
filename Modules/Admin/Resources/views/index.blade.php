@@ -34,6 +34,9 @@
                       <li>
                           Edit your own profile and password.
                       </li>
+                      <li>
+                          Deactivate user accounts.
+                      </li>
                   </ul>
               </div>
               <div class="col-md-12">
@@ -63,7 +66,7 @@
       </div>
       
       <div class="form-row col-md-12" style="margin-top: 20px;">
-          <div class="form-row col-md-12" style="background-color: #FFF0F5; padding:10px;"> 
+          <div class="form-row col-md-12" style="background-color: #0b1e42; padding:10px;"> 
               <select class="form-control col-md-2 ml-auto">
                   <option disabled selected>-- Choose Filter --</option>
                   <option>All</option>
@@ -74,32 +77,66 @@
               </select>
           </div>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5">
-              <table class="display" id="task_table">
-                  <thead>
-                      <tr>
-                          <th>Dates</th>
-                          <th>Project Name</th>
-                          <th>Task Title</th>
-                          <th>Task Description</th>
-                      </tr>
-                  </thead>
-              </table>
+              <div class="col-md-12">
+                  <table class="display table-bordered" id="task_table">
+                      <thead>
+                          <tr>
+                              <th>Star Date</th>
+                              <th>Due Date</th>
+                              <th>Project Name</th>
+                              <th>Task Title</th>
+                              <th>Task Description</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                  </table>
+              </div>
+              
           </div>
       </div>
+  </div>
+
+
+<!--Task View Modal -->
+  <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Task Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 
 <script type="text/javascript">
 
   //DataTables Ajax
-      // $('#task_table').DataTable({
-      //     processing: true,
-      //     serverSide: true,
-      //     language:{
-      //       emptyTable: "No Task Added.",
-      //     },
-      //     ajax: '{{ route('viewTask') }}'
-      // });
+      $('#task_table').DataTable({
+          processing: true,
+          serverSide: true,
+          language:{
+            emptyTable: "No Task Added.",
+          },
+          "ajax": "{{route('viewTask')}}",
+            "columns": [
+                { "data": "created"},
+                { "data": "due"},
+                { "data": "project"},
+                { "data": "task" },
+                { "data": "description" },
+                { "data": "actions" },
+          ],
+      });
 
   //Calendar
     document.addEventListener('DOMContentLoaded', function() {
@@ -129,6 +166,12 @@
       calendar.render();
 
     });
+
+    //Task Modal
+    $(document).on('click','.taskview', function(){
+        var taskid = $(this).attr('taskid');
+        $('#taskModal').modal('show');
+    })
 </script>
 
 @endsection

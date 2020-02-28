@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Admin\Entities\UserDetail;
 use App\User;
 use Redirect;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -29,8 +30,18 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
+    public function unauthorized()
+    {
+        return view('unauthorize');
+    }
 
     public function userDetails(Request $request){
+
+
+        $this->validate($request, [
+        'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+        'password_confirmation' => 'min:8'
+        ]);
         
         $user = User::find(Auth::id());
         $picture = 'default-profile.png';
@@ -40,6 +51,9 @@ class HomeController extends Controller
             $picture = $file->getClientOriginalName();
             $file->move(base_path('\public\images'), $picture);
         }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
 
         UserDetail::create([
             'user_id' => Auth::id(),
