@@ -63,7 +63,7 @@ class AdminController extends Controller
                     return $task_title."</br>".$user_name;
                 })
                 ->addColumn('description', function($tasks){
-                    return $tasks->task_description;
+                    return $tasks->status;
                 })
                 ->addColumn('actions', function($tasks) {
                     return '
@@ -76,6 +76,10 @@ class AdminController extends Controller
                 })
                 ->rawColumns(['created','due','project','task','description','actions'])
                 ->make(true);
+    }
+
+    public function taskDetails(Request $request){
+            echo "lol";
     }
 
     public function viewUsers()
