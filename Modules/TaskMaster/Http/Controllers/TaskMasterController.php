@@ -154,6 +154,7 @@ class TaskMasterController extends Controller
 
     public function addTask(Request $request)
     {
+
          $task = new Tasks([
             'project_id' => $request->projId,
             'task_title' => $request->taskTitle,

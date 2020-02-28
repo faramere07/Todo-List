@@ -88,7 +88,7 @@
               <div class="row mb-2">
                 <div class="col-md-6">
                   <label>Due Date:</label>
-                  <input type="date" name="dueDate" class="form-control" required>
+                  <input type="date" id="dueDate" name="dueDate" class="form-control" min="" required>
                 </div>
                 
                 <div class="col-md-6">
@@ -312,6 +312,12 @@
       }
     }); 
 
+        //for datepicker
+        $(function () {
+                 var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("dueDate")[0].setAttribute('min', today);
+           });
+        
         // end
     });
     </script>
