@@ -85,13 +85,12 @@
                               <th>Due Date</th>
                               <th>Project Name</th>
                               <th>Task Title</th>
-                              <th>Task Description</th>
+                              <th>Task Status</th>
                               <th>Actions</th>
                           </tr>
                       </thead>
                   </table>
               </div>
-              
           </div>
       </div>
   </div>
@@ -168,9 +167,26 @@
     });
 
     //Task Modal
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var _token = $("input[name='_token']").val();
+
     $(document).on('click','.taskview', function(){
         var taskid = $(this).attr('taskid');
-        $('#taskModal').modal('show');
+        
+        $.ajax({
+            url:'<?php echo route('taskDetailsAdmin') ?>',
+            method:"POST",
+            data:{taskid:taskid, _token:_token},
+            success:function(data){
+              alert(data);
+              $('#taskModal').modal('show');
+            }
+        });
     })
 </script>
 
