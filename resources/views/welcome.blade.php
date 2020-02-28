@@ -2,11 +2,15 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Laravel</title>
+        <title>TodoLIst</title>
 
         <!-- Fonts -->
+          <!-- MDB icon -->
+          
+
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="{{ asset('css/font.googleapis.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.10.2-web/css/all.css') }}">
@@ -17,7 +21,15 @@
         <link href="{{ asset('fullcalendar/packages/daygrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/timegrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/list/main.css') }}" rel='stylesheet' />
-
+            <link rel="icon" href="{{ asset('MDB/img/mdb-favicon.ico') }}" type="image/x-icon">
+          <!-- Font Awesome 
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+           Google Fonts Roboto -->
+          <!-- Bootstrap core CSS -->
+          <!-- Material Design Bootstrap -->
+          <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
+          <!-- Your custom styles (optional) -->
+          <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 
         <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
         <script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" ></script>
@@ -35,6 +47,7 @@
     </head>
     
     <body style="background-color: #DCDCDC;">
+
         <div class="flex-center position-ref full-height">
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

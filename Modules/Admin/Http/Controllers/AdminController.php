@@ -79,7 +79,13 @@ class AdminController extends Controller
     }
 
     public function taskDetails(Request $request){
-            echo "lol";
+            $details = Tasks::with(['project','project.user.userDetail','taskType','user.userDetail'])->find($request->get('taskid'));
+
+            $result = "";
+
+            
+                        
+            echo $result;
     }
 
     public function viewUsers()

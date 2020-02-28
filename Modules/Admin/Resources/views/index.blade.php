@@ -106,7 +106,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body taskdetails">
             
         </div>
         <div class="modal-footer">
@@ -183,7 +183,7 @@
             method:"POST",
             data:{taskid:taskid, _token:_token},
             success:function(data){
-              alert(data);
+              $('.taskdetails').html(data);
               $('#taskModal').modal('show');
             }
         });
