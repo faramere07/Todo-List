@@ -21,16 +21,18 @@
 
   	</style>
 
-  	<h2>Projects for the month of {{$month}}</h2>
+  	
 	<table>
 		<tr>
 			<th>Project Name</th>
             <th>Project Description</th>
+            <th>Status</th>
+
 		</tr>
-		@foreach($projects as $project)
+		@foreach($query as $q)
 		<tr>
-			<td>{{$project->project_name}}</td>
-			<td>{{$project->project_desc}}</td>
+			<td>{{$q->project->project_name}}</td>
+			<td>{{$q->status}}</td>
 
 		</tr>
 		@endforeach

@@ -12,7 +12,7 @@
 
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            <i class="fas fa-file-pdf"></i> Reports
+            </i> Reports
 
             </a>
 
@@ -29,7 +29,7 @@
         </li>
 
         <li class="nav-item dropdown">
-            <a id="dLabel" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle" data-target="#" href="/page.html">
+            <a id="dLabel" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle" data-target="#" href="/page.html"><i class="fas fa-file-pdf"></i>
                 Dropdown 
             </a>
 

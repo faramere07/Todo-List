@@ -4,7 +4,8 @@
 
    <div class="alert alert-info alert-dismissible fade show" role="alert"></div>
 
-  
+<form method="POST" id="topdf"  action="{{route('taskReport')}}"> 
+@csrf 
             <div class="form-row">
               <div class="col-md-12">
               
@@ -14,7 +15,10 @@
                   
                 </div>
                   <div class="col-md-4">
-                          <button type="button" class="btn btn-outline-dark col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Add a task</button>
+                    
+                      <button type="submit" class="btn btn-outline-dark col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Add a task</button>
+                    
+                          
                       </div>
                   </div>
                   <hr>
@@ -47,7 +51,7 @@
             </div>
             <br>
 
-
+</form>
 
 
 
@@ -115,7 +119,7 @@
             this.api().columns([0,5]).every( function () {
                 var column = this;
                 count++;
-                var select = $('<select class="mr-3 mb-2" id=select"'+count+'"><option value=""></option></select>')
+                var select = $('<select class="mr-3 mb-2" name=select'+count+'><option value=""></option></select>')
                     .appendTo( "#filters" )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -133,6 +137,8 @@
             } );
         }
         } );
+
+     
 
 
 

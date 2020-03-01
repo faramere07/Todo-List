@@ -16,6 +16,6 @@ class Project extends Model
 
     public function task()
     {
-        return $this->hasMany('Modules\TaskMaster\Entities\Task');
+        return $this->hasMany('Modules\TaskMaster\Entities\Tasks');
     }
 }

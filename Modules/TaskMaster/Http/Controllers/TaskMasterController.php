@@ -409,17 +409,45 @@ class TaskMasterController extends Controller
     }
 
     public function taskReport(Request $request){
+        $pTitle = $request->select1;
+        $status = $request->select2;
 
-        // $month = date('M Y', strtotime('first day of last month'));
-        // $projects = Project::whereMonth(
-        //     'created_at', '=', Carbon::now()->subMonth()->month)->get();
+        //get the details of the proj first to get the id
+
+        //use id from previous query
+        if($pTitle && $status){
+            $project = Project::whereProject_name($pTitle)->first();
+            $query = Tasks::whereProject_id($project->id)->whereStatus($status)->get();
+        }else if($pTitle && !$status){
+            $project = Project::whereProject_name($pTitle)->first();
+            $query = Tasks::whereProject_id($project->id)->get();
+        }else if(!$pTitle && $status){
+            $query = Tasks::whereStatus($status)->get();
+        }else{
+            $query = Tasks::all();
+            
+        }
+      
+        // if($)
+        // 
+        
+        // dd($request->select1);
+        // if($pTitle == null && $status ==null){
+
+        // }else if($pTitle == null && $status ==null){
+
+        // }
+
+        $month = date('M Y', strtotime('first day of last month'));
+        $projects = Project::whereMonth(
+            'created_at', '=', Carbon::now()->subMonth()->month)->get();
       
       
-        // $pdf = PDF::loadView('taskmaster::pdf.projReport', compact('month', 'projects'));
+        $pdf = PDF::loadView('taskmaster::pdf.taskReport', compact('query'));
 
-        // $pdf->save(storage_path().'_filename.pdf');
+        $pdf->save(storage_path().'_filename.pdf');
 
-        // return $pdf->stream('project_'.$month.'.pdf');
+        return $pdf->stream('project_'.$month.'.pdf');
       
     }
 }
