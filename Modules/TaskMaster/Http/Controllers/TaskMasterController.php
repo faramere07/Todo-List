@@ -34,11 +34,9 @@ class TaskMasterController extends Controller
       $id =  Auth::id();
       $userDetails = UserDetail::where('user_id', $id)->first();
       $user = User::find($id);
-      if (Hash::check('123123123', $user->password)) {
-        return view('taskmaster::updateProfile', compact('userDetails'));
-      } else{
+      
         return view('taskmaster::index', compact('userDetails'));
-      }
+      
 
 
     }

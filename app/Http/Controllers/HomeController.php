@@ -64,15 +64,15 @@ class HomeController extends Controller
         ]);
 
         if($user->type_id == '1'){
-            return redirect()->route('Admin');     
+            return redirect()->route('adminHome');     
         }
         elseif($user->type_id == '2') 
         {
-            return redirect()->route('TaskMaster');
+            return redirect()->route('taskmasterHome');
         }
         elseif($user->type_id == '3')
         {
-            return redirect()->route('User');
+            return redirect()->route('userHome');
         }
     }
 }

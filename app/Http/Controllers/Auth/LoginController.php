@@ -39,15 +39,15 @@ class LoginController extends Controller
             return route('Activation');
         }else{
             if(auth()->user()->type_id == '1'){
-                return route('Admin');     
+                return route('adminHome');     
             }
             elseif (auth()->user()->type_id == '2') 
             {
-                return route('TaskMaster');
+                return route('taskmasterHome');
             }
             elseif (auth()->user()->type_id == '3')
             {
-                return route('User');
+                return route('userHome');
             }
         }
     }
