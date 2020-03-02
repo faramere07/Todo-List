@@ -118,7 +118,7 @@
 
 
 
-    <!-- Modal for Edditing -->
+    <!-- Modal for Editing -->
 
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">

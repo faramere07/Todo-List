@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
+use Modules\Admin\Entities\TaskType;
 use Modules\TaskMaster\Entities\Tasks;
 use Modules\TaskMaster\Entities\Project;
 use Illuminate\Support\Facades\Hash;
@@ -95,6 +96,13 @@ class AdminController extends Controller
         return view('admin::users', compact('user_types'));
     }
 
+    public function viewTaskTypes()
+    {
+        $taskTypes = TaskType::all();
+
+        return view('admin::taskTypes');
+    }
+
     public function usersShow()
     {
         $users = User::with(['userDetail','userType'])->where('users.id','!=',Auth::id());
@@ -123,6 +131,24 @@ class AdminController extends Controller
             ->make(true);
     }
 
+    public function taskShow()
+    {
+        $types = TaskType::all();
+
+        return DataTables::of($types)
+            ->addColumn('actions', function($type) {
+                    return '
+                    <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" typeId="'.$type->id.'">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <a class="btn btn-outline-info col-md-5 view" href="">
+                        <i class="fas fa-eye"></i>
+                    </a>';
+                })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
     public function addUser(Request $request)
     {
         $username = User::where('username',$request->get('username'))->first();
@@ -136,11 +162,36 @@ class AdminController extends Controller
 
             Session::flash('message', "New User Added!");
         }else{
-            Session::flash('message', "Failed to add User, Username already Exists!");
+            Session::flash('error', "Failed to add User, Username already Exists!");
         }
 
         return Redirect::back();
     }
+
+    public function addTaskType(Request $request)
+    {
+        $type = TaskType::where('type_name',$request->get('type_name'))->first();
+
+        if(empty($type)){
+            TaskType::create([
+                'type_name' => $request->get('type_name'),
+                'type_desc' => $request->get('type_desc'),
+            ]);
+
+            Session::flash('message', "New Task Type Added!");
+        }else{
+            Session::flash('error', "Failed to add Task Type, Task Type already Exists!");
+        }
+
+        return Redirect::back();
+    }
+
+    public function destroyType(Request $request)
+    {
+        $type = TaskType::find($request->id);
+        $type->delete();
+    }
+
 
     public function viewUser($id){
         $users = User::with('userType')->where('users.username',$id)->first();

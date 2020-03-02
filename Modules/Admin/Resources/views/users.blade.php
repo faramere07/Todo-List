@@ -8,8 +8,16 @@
   <div class="container-fluid" style="margin-top: 70px; margin-bottom: 150px;">
       <div class="form-row col-md-12"> 
           @if (Session::has('message'))
-              <div class="alert alert-warning alert-dismissible fade show" style="display: block; position: relative; margin-bottom: 1%; text-align: left;">
+              <div class="alert alert-success alert-dismissible fade show" style="display: block; position: relative; margin-bottom: 1%; text-align: left;">
                 <strong>{{ Session::get('message') }}!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+          @elseif (Session::has('error'))
+              <div class="alert alert-danger alert-dismissible fade show" style="display: block; position: relative; margin-bottom: 1%; text-align: left;">
+                <strong>{{ Session::get('error') }}!</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
