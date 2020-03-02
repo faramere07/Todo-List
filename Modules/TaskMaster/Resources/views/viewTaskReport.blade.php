@@ -43,7 +43,6 @@
                           <tr>
                               <th>Project</th>
                               <th>Title</th>
-                              <th>Description</th>
                               <th>Date Time</th>
                               <th>Due Date</th>
                               <th>Status</th>
@@ -110,7 +109,6 @@
             { "data": "project_name" },
 
             { "data": "task_title" },
-            { "data": "task_description" },
             { "data": "date_time" },
             { "data": "due_date" },
             { "data": "status" },

@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-5">
             <div class="card">
-                <h5 class="card-header info-color white-text text-center py-4">
+                <h5 class="card-header white-text text-center py-4" style="background-color: #0b3a80;">
                     <strong>Login</strong>
                 </h5>
 
-                <div class="card-body px-lg-5 pt-0">
+                <div class="card-body col-md-12 pt-0">
                     <form class="text-center" style="color: #757575;" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="md-form">
@@ -33,7 +33,7 @@
                             @enderror
                         </div>
 
-                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Login</button>
+                        <button class="btn btn-outline-primary btn-block my-4 z-depth-0" type="submit">Login</button>
 
                     </form>
                 </div>
