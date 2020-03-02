@@ -99,6 +99,22 @@
 
     $(document).ready(function(){
 
+      var date = new Date();
+
+          var newd      = date.toLocaleDateString();
+          var month     = date.getMonth()+1;
+          var date1     = date.getDate();
+          var year      = date.getFullYear();
+          
+          if(month <10){
+            month = '0'+month;
+
+          }if(date1 <10){
+            date1 = '0'+date1;
+          }
+  
+        var newDate = year+'-'+month+'-'+date1;
+
         var dataTable= $('#table_id').DataTable( {
         "ajax": "{{ route('user_dtb') }}",
         "columns": [
@@ -115,7 +131,7 @@
         initComplete: function () {
             this.api().columns([5]).every( function () {
                 var column = this;
-                var select = $('<select><option value=""></option></select>')
+                var select = $('<select><option value="">All</option></select>')
                     .appendTo( $(column.header()) )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -131,7 +147,26 @@
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
             } );
-        }
+        },
+
+        'rowCallback': function(row, data, index){
+            
+            if(data.due_date < newDate && data.status == 'Ongoing'){
+                $(row).css('color', '#e8000c');
+            }
+
+            if(data.status == 'Ongoing' && data.due_date >= newDate){
+                console.log(data.status); 
+                $(row).find('td:eq(5)').css('color', '#02cc38');
+            }if(data.status == 'Finished(On-Time)'){
+                console.log(data.status); 
+                $(row).find('td:eq(5)').css('color', 'blue');
+            }if(data.status == 'Finished(Late)'){
+                console.log(data.status); 
+                $(row).find('td:eq(5)').css('color', 'red');
+            }
+            
+          }
         } );
         } );
 
@@ -153,7 +188,7 @@
              
               $('#detailBody').html(data);
              
-            }   
+            }
           });  
         });
 
