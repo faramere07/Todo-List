@@ -14,6 +14,7 @@ use App\User;
 use Modules\Admin\Entities\UserDetail;
 use Modules\Admin\Entities\UserType;
 use Auth;
+use PDF;
 
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
@@ -296,5 +297,21 @@ class UserController extends Controller
         $userDetails->save();
 
         return redirect()->route('viewProfileUser')->with('success', 'Profile Updated');
+    }
+
+    public function userReport(){
+        $id = Auth::id();
+        $tasks = Tasks::whereUser_id($id)->get();
+
+        $month = date('M Y', strtotime('first day of last month'));
+        $projects = Project::whereMonth(
+            'created_at', '=', Carbon::now()->subMonth()->month)->get();
+      
+      
+        $pdf = PDF::loadView('user::pdf.userReport', compact( 'month', 'tasks'));
+
+        $pdf->save(storage_path().'_filename.pdf');
+
+        return $pdf->stream('tasks_'.$month.'.pdf');
     }
 }

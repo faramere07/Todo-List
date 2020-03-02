@@ -31,7 +31,7 @@
         </div>
         <hr>
     	<table id="table_id" class="table table-bordered">
-		    <thead class="thead thead-dark">
+		    <thead class="thead">
 	            <tr>
 	                <th>Project Name</th>
                   <th>Project Description</th>

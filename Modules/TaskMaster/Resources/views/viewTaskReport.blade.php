@@ -12,8 +12,9 @@
 
                   <div class="row">
                     <div class="col-md-8">
+                       <h1 class="lead">Generate Report</h1>
                   
-                </div>
+                    </div>
                   <div class="col-md-4">
                     
                       <button type="submit" class="btn btn-outline-danger col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
@@ -24,7 +25,7 @@
                   <hr>
 
                         <span id="fil">
-                          Sort by: <br>
+                          <strong>Sort by: </strong><br>
                           <div class="row">
                             <div class="col-md-2">
                               Project
@@ -129,8 +130,11 @@
             this.api().columns([0,5]).every( function () {
                 var column = this;
                 count++;
-                var select = $('<select class="mx-3 mb-2" name="select'+count+'"><option value=""></option></select>')
-                    .appendTo( "#filters" )
+                $('<div class="col-md-2" id="lalagyan'+count+'"></div>')
+                    .appendTo( "#filters" );
+
+                var select = $('<select class="mb-2 form-control" name="select'+count+'"><option value=""></option></select>')
+                    .appendTo( "#lalagyan"+count )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
