@@ -24,20 +24,34 @@
                   </div>
                   <hr>
 
-                        <span id="fil">
+                  
                           <strong>Sort by: </strong><br>
                           <div class="row">
+                            <div class="col-md-2">
+                              Date From
+                            </div>
+                            <div class="col-md-2">
+                              Date To
+                            </div>
                             <div class="col-md-2">
                               Project
                             </div>
                             <div class="col-md-2">
                               Task Status
                             </div>
+                            
                           </div>
                           <div class="row" id="filters">
+                            
+
+                            <div class="col-md-2">
+                              <input type="date" name="dateFrom" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                              <input type="date" name="dateFrom" class="form-control">
+                            </div>
                           </div>
-                        </span>
-                    
+                       
                     <table id="table_id" class="table table-bordered">
                       <thead class="thead thead-dark">
                           <tr>
