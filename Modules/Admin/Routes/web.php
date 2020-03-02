@@ -32,8 +32,9 @@ Route::prefix('admin')->group(function() {
     Route::post('/', 'AdminController@savePassword')->name('savePassword')->middleware('admin');
 
     
-
-
+    Route::get('/viewProfile', 'AdminController@viewProfileAdmin')->name('viewProfileAdmin')->middleware('admin');
+    Route::post('/editProfile', 'AdminController@editProfileAdmin')->name('editProfileAdmin')->middleware('admin');
+    Route::post('/storeProfile', 'AdminController@storeProfileAdmin')->name('storeProfileAdmin');
 
 
 });

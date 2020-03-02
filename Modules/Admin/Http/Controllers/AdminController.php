@@ -228,4 +228,54 @@ class AdminController extends Controller
         
     }
 
+
+    public function viewProfileAdmin(){
+
+      $id =  Auth::id();
+      $userDetails = UserDetail::where('user_id', $id)->first();
+
+        return view('admin::viewProfile', compact('userDetails'));
+    }
+
+    
+    public function editProfileAdmin(Request $request)
+    {
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        echo '
+        <div class="form-row">
+        <div class="col-md-4">
+        <label class="small" for="fname">First Name</label>
+            <input name="fname" class="form-control" type="text" value="'.$userDetails->first_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="mname">Middle Name</label>
+            <input name="mname" class="form-control" type="text" value="'.$userDetails->mid_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="lname">Last Name</label>
+            <input required name="lname" class="form-control" type="text" value="'.$userDetails->last_name.'">
+        </div>
+
+        </div>
+        ';
+
+
+    }
+
+    public function storeProfileAdmin(Request $request)
+    {
+
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        $userDetails->first_name= $request->fname;
+        $userDetails->mid_name = $request->mname;
+        $userDetails->last_name =$request->lname;
+        $userDetails->save();
+
+        return redirect()->route('viewProfileAdmin')->with('success', 'Profile Updated');
+    }
+
 }
