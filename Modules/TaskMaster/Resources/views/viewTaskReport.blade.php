@@ -4,7 +4,7 @@
 
    <div class="alert alert-info alert-dismissible fade show" role="alert"></div>
 
-<form method="POST" id="topdf"  action="{{route('taskReport')}}"> 
+<form method="POST" id="topdf"  action="{{route('taskReport')}}" target="_blank"> 
 @csrf 
             <div class="form-row">
               <div class="col-md-12">
@@ -16,15 +16,25 @@
                 </div>
                   <div class="col-md-4">
                     
-                      <button type="submit" class="btn btn-outline-dark col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Add a task</button>
+                      <button type="submit" class="btn btn-outline-danger col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
                     
                           
                       </div>
                   </div>
                   <hr>
 
-                        <span id="filters">
+                        <span id="fil">
                           Sort by: <br>
+                          <div class="row">
+                            <div class="col-md-2">
+                              Project
+                            </div>
+                            <div class="col-md-2">
+                              Task Status
+                            </div>
+                          </div>
+                          <div class="row" id="filters">
+                          </div>
                         </span>
                     
                     <table id="table_id" class="table table-bordered">
@@ -119,7 +129,7 @@
             this.api().columns([0,5]).every( function () {
                 var column = this;
                 count++;
-                var select = $('<select class="mr-3 mb-2" name=select'+count+'><option value=""></option></select>')
+                var select = $('<select class="mx-3 mb-2" name="select'+count+'"><option value=""></option></select>')
                     .appendTo( "#filters" )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(

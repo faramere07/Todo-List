@@ -7,28 +7,25 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav lead">
-      <a class="nav-item nav-link active" href="{{ route('taskmasterHome') }}">Home <span class="sr-only">(current)</span></a>
+
+        <a class="nav-item nav-link active" href="{{ route('taskmasterHome') }}">
+            <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span>
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+       
+                <a class="nav-item nav-link active" href="{{ route('viewTaskReport') }}"><i class="fas fa-file-pdf"></i>
+                     {{ __('Generate Report') }}
+                </a>
+                
+            </div>
+        </div>
    
 
-        <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            </i> Reports
+        
 
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('projectReport') }}">
-                    {{ __('Projects') }}
-                </a>
-
-                <a class="dropdown-item" href="{{ route('changePasswordTaskMaster') }}">
-                     {{ __('Tasks') }}
-                </a>
-
-            </div>
-        </li>
-
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
             <a id="dLabel" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle" data-target="#" href="/page.html"><i class="fas fa-file-pdf"></i>
                 Dropdown 
             </a>
@@ -41,18 +38,11 @@
                 <a class="dropdown-item" href="{{ route('viewTaskReport') }}">
                      {{ __('Tasks') }}
                 </a>
-                <!-- submenu -->
-               <!-- <div class="dropdown-submenu">
-                    <a tabindex="-1" href="#" class="dropdown-item">Tasks</a>
-                    <ul class="dropdown-menu">
-                        
-                      <li><a tabindex="-1" href="#" class="dropdown-item">Second level</a></li>
-                    </ul>
-              </div> -->
+         
             </div>
 
             
-        </li>
+        </li> -->
                            
     </div>
 
