@@ -119,8 +119,20 @@
 
         'rowCallback': function(row, data, index){
             
-            if(data.due_date < newDate){
-                $(row).css('background-color', '#fa6057');
+            if(data.due_date < newDate && data.status == 'Ongoing'){
+                // $(row).css('background-color', '#cc1d1d');
+                $(row).css('color', '#e8000c');
+            }
+
+            if(data.status == 'Ongoing' && data.due_date >= newDate){
+                console.log(data.status); 
+                $(row).find('td:eq(4)').css('color', '#02cc38');
+            }if(data.status == 'Finished(On-Time)'){
+                console.log(data.status); 
+                $(row).find('td:eq(4)').css('color', 'blue');
+            }if(data.status == 'Finished(Late)'){
+                console.log(data.status); 
+                $(row).find('td:eq(4)').css('color', 'red');
             }
             
           },
