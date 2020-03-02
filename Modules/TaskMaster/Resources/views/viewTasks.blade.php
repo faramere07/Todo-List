@@ -198,7 +198,7 @@
 
         'rowCallback': function(row, data, index){
             
-            if(data.due_date < newDate){
+            if(data.due_date < newDate && data.status == 'Ongoing'){
                 $(row).css('background-color', '#fa6057');
             }
             
