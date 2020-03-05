@@ -31,6 +31,9 @@ Route::prefix('admin')->group(function() {
     Route::post('/destroyUser', 'AdminController@destroyUser')->name('destroyUser')->middleware('admin');
     Route::post('/destroyType', 'AdminController@destroyType')->name('destroyType')->middleware('admin');
 
+    Route::post('/editTaskType', 'AdminController@editTaskType')->name('editTaskType')->middleware('admin');
+    Route::post('/updateTaskType', 'AdminController@updateTaskType')->name('updateTaskType')->middleware('admin');
+
     Route::get('/adduser', 'AdminController@adduser')->name('adduser')->middleware('admin');
     Route::get('/changePassword', 'AdminController@changePassword')->name('changePassword')->middleware('admin');
     Route::post('/', 'AdminController@savePassword')->name('savePassword')->middleware('admin');

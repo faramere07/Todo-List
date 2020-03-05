@@ -141,12 +141,43 @@ class AdminController extends Controller
                     <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" typeId="'.$type->id.'">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <a class="btn btn-outline-info col-md-5 view" href="">
-                        <i class="fas fa-eye"></i>
-                    </a>';
+                    <button class="btn btn-outline-info col-md-5 edit" typeId="'.$type->id.'">
+                        <i class="fas fa-edit"></i>
+                    </button>';
                 })
             ->rawColumns(['actions'])
             ->make(true);
+    }
+
+    public function editTaskType(Request $request)
+    {
+        $types = TaskType::where('id', $request->id)->first();
+        echo
+                ' 
+                <div class="form-row col-md-12 justify-content-center">
+                    <div class="form-group col-md-12">
+                      <label for="exampleInputPassword1">Type Name</label>
+                      <input type="text" class="form-control" name="type_name" max="25" value="'.$types->type_name.'" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="exampleInputPassword1">Type Description</label>
+                      <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$types->type_desc.'</textarea>
+                    </div>
+                </div>
+                ';
+
+    }
+
+    public function updateTaskType(Request $request){
+        $types = TaskTypes::where('id', $request->typeId)->first();
+
+        $types->type_name = $request->type_name;
+        $types->type_desc = $request->type_desc;
+        $types->save();
+
+        return redirect()->route('userHome');
+
+
     }
 
     public function addUser(Request $request)

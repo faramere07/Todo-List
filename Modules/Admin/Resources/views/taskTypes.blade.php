@@ -44,7 +44,7 @@
       </div>
   </div>
 
-  <!-- Add Task modal -->
+  <!-- Add Task Type modal -->
   <div class="modal fade" id="addTaskType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <form method="POST" action="{{ route('addTaskType') }}">
@@ -78,6 +78,34 @@
       
     </div>
   </div>
+
+  <!-- Edit Task Type modal -->
+  <div class="modal fade" id="editTaskType" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Task Type</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" action="{{ route('updateTaskType') }}">
+              @csrf
+            <div class="modal-body" id="editBody">
+
+                <!-- tasktype echo edit task type -->
+
+            </div>
+            <div class="modal-footer">
+              <div class="form-group col-md-12">
+              <button type="submit" class="btn btn-outline-primary col-md-12">Update</button>
+            </div>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
 
 <script type="text/javascript">
 
@@ -137,6 +165,25 @@
       }
     }); 
 
+
+      //show Modal edit Task
+  $(document).on('click','.edit',function(){
+          var id = $(this).attr('typeId');
+
+          $.ajax({
+            url:"{{ route('editTaskType') }}",
+            method:"POST",
+            data:{
+              id:id,
+              _token:token
+            },
+            success:function(data){
+              $('#editTaskType').modal('show');
+              $('#editBody').html(data);
+             
+            }   
+          });  
+        });
 
       
 
