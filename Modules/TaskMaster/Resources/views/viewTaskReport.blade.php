@@ -19,12 +19,7 @@
                        <h1 class="lead">Generate Report</h1>
                   
                     </div>
-                  <div class="col-md-4">
-                    
-                      <button type="submit" class="btn btn-outline-danger col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
-                    
-                          
-                      </div>
+                  
                   </div>
                   <hr>
 
@@ -61,6 +56,11 @@
                                 <input type="date" name="max" id="max" class="form-control" required>
                               </div>
                             </div>
+                            <div class="row d-flex justify-content-center mt-2">
+                              <div class="col-md-8">
+                                 <button type="submit" class="btn btn-outline-danger col-md-12 " id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
+                              </div>
+                            </div>
                           </div>
                        
                     <table id="table_id" class="table table-bordered">
@@ -72,8 +72,7 @@
                               <th>Due Date</th>
                               <th>Status</th>
                               <th>Remarks</th>
-                              
-                              <th class="text-right">Actions</th>
+                
                               
                           </tr>
                       </thead>
@@ -163,7 +162,7 @@ $.fn.dataTable.ext.search.push(
             { "data": "status" },
             { "data": "remarks" },
             // { "data": "type_name" },
-            { "data": "actions" },
+            
         ],
 
         'rowCallback': function(row, data, index){
