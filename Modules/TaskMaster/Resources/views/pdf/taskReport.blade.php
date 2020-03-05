@@ -34,7 +34,7 @@
   		@if($pTitle)
   			of Project '{{$pTitle}}'
   		@endif 
-  		as of {{$month}}</h3>
+  		from {{$start}} - {{$end}}</h3>
   		<br>
 	<table>
 		<tr>
