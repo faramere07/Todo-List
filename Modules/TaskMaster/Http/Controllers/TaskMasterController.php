@@ -432,11 +432,13 @@ class TaskMasterController extends Controller
 
 
         $month = date('M Y', strtotime('first day of last month'));
+        $start = date('M d, Y', strtotime($min));
+        $end = date('M d, Y', strtotime($max));
         $projects = Project::whereMonth(
             'created_at', '=', Carbon::now()->subMonth()->month)->get();
       
       
-        $pdf = PDF::loadView('taskmaster::pdf.taskReport', compact('query', 'month', 'status', 'pTitle'));
+        $pdf = PDF::loadView('taskmaster::pdf.taskReport', compact('query', 'month', 'status', 'pTitle', 'start', 'end'));
 
         $pdf->save(storage_path().'_filename.pdf');
 

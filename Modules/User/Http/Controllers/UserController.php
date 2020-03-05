@@ -313,19 +313,62 @@ class UserController extends Controller
         return redirect()->route('viewProfileUser')->with('success', 'Profile Updated');
     }
 
-    public function userReport(){
+    public function userReport(Request $request){
         $id = Auth::id();
-        $tasks = Tasks::whereUser_id($id)->get();
+        $pTitle = $request->select1;
+        $status = $request->select2;
+        $min = $request->min;
+        $max = $request->max;
 
+        //get the details of the proj first to get the id
+
+        //use id from previous query
+        if($pTitle && $status && $min && $max){
+            $project = Project::whereProject_name($pTitle)->first();
+            $query = Tasks::whereProject_id($project->id)
+                            ->whereStatus($status)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->whereUser_id($id)
+                            ->get();
+        }else if($pTitle && !$status && $min && $max){
+            $project = Project::whereProject_name($pTitle)->first();
+            $query = Tasks::whereProject_id($project->id)
+                            ->whereUser_id($id)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->get();
+        }else if(!$pTitle && $status && $min && $max){
+            $query = Tasks::whereStatus($status)
+                            ->whereUser_id($id)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->get();
+        }else{
+            $query = Tasks::whereBetween('due_date', [$min, $max])
+                            ->whereUser_id($id)->get;
+            
+        }
+
+        $userDetails = UserDetail::whereUser_id($id)->first();
         $month = date('M Y', strtotime('first day of last month'));
+        $start = date('M d, Y', strtotime($min));
+        $end = date('M d, Y', strtotime($max));
         $projects = Project::whereMonth(
             'created_at', '=', Carbon::now()->subMonth()->month)->get();
       
       
-        $pdf = PDF::loadView('user::pdf.userReport', compact( 'month', 'tasks'));
+        $pdf = PDF::loadView('user::pdf.userReport', compact('query', 'month', 'status', 'pTitle', 'start', 'end', 'userDetails'));
 
         $pdf->save(storage_path().'_filename.pdf');
 
-        return $pdf->stream('tasks_'.$month.'.pdf');
+        return $pdf->stream('tasks'.$month.'.pdf');
+      
+    }
+
+    public function viewUserReport(){
+        $id =  Auth::id();
+      $userDetails = UserDetail::where('user_id', $id)->first();
+      $taskDetails = Tasks::where('user_id', $id)->where('status', 'ongoing')->count();
+      $user = User::find($id);
+
+        return view('user::viewUserReport', compact('userDetails', 'taskDetails', 'user'));
     }
 }

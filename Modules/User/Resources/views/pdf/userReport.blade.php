@@ -27,8 +27,7 @@
 
 <body>
 	
-  	<h3>Tasks
-  		as of {{$month}}</h3>
+  	<h3>{{$userDetails->first_name}}'s Tasks for {{$start}} - {{$end}}</h3>
   		<br>
 	<table>
 		<tr>
@@ -41,7 +40,7 @@
             <th>Remarks</th>
 		</tr>
 
-		@foreach($tasks as $q)
+		@foreach($query as $q)
 		<tr>
 			<td>{{$q->project->project_name}}</td>
 			<td>{{$q->task_title}}</td>
