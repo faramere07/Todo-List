@@ -156,11 +156,12 @@ class AdminController extends Controller
                 ' 
                 <div class="form-row col-md-12 justify-content-center">
                     <div class="form-group col-md-12">
-                      <label for="exampleInputPassword1">Type Name</label>
+                      <label>Type Name</label>
                       <input type="text" class="form-control" name="type_name" max="25" value="'.$types->type_name.'" required>
+                      <input type="hidden" class="form-control" name="id" max="25" value="'.$types->id.'" required>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="exampleInputPassword1">Type Description</label>
+                      <label>Type Description</label>
                       <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$types->type_desc.'</textarea>
                     </div>
                 </div>
@@ -169,15 +170,13 @@ class AdminController extends Controller
     }
 
     public function updateTaskType(Request $request){
-        $types = TaskTypes::where('id', $request->typeId)->first();
+        $types = TaskType::where('id', $request->id)->first();
 
         $types->type_name = $request->type_name;
         $types->type_desc = $request->type_desc;
         $types->save();
 
-        return redirect()->route('userHome');
-
-
+        return redirect()->route('viewTaskTypes')->with('message', "Task Type successfully updated!");
     }
 
     public function addUser(Request $request)
