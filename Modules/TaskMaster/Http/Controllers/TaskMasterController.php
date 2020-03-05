@@ -61,14 +61,11 @@ class TaskMasterController extends Controller
 
     public function addProj(Request $request)
     {
-         $pro = new Project([
+            Project::firstOrCreate([
             'project_name' => $request->projName,
             'project_desc' => $request->projDesc,
             'user_id' =>  Auth::id(),
-
-            
-        ]);
-        $pro->save();
+            ]);
     }
 
      public function editProj(Request $request)
@@ -152,8 +149,7 @@ class TaskMasterController extends Controller
 
     public function addTask(Request $request)
     {
-
-         $task = new Tasks([
+        Tasks::firstOrCreate([
             'project_id' => $request->projId,
             'task_title' => $request->taskTitle,
             'task_description' => $request->taskDesc,
@@ -162,10 +158,7 @@ class TaskMasterController extends Controller
             'date_time' => $request->dateTime,
             'due_date' => $request->dueDate,
             'status' => 'Ongoing',
-
-
-        ]);
-        $task->save();
+            ]);
     }
 
     public function destroyTask(Request $request)

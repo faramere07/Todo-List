@@ -11,6 +11,7 @@
         
         <link href="{{ asset('css/font.googleapis.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-free-5.10.2-web/css/all.css') }}">
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
@@ -24,10 +25,9 @@
         <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
         <script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" ></script>
         <script src="{{ asset('js/jquery-3.4.1.min.js') }}" ></script>
-        <script src="{{ asset('js/popper.min.js') }}" ></script>
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('js/popper.min.js') }}" ></script>
         <script src="{{ asset('fullcalendar/packages/core/main.js') }}"></script>
         <script src="{{ asset('fullcalendar/packages/interaction/main.js') }}"></script>
         <script src="{{ asset('fullcalendar/packages/daygrid/main.js') }}"></script>

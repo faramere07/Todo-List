@@ -12,8 +12,11 @@
         <a class="nav-item nav-link active" href="{{route('viewUsers')}}">
             <i class="fas fa-users"></i> Users
         </a>
+        <a class="nav-item nav-link active" href="{{route('viewTaskTypes')}}">
+            <i class="fas fa-tasks"></i> Task Types
+        </a>
         <a class="nav-item nav-link active" href="">
-            <i class="fas fa-tasks"></i> Projects
+            <i class="fas fa-project-diagram"></i> Projects
         </a>
         <a class="nav-item nav-link active" href="">
             <i class="fas fa-file-pdf"></i> Reports

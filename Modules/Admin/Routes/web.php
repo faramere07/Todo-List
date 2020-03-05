@@ -14,18 +14,25 @@
 Route::prefix('admin')->group(function() {
     Route::get('/', 'AdminController@index')->name('adminHome')->middleware('admin');
     Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers')->middleware('admin');
+    Route::get('/TaskTypes', 'AdminController@viewTaskTypes')->name('viewTaskTypes')->middleware('admin');
     Route::get('/tasks', 'AdminController@viewTask')->name('viewTask')->middleware('admin');
     Route::post('/AddUser', 'AdminController@addUser')->name('addUser')->middleware('admin');
+    Route::post('/addTaskType', 'AdminController@addTaskType')->name('addTaskType')->middleware('admin');
     Route::get('/user_profile/{id}', 'AdminController@viewUser')->name('viewUser')->middleware('admin');
     Route::post('/taskDetails', 'AdminController@taskDetails')->name('taskDetailsAdmin');
 
 
 
     Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow')->middleware('admin');
+    Route::get('/task_dtb', 'AdminController@taskShow')->name('taskShow')->middleware('admin');
     Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd')->middleware('admin');
     Route::post('/editUser', 'AdminController@editUser')->name('editUser')->middleware('admin');
     Route::post('/saveEditUser', 'AdminController@saveEditUser')->name('saveEditUser')->middleware('admin');
     Route::post('/destroyUser', 'AdminController@destroyUser')->name('destroyUser')->middleware('admin');
+    Route::post('/destroyType', 'AdminController@destroyType')->name('destroyType')->middleware('admin');
+
+    Route::post('/editTaskType', 'AdminController@editTaskType')->name('editTaskType')->middleware('admin');
+    Route::post('/updateTaskType', 'AdminController@updateTaskType')->name('updateTaskType')->middleware('admin');
 
     Route::get('/adduser', 'AdminController@adduser')->name('adduser')->middleware('admin');
     Route::get('/changePassword', 'AdminController@changePassword')->name('changePassword')->middleware('admin');
