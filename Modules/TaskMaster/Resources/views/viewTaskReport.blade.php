@@ -1,7 +1,11 @@
 @extends('taskmaster::layouts.master')
 
 @section('content')
-
+<style type="text/css">
+  .dataTables_filter {
+     display: none;
+}
+</style>
    <div class="alert alert-info alert-dismissible fade show" role="alert"></div>
 
 <form method="POST" id="topdf"  action="{{route('taskReport')}}" target="_blank"> 
@@ -15,40 +19,47 @@
                        <h1 class="lead">Generate Report</h1>
                   
                     </div>
-                  <div class="col-md-4">
-                    
-                      <button type="submit" class="btn btn-outline-danger col-md-8 float-right" id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
-                    
-                          
-                      </div>
+                  
                   </div>
                   <hr>
 
                   
                           <strong>Sort by: </strong><br>
-                          <div class="row">
-                            <div class="col-md-2">
-                              Date From
+                          <div class="mb-3 p-3">
+                            <!-- <div class=" d-flex justify-content-center">
+                              <div class="col-md-8">
+                                <input type="text" id="searchbox" placeholder="search" class="form-control">
+                              </div>
+                            </div> -->
+                            <div class="row d-flex justify-content-center">
+                              <div class="col-md-2">
+                                <label>Date From</label>
+                              </div>
+                              <div class="col-md-2">
+                                <label>Date To</label>
+                              </div>
+                              <div class="col-md-2">
+                                <label>Project</label>
+                              </div>
+                              <div class="col-md-2">
+                                <label>Task Status</label>
+                              </div>
+                              
                             </div>
-                            <div class="col-md-2">
-                              Date To
-                            </div>
-                            <div class="col-md-2">
-                              Project
-                            </div>
-                            <div class="col-md-2">
-                              Task Status
-                            </div>
-                            
-                          </div>
-                          <div class="row" id="filters">
-                            
+                            <div class="row d-flex justify-content-center" id="filters">
+                              
 
-                            <div class="col-md-2">
-                              <input type="date" name="dateFrom" class="form-control">
+                              <div class="col-md-2">
+                                <input type="date" name="min" id="min" class="form-control" required>
+                              </div>
+                              <div class="col-md-2">
+                                <input type="date" name="max" id="max" class="form-control" required>
+                              </div>
                             </div>
-                            <div class="col-md-2">
-                              <input type="date" name="dateFrom" class="form-control">
+                            <div class="row d-flex justify-content-center mt-2">
+                              <div class="col-md-8">
+                                 <button type="submit" class="btn btn-outline-danger col-md-12 " id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
+                              </div>
                             </div>
                           </div>
                        
@@ -61,8 +72,7 @@
                               <th>Due Date</th>
                               <th>Status</th>
                               <th>Remarks</th>
-                              
-                              <th class="text-right">Actions</th>
+                
                               
                           </tr>
                       </thead>
@@ -93,12 +103,7 @@
         $('.empty').hide();
         $('.emptyUpdate').hide();
 
-
-        // const date = new Date();
-        // const formattedDate = date.toLocaleDateString('en-GB', {
-        //   day: 'numeric', month: 'short', year: 'numeric'
-        // }).replace(/ /g, '-');
-
+//Date
         var date = new Date();
 
           var newd      = date.toLocaleDateString();
@@ -115,9 +120,38 @@
   
         var newDate = year+'-'+month+'-'+date1;
                 var count = 0;
- 
 
-        var dataTable= $('#table_id').DataTable( {
+
+//Datatable
+
+
+
+
+
+/* Custom filtering function which will search data in column four between two values */
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = Date.parse($('#min').val());
+        var max = Date.parse($('#max').val());
+        var age = Date.parse( data[3] ) || 0; // use data for the age column
+ 
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && age <= max ) ||
+             ( min <= age   && isNaN( max ) ) ||
+             ( min <= age   && age <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+     var table = $('#example').DataTable();
+     
+    // Event listener to the two range filtering inputs to redraw on input
+   
+            
+    
+        var table= $('#table_id').DataTable( { 
         "ajax": "{{route('taskReport_dtb')}}",
         "columns": [
             { "data": "project_name" },
@@ -128,7 +162,7 @@
             { "data": "status" },
             { "data": "remarks" },
             // { "data": "type_name" },
-            { "data": "actions" },
+            
         ],
 
         'rowCallback': function(row, data, index){
@@ -151,13 +185,13 @@
             
           },
           initComplete: function () {
-            this.api().columns([0,5]).every( function () {
+            this.api().columns([0,4]).every( function () {
                 var column = this;
                 count++;
                 $('<div class="col-md-2" id="lalagyan'+count+'"></div>')
                     .appendTo( "#filters" );
 
-                var select = $('<select class="mb-2 form-control" name="select'+count+'"><option value=""></option></select>')
+                var select = $('<select class="mb-2 form-control" name="select'+count+'"><option value=""></option>All</select>')
                     .appendTo( "#lalagyan"+count )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
@@ -176,11 +210,89 @@
         }
         } );
 
+    //         $("#searchbox").keyup(function() {
+    //     dataTable.fnFilter(this.value);
+    // }); 
+
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').change(function () {
+                table.draw();
+            });
+        });
+    // Event listener to the two range filtering inputs to redraw on input
+    // $('#min, #max').keyup( function() {
+    //     table.draw();
+    // } );
+
+    // Event listener to the two range filtering inputs to redraw on input
+    // $('#min, #max').change(function () {
+    //     table.draw();
+    // });
+
+
+        // var dataTable= $('#table_id').DataTable( {
+        // "ajax": "{{route('taskReport_dtb')}}",
+        // "columns": [
+        //     { "data": "project_name" },
+
+        //     { "data": "task_title" },
+        //     { "data": "date_time" },
+        //     { "data": "due_date" },
+        //     { "data": "status" },
+        //     { "data": "remarks" },
+        //     // { "data": "type_name" },
+        //     { "data": "actions" },
+        // ],
+
+        // 'rowCallback': function(row, data, index){
+            
+        //     if(data.due_date < newDate && data.status == 'Ongoing'){
+        //         // $(row).css('background-color', '#cc1d1d');
+        //         $(row).css('color', '#e8000c');
+        //     }
+
+        //     if(data.status == 'Ongoing' && data.due_date >= newDate){
+        //         console.log(data.status); 
+        //         $(row).find('td:eq(4)').css('color', '#02cc38');
+        //     }if(data.status == 'Finished(On-Time)'){
+        //         console.log(data.status); 
+        //         $(row).find('td:eq(4)').css('color', 'blue');
+        //     }if(data.status == 'Finished(Late)'){
+        //         console.log(data.status); 
+        //         $(row).find('td:eq(4)').css('color', 'red');
+        //     }
+            
+        //   },
+        //   initComplete: function () {
+        //     this.api().columns([0,3,5]).every( function () {
+        //         var column = this;
+        //         count++;
+        //         $('<div class="col-md-2" id="lalagyan'+count+'"></div>')
+        //             .appendTo( "#filters" );
+
+        //         var select = $('<select class="mb-2 form-control" name="select'+count+'"><option value=""></option></select>')
+        //             .appendTo( "#lalagyan"+count )
+        //             .on( 'change', function () {
+        //                 var val = $.fn.dataTable.util.escapeRegex(
+        //                     $(this).val()
+        //                 );
+ 
+        //                 column
+        //                     .search( val ? '^'+val+'$' : '', true, false )
+        //                     .draw();
+        //             } );
+ 
+        //         column.data().unique().sort().each( function ( d, j ) {
+        //             select.append( '<option value="'+d+'">'+d+'</option>' )
+        //         } );
+        //     } );
+        // }
+        // } );
+
      
 
 
 
-        // end
-    });
+
     </script>
 @endsection

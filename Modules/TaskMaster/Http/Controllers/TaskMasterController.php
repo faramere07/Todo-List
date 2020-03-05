@@ -404,20 +404,29 @@ class TaskMasterController extends Controller
     public function taskReport(Request $request){
         $pTitle = $request->select1;
         $status = $request->select2;
+        $min = $request->min;
+        $max = $request->max;
 
         //get the details of the proj first to get the id
 
         //use id from previous query
-        if($pTitle && $status){
+        if($pTitle && $status && $min && $max){
             $project = Project::whereProject_name($pTitle)->first();
-            $query = Tasks::whereProject_id($project->id)->whereStatus($status)->get();
-        }else if($pTitle && !$status){
+            $query = Tasks::whereProject_id($project->id)
+                            ->whereStatus($status)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->get();
+        }else if($pTitle && !$status && $min && $max){
             $project = Project::whereProject_name($pTitle)->first();
-            $query = Tasks::whereProject_id($project->id)->get();
-        }else if(!$pTitle && $status){
-            $query = Tasks::whereStatus($status)->get();
+            $query = Tasks::whereProject_id($project->id)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->get();
+        }else if(!$pTitle && $status && $min && $max){
+            $query = Tasks::whereStatus($status)
+                            ->whereBetween('due_date', [$min, $max])
+                            ->get();
         }else{
-            $query = Tasks::all();
+            $query = Tasks::all()->whereBetween('due_date', [$min, $max]);
             
         }
 
