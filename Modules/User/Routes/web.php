@@ -27,7 +27,9 @@ Route::prefix('user')->group(function() {
     Route::post('/editProfile', 'UserController@editProfile')->name('editProfile');
 
     Route::post('/storeProfile', 'UserController@storeProfile')->name('storeProfile');
-    Route::get('/userReport', 'UserController@userReport')->name('userReport');
+    Route::post('/userReport', 'UserController@userReport')->name('userReport');
+    Route::get('/viewUserReport', 'UserController@viewUserReport')->name('viewUserReport');
+
 
 
 });
