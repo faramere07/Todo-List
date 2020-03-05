@@ -154,7 +154,7 @@ class AdminController extends Controller
         $username = User::where('username',$request->get('username'))->first();
 
         if(empty($username)){
-            User::create([
+            User::firstOrCreate([
                 'password' => Hash::make($request->get('password')),
                 'username' => $request->get('username'),
                 'type_id' => $request->get('type_id'),
@@ -173,7 +173,7 @@ class AdminController extends Controller
         $type = TaskType::where('type_name',$request->get('type_name'))->first();
 
         if(empty($type)){
-            TaskType::create([
+            TaskType::firstOrCreate([
                 'type_name' => $request->get('type_name'),
                 'type_desc' => $request->get('type_desc'),
             ]);
