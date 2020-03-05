@@ -38,9 +38,9 @@
     <script type="text/javascript" src="{{ asset('MDB/js/mdb.min.js') }}"></script>
 
 </head>
-<body>
+<body style="background-color: #050b21;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

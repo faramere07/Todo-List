@@ -279,6 +279,14 @@ class UserController extends Controller
         <label class="small" for="lname">Last Name</label>
             <input required name="lname" class="form-control" type="text" value="'.$userDetails->last_name.'">
         </div>
+        </div><br>
+        <div class="form-row col-md-12">
+        <label class="small" for="image">Image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="image" name="image">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+        </div>
 
         </div>
         ';
@@ -290,6 +298,12 @@ class UserController extends Controller
     {
 
         $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        if($request->image != null){
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+        $userDetails->profile_picture = $imageName;
+        }
 
         $userDetails->first_name= $request->fname;
         $userDetails->mid_name = $request->mname;

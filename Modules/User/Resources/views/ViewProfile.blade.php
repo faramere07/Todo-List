@@ -51,7 +51,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form method="POST" action="{{ route('storeProfile') }}">
+          <form method="POST" action="{{ route('storeProfile') }}" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
               ...

@@ -32,14 +32,14 @@
         <script type="text/javascript" src="{{ asset('MDB/js/mdb.min.js') }}"></script>
     </head>
     
-    <body style="background-color: #DCDCDC;">
+    <body style="background-color: #030621;">
 
         <div class="flex-center position-ref full-height">
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ml-auto">
                         @guest
                             <li class="nav-item">
@@ -79,22 +79,23 @@
                     </div>
                     <div class="form-row col-md-6">
                         <div class="card">
-                            <h5 class="card-header info-color white-text text-center py-4">
+                            <h5 class="card-header white-text text-center py-4" style="background-color: #1b2d69;">
                                 <strong>User Details</strong>
                             </h5>
+                            <br>
                             <div class="card-body px-lg-5 pt-0">
                                 <form class="text-center" style="color: #757575;" method="POST" action="{{ route('Activate') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row col-md-12">
                                         <center>
-                                            <div class="col-md-10" style="border:1px solid; height: 200px;">
-                                                <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 100%; height: 100%;"><br>
+                                            <div class="col-md-10" style="border:1px solid; height: 250px;">
+                                                <img src="{{ asset('images/default-profile.png') }}" id="profPic" style="width: 90%; height: 100%;"><br>
                                             </div>
                                             <div class="col-md-12">
                                                 <input type='file' name="files" accept='image/*' onchange='openFile(event)' id="files" hidden>
                                                 <center>
-                                                    (Optional)<br>
-                                                    <button type="button" class="btn btn-primary" id="upBtn">Upload Picture</button>
+                                                    <br>
+                                                    <button type="button" class="btn btn-outline-dark" id="upBtn">Upload Picture</button>
                                                 </center>
                                             </div>
                                         </center>
@@ -132,7 +133,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-row col-md-12">
-                                        <button type="submit" class="btn btn-outline-primary col-md-12">Submit</button>
+                                        <div class="col-md-2"></div>
+                                        <button type="submit" class="btn btn-outline-dark col-md-8">Submit</button>
                                     </div>
                                 </form>
                             </div>
