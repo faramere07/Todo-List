@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group col-md-12">
                       <label for="exampleInputPassword1">Type Description</label>
-                      <textarea class="form-control" name="type_desc" rows="3" cols="50"></textarea>
+                      <textarea class="form-control" name="type_desc" rows="3" cols="50" required></textarea>
                     </div>
                 </div>
             </div>

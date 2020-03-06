@@ -43,5 +43,7 @@ Route::prefix('admin')->group(function() {
     Route::post('/editProfile', 'AdminController@editProfileAdmin')->name('editProfileAdmin')->middleware('admin');
     Route::post('/storeProfile', 'AdminController@storeProfileAdmin')->name('storeProfileAdmin');
 
+    Route::get('/viewReport', 'AdminController@viewReport')->name('viewAdminReport');
+    Route::get('/usersShowReport', 'AdminController@usersShowReport')->name('usersShowReport');
 
 });

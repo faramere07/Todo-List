@@ -18,7 +18,7 @@
         <a class="nav-item nav-link active" href="">
             <i class="fas fa-project-diagram"></i> Projects
         </a>
-        <a class="nav-item nav-link active" href="">
+        <a class="nav-item nav-link active" href="{{ route('viewAdminReport') }}">
             <i class="fas fa-file-pdf"></i> Reports
         </a>
     </div>

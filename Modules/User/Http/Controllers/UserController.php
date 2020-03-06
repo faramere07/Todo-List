@@ -343,7 +343,7 @@ class UserController extends Controller
                             ->get();
         }else{
             $query = Tasks::whereBetween('due_date', [$min, $max])
-                            ->whereUser_id($id)->get;
+                            ->whereUser_id($id)->get();
             
         }
 

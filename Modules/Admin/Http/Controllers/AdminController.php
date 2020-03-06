@@ -359,4 +359,8 @@ class AdminController extends Controller
         return redirect()->route('viewProfileAdmin')->with('success', 'Profile Updated');
     }
 
+    public function viewReport(){
+        return view('admin::viewUserReport');
+    }
+
 }

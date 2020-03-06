@@ -70,7 +70,6 @@
             </div>
 
             <div class="modal-footer">
-             
                   <input type="hidden" name="date" id="dateAdd">
                   <button type="submit" class="btn btn-outline-primary add">Save project</button>
             </div>
@@ -93,7 +92,6 @@
           <form id ='editForm'>
           @csrf
               <div class="modal-body" id="editBody">
-
                   
               </div>
               <div class="modal-footer">
