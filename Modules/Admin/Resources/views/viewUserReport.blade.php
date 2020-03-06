@@ -2,7 +2,7 @@
 
 @section('content')
  
-<form method="POST" id="topdf"  action="" target="_blank"> 
+<form method="POST" id="topdf"  action="{{route('userReportPDF')}}" target="_blank"> 
 @csrf 
             <div class="form-row"  style="margin-top: 70px;">
               <div class="col-md-12">
@@ -21,12 +21,12 @@
                           <div class="mb-3 p-3">
                            
                             <div class="row d-flex justify-content-center">
-                              <!-- <div class="col-md-2">
+                              <div class="col-md-2">
                                 <label>Date From</label>
                               </div>
                               <div class="col-md-2">
                                 <label>Date To</label>
-                              </div> -->
+                              </div>
                               <div class="col-md-2">
                                 <label>User Type</label>
                               </div>
@@ -36,12 +36,12 @@
                             <div class="row d-flex justify-content-center" id="filters">
                               
 
-                              <!-- <div class="col-md-2">
+                              <div class="col-md-2">
                                 <input type="date" name="min" id="min" class="form-control" required>
                               </div>
                               <div class="col-md-2">
                                 <input type="date" name="max" id="max" class="form-control" required>
-                              </div> -->
+                              </div>
                             </div>
                             <div class="row d-flex justify-content-center mt-2">
                               <div class="col-md-8">
@@ -55,7 +55,9 @@
                           <tr>
                               <th>Profile Picture</th>
                               <th>Username</th>
-                              <th>Name</th>
+                              <th>First Name</th>
+                              <th>Middle name</th>
+                              <th>Last Name</th>
                               <th>User Type</th>
                               
                           </tr>
@@ -74,57 +76,36 @@
 
 
     <script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          var token = $("input[name='_token']").val();
 
    
     $(document).ready(function(){
 var count=0;
       //DataTables Ajax
         $('#user_table').DataTable({
-            processing: true,
-            serverSide: true,
-            language:{
-              emptyTable: "No User Added.",
-            },
-            "ajax": "{{route('usersShow')}}",
-            "columns": [
-                { "data": "userDetail.profile_picture"},
-                { "data": "username" },
-                { "data": "first_name" },
-                { "data": "type_name" },
-             
+          "ajax": "{{route('usersShowReport')}}",
+          "columns": [
+              { "data": "profile_picture" },
+              { "data": "username" },
+              { "data": "first_name" },
+              { "data": "last_name" },
+              { "data": "mid_name" },
+              { "data": "type_name" },
+          ],
+          "columnDefs": [
+              { "targets": 0,
+                "render": function(data) {
+                  return '<img class="img-fluid mx-auto d-block" src=../images/'+data+'>'
+                }
+              }   
             ],
-            columnDefs:[
-                {
-                  "width":"150px","targets":[0],
-                },
-                {
-                  "width":"100px","targets":[3],
-                },
-                {
-                  "targets":[0],
-                  "render": function(data, type, row){
-                      if(row.profile_picture == null){
-                          return "<img style='width:100px; height:100px;' src='{{ asset('images/default-profile.png') }}'/>";
-                      }else{
-                          return "<img style='width:100px; height:100px;' src='../images/"+row.profile_picture+"'/>";
-                      }
-                  }
-                },
-                {
-                  "targets":[2],
-                  "render": function(data, type, row){
-                      if(row.first_name == null){
-                        return "<i>(To Be Filled-up)</i>"
-                      }else{
-                        return row.first_name + " " + row.mid_name + " " + row.last_name;
-                      }
-                  }
-                },
-            ],
-
-
-          initComplete: function () {
-            this.api().columns([3]).every( function () {
+             initComplete: function () {
+            this.api().columns([5]).every( function () {
                 var column = this;
                 count++;
                 $('<div class="col-md-2" id="lalagyan'+count+'"></div>')
@@ -147,8 +128,7 @@ var count=0;
                 } );
             } );
         }
-        });
-
+          } );
     });
       
 

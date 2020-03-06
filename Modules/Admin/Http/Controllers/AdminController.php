@@ -82,7 +82,38 @@ class AdminController extends Controller
     public function taskDetails(Request $request){
             $details = Tasks::with(['project','project.user.userDetail','taskType','user.userDetail'])->find($request->get('taskid'));
 
-            $result = "";
+            $result = "
+                        <div class='input-group mb-3'>
+                          <div class='input-group-prepend'>
+                            <span class='input-group-text' id='basic-addon1'>Start Date and Time</span>
+                          </div>
+                          <input type='text' class='form-control' placeholder='Username' aria-label='Username' aria-describedby='basic-addon1'>
+                        </div>
+                        <div class='input-group mb-3'>
+                          <div class='input-group-prepend'>
+                            <span class='input-group-text' id='basic-addon1'>Start Time</span>
+                          </div>
+                          <input type='text' class='form-control' placeholder='Username' aria-label='Username' aria-describedby='basic-addon1'>
+                        </div>
+                        <div class='input-group mb-3'>
+                          <div class='input-group-prepend'>
+                            <span class='input-group-text' id='basic-addon1'>Start Time</span>
+                          </div>
+                          <input type='text' class='form-control' placeholder='Username' aria-label='Username' aria-describedby='basic-addon1'>
+                        </div>
+                        <div class='input-group mb-3'>
+                          <div class='input-group-prepend'>
+                            <span class='input-group-text' id='basic-addon1'>Start Time</span>
+                          </div>
+                          <input type='text' class='form-control' placeholder='Username' aria-label='Username' aria-describedby='basic-addon1'>
+                        </div>
+                        <div class='input-group mb-3'>
+                          <div class='input-group-prepend'>
+                            <span class='input-group-text' id='basic-addon1'>Start Time</span>
+                          </div>
+                          <input type='text' class='form-control' placeholder='Username' aria-label='Username' aria-describedby='basic-addon1'>
+                        </div>
+            ";
 
             
                         
@@ -125,6 +156,25 @@ class AdminController extends Controller
                             View
                         </div>
                     </a>
+                            ';
+                })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+     public function usersShowReport(){
+        $users = UserDetail::join('users', 'users.id', 'user_details.user_id')
+                ->join('user_types', 'user_types.id', 'users.type_id')
+                ->where('type_id', '!=', 1)
+                ->select('*','user_details.id as ud_id')
+                ->get();
+              
+         // $users = DB::table('user')->get();
+         // dd($users);
+
+         return DataTables::of($users)
+            ->addColumn('actions', function($user) {
+                    return '<button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'" fname="'.$user->firstName.'">Delete</button>
+                            <button class="btn btn-outline-info col-md-5 edit" userId="'.$user->id.'">Edit</button>
                             ';
                 })
             ->rawColumns(['actions'])
@@ -361,6 +411,25 @@ class AdminController extends Controller
 
     public function viewReport(){
         return view('admin::viewUserReport');
+    }
+
+    public function userReport(Request $request){
+        $type = $request->select1;
+        // $min = $request->min;
+        // $max = $request->max;
+        if($type){
+            $query = Users::where('type_id', $type)->get();
+        }else{
+            $query = Users::where('type_id', '!=', 1)->get();
+
+        }
+
+     
+        $pdf = PDF::loadView('admin::pdf.userReportPDF', compact('query', 'type', ));
+
+        $pdf->save(storage_path().'_filename.pdf');
+
+        return $pdf->stream('users_'.$month.'.pdf');
     }
 
 }

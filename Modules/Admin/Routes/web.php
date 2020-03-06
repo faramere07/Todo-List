@@ -45,5 +45,5 @@ Route::prefix('admin')->group(function() {
 
     Route::get('/viewReport', 'AdminController@viewReport')->name('viewAdminReport');
     Route::get('/usersShowReport', 'AdminController@usersShowReport')->name('usersShowReport');
-
+    Route::post('/userReport', 'AdminController@userReport')->name('userReportPDF');
 });

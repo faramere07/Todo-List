@@ -19,6 +19,9 @@
         <link href="{{ asset('fullcalendar/packages/daygrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/timegrid/main.css') }}" rel='stylesheet' />
         <link href="{{ asset('fullcalendar/packages/list/main.css') }}" rel='stylesheet' />
+        <link rel="icon" href="{{ asset('MDB/img/mdb-favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 
         
         <script src="{{ asset('js/jquery-3.4.1.slim.min.js') }}" ></script>
@@ -34,7 +37,8 @@
         <script src="{{ asset('fullcalendar/packages/timegrid/main.js') }}"></script>
         <script src="{{ asset('fullcalendar/packages/list/main.js') }}"></script>
         <script src="{{ asset('js/filereader.js-master/filereader.js') }}"></script>
-
+        <script type="text/javascript" src="{{ asset('MDB/js/mdb.min.js') }}"></script>
+        
        {{-- Laravel Mix - CSS File --}}
        {{-- <link rel="stylesheet" href="{{ mix('css/admin.css') }}"> --}}
 
@@ -65,8 +69,8 @@
             .buttonText2{
               display: none;
               position: absolute;
-              top:-70%;
-              right: 13%;
+              top:0%;
+              right: 30%;
               color:#000;
             }
             .destroy:hover .buttonText{
