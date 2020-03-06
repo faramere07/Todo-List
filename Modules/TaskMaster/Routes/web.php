@@ -43,6 +43,8 @@ Route::prefix('taskmaster')->group(function() {
 
     Route::get('/viewTaskReport', 'TaskMasterController@viewTaskReport')->name('viewTaskReport')->middleware('taskmaster');
     Route::get('/taskReport_dtb', 'TaskMasterController@taskReport_dtb')->name('taskReport_dtb')->middleware('taskmaster');
+    Route::post('/viewEditProfile', 'TaskMasterController@viewEditProfile')->name('viewEditProfile')->middleware('taskmaster');
+
 
 
 });

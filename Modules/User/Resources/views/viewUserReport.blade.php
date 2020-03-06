@@ -5,7 +5,7 @@
 
 <form method="POST" id="topdf"  action="{{route('userReport')}}" target="_blank"> 
 @csrf 
-            <div class="form-row">
+            <div class="form-row" style="margin-top: 70px;">
               <div class="col-md-12">
 
                   <div class="row">

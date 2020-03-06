@@ -329,6 +329,40 @@ class TaskMasterController extends Controller
         return view('taskmaster::viewProfile', compact('userDetails'));
     }
 
+public function viewEditProfile(Request $request)
+    {
+        $userDetails = UserDetail::where('user_id', Auth::id())->first();
+
+        echo '
+        <div class="form-row">
+        <div class="col-md-4">
+        <label class="small" for="fname">First Name</label>
+            <input name="firstName" class="form-control" type="text" value="'.$userDetails->first_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="mname">Middle Name</label>
+            <input name="middleName" class="form-control" type="text" value="'.$userDetails->mid_name.'">
+        </div>
+
+        <div class="col-md-4">
+        <label class="small" for="lname">Last Name</label>
+            <input required name="lastName" class="form-control" type="text" value="'.$userDetails->last_name.'">
+        </div>
+        </div><br>
+        <div class="form-row col-md-12">
+        <label class="small" for="image">Image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="image" name="image">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+        </div>
+
+        </div>
+        ';
+
+
+    }
     public function editProfile (Request $request){
         $user = User::find(Auth::id());
         $userDetails = UserDetail::where('user_id', Auth::id())->first();
