@@ -17,6 +17,7 @@ use Yajra\Datatables\Datatables;
 use Auth;
 use Session;
 use Redirect;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -167,6 +168,13 @@ class AdminController extends Controller
                 ->where('type_id', '!=', 1)
                 ->select('*','user_details.id as ud_id')
                 ->get();
+                //  ->addColumn('first_name', function($user){
+                // $details = UserDetail::where('user_id', $user->id)->first();
+                // if($details){
+                //     return $details->first_name;
+                // }else{
+                //     return 'to be filled';
+                // }
               
          // $users = DB::table('user')->get();
          // dd($users);
@@ -414,22 +422,28 @@ class AdminController extends Controller
     }
 
     public function userReport(Request $request){
+        $gen = UserDetail::where('user_id', Auth::id())->first();
         $type = $request->select1;
-        // $min = $request->min;
-        // $max = $request->max;
+        $min = $request->min;
+        $max = $request->max;
         if($type){
-            $query = Users::where('type_id', $type)->get();
+            $query = User::where('type_id', $type)
+                    ->whereBetween('created_at', [$min, $max])
+                    ->get();
         }else{
-            $query = Users::where('type_id', '!=', 1)->get();
+            $query = User::where('type_id', '!=', 1)
+                    ->whereBetween('created_at', [$min, $max])
+                    ->get();
 
         }
 
+
      
-        $pdf = PDF::loadView('admin::pdf.userReportPDF', compact('query', 'type', ));
+        $pdf = PDF::loadView('admin::pdf.userReportPDF', compact('query', 'min', 'max' ,'type', 'gen'));
 
         $pdf->save(storage_path().'_filename.pdf');
 
-        return $pdf->stream('users_'.$month.'.pdf');
+        return $pdf->stream('users_.pdf');
     }
 
 }

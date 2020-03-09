@@ -59,6 +59,8 @@
                               <th>Middle name</th>
                               <th>Last Name</th>
                               <th>User Type</th>
+                              <th>User Type</th>
+
                               
                           </tr>
                       </thead>
@@ -86,8 +88,38 @@
    
     $(document).ready(function(){
 var count=0;
+
+
+
+      $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+
+            var d1 = new Date($('#min').val());
+            var d2 = new Date($('#max').val());
+            var d3 = new Date(data[6]);
+              // var min = Date.parse($('#min').val());
+              // var max = Date.parse($('#max').val());
+              // var age = Date.parse( data[6] ) || 0; // use data for the age column
+
+
+              var min = d1.getTime();
+              var max = d2.getTime();
+              var age = d3.getTime();
+       
+              if ( ( isNaN( min ) && isNaN( max ) ) ||
+                   ( isNaN( min ) && age <= max ) ||
+                   ( min <= age   && isNaN( max ) ) ||
+                   ( min <= age   && age <= max ) )
+              {
+                  return true;
+              }
+              return false;
+          }
+      );
+
+
       //DataTables Ajax
-        $('#user_table').DataTable({
+        var table= $('#user_table').DataTable({
           "ajax": "{{route('usersShowReport')}}",
           "columns": [
               { "data": "profile_picture" },
@@ -96,13 +128,19 @@ var count=0;
               { "data": "last_name" },
               { "data": "mid_name" },
               { "data": "type_name" },
+              { "data": "created_at"},
           ],
           "columnDefs": [
               { "targets": 0,
                 "render": function(data) {
-                  return '<img class="img-fluid mx-auto d-block" src=../images/'+data+'>'
+                  return '<img style="width:150px; height:150px;" src=../images/'+data+'>'
                 }
-              }   
+              }
+              // ,
+              // {
+              //     "targets": [ 6 ],
+              //     "visible": false
+              // }  
             ],
              initComplete: function () {
             this.api().columns([5]).every( function () {
@@ -129,6 +167,12 @@ var count=0;
             } );
         }
           } );
+
+        // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').change(function () {
+                table.draw();
+            });
+      
     });
       
 
