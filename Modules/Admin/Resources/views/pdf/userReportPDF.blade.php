@@ -35,8 +35,7 @@
   		<br>
 	<table>
 		<tr>
-        	<th>Profile Picture</th>
-			<th>Username</th>
+        	<th>Username</th>
 			<th>First Name</th>
 			<th>Middle name</th>
 			<th>Last Name</th>
@@ -46,7 +45,7 @@
 		
 		@foreach($query as $q)
 		<tr>
-			<td>{{$q->profile_picture}}</td>
+			
 			<td>{{$q->username}}</td>
 			<td>{{$q->first_name}}</td>
 			<td>{{$q->mid_name}}</td>

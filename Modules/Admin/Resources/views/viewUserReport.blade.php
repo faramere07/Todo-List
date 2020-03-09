@@ -59,7 +59,7 @@
                               <th>Middle name</th>
                               <th>Last Name</th>
                               <th>User Type</th>
-                              <th>User Type</th>
+                             
 
                               
                           </tr>
@@ -136,11 +136,11 @@ var count=0;
                   return '<img style="width:150px; height:150px;" src=../images/'+data+'>'
                 }
               }
-              // ,
-              // {
-              //     "targets": [ 6 ],
-              //     "visible": false
-              // }  
+              ,
+              {
+                  "targets": [ 6 ],
+                  "visible": false
+              }  
             ],
              initComplete: function () {
             this.api().columns([5]).every( function () {
