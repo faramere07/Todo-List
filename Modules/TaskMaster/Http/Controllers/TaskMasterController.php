@@ -298,27 +298,39 @@ class TaskMasterController extends Controller
 
     public function savePassword(Request $request)
     {
-        $message = array(
+       
+        $hashedPassword = User::find(Auth::id());
+
+        if (Hash::check($request->old_password, $hashedPassword->password)) {
+            // Validations
+            $message = array(
             'password.min' => 'Please input atleast 6 characters',
             'password.confirmed' => 'Password does not match',
            
-        );
-        $request->validate( [
-            'password' => 'sometimes|string|min:6|confirmed',
+            );
+            $request->validate( [
+                'password' => 'sometimes|string|min:6|confirmed',
 
-        ], $message);
+            ], $message);
 
-        $id =  Auth::id();
+                $id =  Auth::id();
 
-        $user = User::find($id);
-        $user->password =Hash::make($request->password);
-        $user->save();
+            $user = User::find($id);
+            $user->password =Hash::make($request->password);
+            $user->save();
 
-        // return view('admin::index')->with('success', 'User Updated');
-        return redirect()
-            ->route('taskmasterHome')
-            ->with('success', 'Password Changed');
-        
+            // return view('admin::index')->with('success', 'User Updated');
+            return redirect()->route('taskmasterHome')->with('success', 'Password Changed');
+        }else{
+           
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'old_password' => ['Password is incorrect.'],
+
+             ]);
+             throw $error;
+        }
+   
+    
     }
 
     public function viewProfile(){

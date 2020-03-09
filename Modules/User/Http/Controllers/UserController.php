@@ -73,37 +73,37 @@ class UserController extends Controller
 
     public function savePassword(Request $request)
     {
-        $message = array(
-            'password.min' => 'Please input atleast 6 characters',
-            'password.confirmed' => 'Password does not match',
-           
-        );
-        $request->validate( [
-            'password' => 'sometimes|string|min:6|confirmed',
-
-        ], $message);
-
+        
 
         $hashedPassword = User::find(Auth::id());
 
         if (Hash::check($request->old_password, $hashedPassword->password)) {
-            // The passwords match...
+            // Validations
+            $message = array(
+            'password.min' => 'Please input atleast 6 characters',
+            'password.confirmed' => 'Password does not match',
+           
+            );
+            $request->validate( [
+                'password' => 'sometimes|string|min:6|confirmed',
+
+            ], $message);
 
                 $id =  Auth::id();
 
-        $user = User::find($id);
-        $user->password =Hash::make($request->password);
-        $user->save();
+            $user = User::find($id);
+            $user->password =Hash::make($request->password);
+            $user->save();
 
-        // return view('admin::index')->with('success', 'User Updated');
-        return redirect()
-            ->route('userHome')
-            ->with('success', 
-    'Password Changed');
+            // return view('admin::index')->with('success', 'User Updated');
+            return redirect()->route('userHome')->with('success', 'Password Changed');
         }else{
-           return redirect()->back()->withError(['old_password','your message,here']);
+           
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'old_password' => ['Password is incorrect.'],
 
-           // return redirect::back()->withErrors(['old_password', 'Old password does not match']);
+             ]);
+             throw $error;
         }
    
     
