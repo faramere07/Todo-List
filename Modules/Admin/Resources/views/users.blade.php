@@ -113,6 +113,14 @@
 
 <script type="text/javascript">
 
+  $.ajaxSetup({
+    headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          var token = $("input[name='_token']").val();
+
+
     $(document).ready(function(){
 
       //DataTables Ajax
