@@ -112,17 +112,21 @@ class TaskMasterController extends Controller
 
    
      public function task_dtb($id){
-
-        $tasks = Tasks::has('project')->where('project_id',$id)->get();
+        $tasks = Tasks::with(['user', 'user.userDetail'])->where('project_id',$id)->get();
 
          return DataTables::of($tasks)
-            ->addColumn('actions', function($task) {
-                    return '<button class="btn btn-outline-danger col-md-5 float-right mx-2 destroy" taskId="'.$task->id.'" >Delete</button>
-                            <button class="btn btn-outline-primary col-md-5 float-right edit" taskId="'.$task->id.'">Edit</button>
+            ->addColumn('actions', function($tasks) {
+                    return '<button class="btn btn-outline-danger col-md-5 float-right mx-2 destroy" taskId="'.$tasks->id.'" >Delete</button>
+                            <button class="btn btn-outline-primary col-md-5 float-right edit" taskId="'.$tasks->id.'">Edit</button>
                             
                             ';
                 })
-            ->rawColumns(['actions'])
+            ->addColumn('assignee', function($tasks) {
+                    return '<td>'.$tasks->user->userDetail->first_name.' '.$tasks->user->userDetail->last_name.'</td>
+                            
+                            ';
+                })
+            ->rawColumns(['actions', 'assignee'])
             ->make(true);
     }
 
@@ -226,7 +230,7 @@ class TaskMasterController extends Controller
               <div class="row mb-2">
                 <div class="col-md-6">
                   <label>Due Date:</label>
-                  <input type="date" name="dueDate" class="form-control" value="'.$task->due_date.'">
+                  <input type="date" id="dueDate" name="dueDate" class="form-control" value="'.$task->due_date.'">
                 </div>
                 
                 <div class="col-md-6">

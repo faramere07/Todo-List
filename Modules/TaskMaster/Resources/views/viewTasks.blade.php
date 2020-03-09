@@ -26,11 +26,11 @@
                           <tr>
                               <th>Title</th>
                               <th>Description</th>
-                              <th>Date Time</th>
+                              <th>Time</th>
                               <th>Due Date</th>
                               <th>Status</th>
                               <th>Remarks</th>
-                              
+                              <th>Assignee</th>
                               <th class="text-right">Actions</th>
                               
                           </tr>
@@ -192,7 +192,7 @@
             { "data": "due_date" },
             { "data": "status" },
             { "data": "remarks" },
-            // { "data": "type_name" },
+            { "data": "assignee" },
             { "data": "actions" },
         ],
 
