@@ -89,6 +89,28 @@
     </div>
   </div>
 
+  <!-- View User modal -->
+  <div class="modal fade" id="viewUserDetails" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" action="">
+              @csrf
+            <div class="modal-body" id="viewBody">
+
+                <!-- echo user details modal content -->
+
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>  
+
 <script type="text/javascript">
 
     $(document).ready(function(){
@@ -139,6 +161,25 @@
         });
 
     });
+
+    //show Modal view user details
+  $(document).on('click','.view',function(){
+          var id = $(this).attr('userId');
+
+          $.ajax({
+            url:"{{ route('viewUserDetails') }}",
+            method:"POST",
+            data:{
+              id:id,
+              _token:token
+            },
+            success:function(data){
+              $('#viewUserDetails').modal('show');
+              $('#viewBody').html(data);
+             
+            }   
+          });  
+        });
       
 
 </script>

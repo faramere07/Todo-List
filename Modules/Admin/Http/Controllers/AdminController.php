@@ -147,15 +147,11 @@ class AdminController extends Controller
                     return '
                     <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'">
                         <i class="fas fa-user-minus"></i>
-                        <div class="buttonText">
-                            Deactivate
-                        </div>
                     </button>
-                    <a class="btn btn-outline-info col-md-5 view" href="'.route('viewUser',$user->username).'">
+                    <button class="btn btn-outline-info col-md-5 view" userId="'.$user->id.'">
                         <i class="fas fa-eye"></i>
-                        <div class="buttonText2">
-                            View
-                        </div>
+                    </button>
+
                     </a>
                             ';
                 })
@@ -221,6 +217,27 @@ class AdminController extends Controller
                     <div class="form-group col-md-12">
                       <label>Type Description</label>
                       <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$types->type_desc.'</textarea>
+                    </div>
+                </div>
+                ';
+
+    }
+
+    public function viewUserDetails (Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+        $userDetail = UserDetail::where('user_id', $request->id)->first();
+        echo
+                ' 
+                <div class="form-row col-md-12 justify-content-center">
+                    <div class="form-group col-md-12">
+                      <label>Name</label>
+                      <input type="text" class="form-control" name="type_name" max="25" value="'.$user->name.'" required>
+                      <input type="hidden" class="form-control" name="id" max="25" value="'.$userDetails->id.'" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label>Type Description</label>
+                      <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$userDetails->name.'</textarea>
                     </div>
                 </div>
                 ';

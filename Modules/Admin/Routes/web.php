@@ -22,7 +22,7 @@ Route::prefix('admin')->group(function() {
     Route::post('/taskDetails', 'AdminController@taskDetails')->name('taskDetailsAdmin');
 
 
-
+    Route::post('/viewUserDetails', 'AdminController@viewUserDetails')->name('viewUserDetails')->middleware('admin');
     Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow')->middleware('admin');
     Route::get('/task_dtb', 'AdminController@taskShow')->name('taskShow')->middleware('admin');
     Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd')->middleware('admin');
