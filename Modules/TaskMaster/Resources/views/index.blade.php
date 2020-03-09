@@ -19,7 +19,7 @@
     </div>
 @endif
         
-        <div class="form-row"  style="margin-top: 70px; ">
+        <div class="form-row"  >
 
             <div class="col-md-8">
               <h1 class="lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}, You have # Projects</h1>
@@ -31,7 +31,7 @@
         </div>
         <hr>
     	<table id="table_id" class="table table-bordered">
-		    <thead class="thead">
+		    <thead class="thead thead-dark">
 	            <tr>
 	                <th>Project Name</th>
                   <th>Project Description</th>
