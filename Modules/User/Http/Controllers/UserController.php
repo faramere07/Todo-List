@@ -83,7 +83,13 @@ class UserController extends Controller
 
         ], $message);
 
-        $id =  Auth::id();
+
+        $hashedPassword = User::find(Auth::id());
+
+        if (Hash::check($request->old_password, $hashedPassword->password)) {
+            // The passwords match...
+
+                $id =  Auth::id();
 
         $user = User::find($id);
         $user->password =Hash::make($request->password);
@@ -94,6 +100,13 @@ class UserController extends Controller
             ->route('userHome')
             ->with('success', 
     'Password Changed');
+        }else{
+           return redirect()->back()->withError(['old_password','your message,here']);
+
+           // return redirect::back()->withErrors(['old_password', 'Old password does not match']);
+        }
+   
+    
         
     }
 

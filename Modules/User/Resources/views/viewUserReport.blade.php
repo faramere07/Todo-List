@@ -188,7 +188,7 @@ $.fn.dataTable.ext.search.push(
         ],
 
         initComplete: function () {
-            this.api().columns([0,3]).every( function () {
+            this.api().columns([0,5]).every( function () {
                 var column = this;
                 count++;
                 $('<div class="col-md-2" id="lalagyan'+count+'"></div>')
