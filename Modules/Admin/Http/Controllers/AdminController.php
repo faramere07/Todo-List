@@ -427,23 +427,33 @@ class AdminController extends Controller
         $min = $request->min;
         $max = $request->max;
         if($type){
-            $query = User::where('type_id', $type)
-                    ->whereBetween('created_at', [$min, $max])
-                    ->get();
+            $query = UserDetail::join('users', 'users.id', 'user_details.user_id')
+                ->join('user_types', 'user_types.id', 'users.type_id')
+                ->where('type_name', $type)
+                ->whereBetween('users.created_at', [$min, $max])
+                ->select('*','user_details.id as ud_id')
+                ->get();
+
+             
         }else{
-            $query = User::where('type_id', '!=', 1)
-                    ->whereBetween('created_at', [$min, $max])
-                    ->get();
+            $query = UserDetail::join('users', 'users.id', 'user_details.user_id')
+                ->join('user_types', 'user_types.id', 'users.type_id')
+                ->where('type_id', '!=', 1)
+                ->whereBetween('users.created_at', [$min, $max])
+                ->select('*','user_details.id as ud_id')
+                ->get();
 
         }
 
 
-     
+     // dd($query);
         $pdf = PDF::loadView('admin::pdf.userReportPDF', compact('query', 'min', 'max' ,'type', 'gen'));
 
         $pdf->save(storage_path().'_filename.pdf');
 
         return $pdf->stream('users_.pdf');
+
+        // return view('admin::pdf.userReportPDF', compact('query', 'min', 'max' ,'type', 'gen'));
     }
 
 }
