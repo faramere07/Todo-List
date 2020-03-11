@@ -173,7 +173,7 @@
     //show Modal view user details
   $(document).on('click','.view',function(){
           var id = $(this).attr('userId');
-          alert(id);
+        
           $.ajax({
             url:"{{ route('viewUserDetails') }}",
             method:"POST",
@@ -185,7 +185,10 @@
               $('#viewUserDetails').modal('show');
               $('#viewBody').html(data);
              
-            }   
+            },
+          error: function(jqxhr, status, exception) {
+             alert('User still needs to fill his/her details.');
+         }
           });  
         });
       

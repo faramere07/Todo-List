@@ -226,7 +226,7 @@ class AdminController extends Controller
 
     public function viewUserDetails(Request $request)
     {
-        dd($request->id);
+        
         $user = User::where('id', $request->id)->first();
         $userDetail = UserDetail::where('user_id', $request->id)->first();
         echo
