@@ -124,7 +124,8 @@ class AdminController extends Controller
     public function viewUsers()
     {
         $user_types = UserType::all();
-
+        // $users = User::with(['userDetail','userType'])->where('users.id','!=',Auth::id())->get();
+        // dd($users);
         return view('admin::users', compact('user_types'));
     }
 
@@ -141,14 +142,14 @@ class AdminController extends Controller
 
         return DataTables::of($users)
             ->addColumn('type_name', function($user){
-                    return $user->userType->type_name;
+                    return $user->user_id;
                 })
             ->addColumn('actions', function($user) {
                     return '
-                    <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->id.'">
+                    <button class="btn btn-outline-danger float-right col-md-5 mx-2 destroy" userId="'.$user->userType->type_name.'">
                         <i class="fas fa-user-minus"></i>
                     </button>
-                    <button class="btn btn-outline-info col-md-5 view" userId="'.$user->id.'">
+                    <button class="btn btn-outline-info col-md-5 view" userId="'.$user->user_id.'">
                         <i class="fas fa-eye"></i>
                     </button>
 
@@ -225,6 +226,7 @@ class AdminController extends Controller
 
     public function viewUserDetails(Request $request)
     {
+        dd($request->id);
         $user = User::where('id', $request->id)->first();
         $userDetail = UserDetail::where('user_id', $request->id)->first();
         echo
@@ -232,12 +234,12 @@ class AdminController extends Controller
                 <div class="form-row col-md-12 justify-content-center">
                     <div class="form-group col-md-12">
                       <label>Name</label>
-                      <input type="text" class="form-control" name="type_name" max="25" value="'.$user->name.'" required>
-                      <input type="hidden" class="form-control" name="id" max="25" value="'.$userDetails->id.'" required>
+                      <input type="text" class="form-control" name="type_name" max="25" value="'.$userDetail->first_name.'" required>
+                      <input type="hidden" class="form-control" name="id" max="25" value="'.$userDetail->id.'" required>
                     </div>
                     <div class="form-group col-md-12">
                       <label>Type Description</label>
-                      <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$userDetails->name.'</textarea>
+                      <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$userDetail->first_name.'</textarea>
                     </div>
                 </div>
                 ';

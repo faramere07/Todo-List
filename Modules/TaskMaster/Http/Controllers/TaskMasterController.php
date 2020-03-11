@@ -33,9 +33,10 @@ class TaskMasterController extends Controller
     {
       $id =  Auth::id();
       $userDetails = UserDetail::where('user_id', $id)->first();
+      $countProject = Project::where('user_id', $id)->where('archive_status', 'No')->count();
       $user = User::find($id);
       
-        return view('taskmaster::index', compact('userDetails'));
+      return view('taskmaster::index', compact('userDetails', 'countProject'));
       
 
 
@@ -191,11 +192,11 @@ class TaskMasterController extends Controller
               
 
               <div class="input-group input-group-lg mb-2">
-                  <input type="text" name="taskTitle" class="form-control" placeholder="Task title" value="'.$task->task_title.'">   
+                  <input required type="text" name="taskTitle" class="form-control" placeholder="Task title" value="'.$task->task_title.' ">   
               </div>
 
               <div class="mb-2">
-                  <select class="form-control" name="taskType">
+                  <select class="form-control" name="taskType" required>
                     <option>--select task type--</option>';
 
                     foreach ($types as $type){
@@ -212,7 +213,7 @@ class TaskMasterController extends Controller
 
               <div class="mb-2">
 
-                  <select class="form-control" name="userId">
+                  <select class="form-control" name="userId" required>
                     <option>--select user--</option>';
 
                     foreach ($users as $user){
@@ -230,12 +231,12 @@ class TaskMasterController extends Controller
               <div class="row mb-2">
                 <div class="col-md-6">
                   <label>Due Date:</label>
-                  <input type="date" id="dueDate" name="dueDate" class="form-control" value="'.$task->due_date.'">
+                  <input required type="date" id="dueDate" name="dueDate" class="form-control" value="'.$task->due_date.' ">
                 </div>
                 
                 <div class="col-md-6">
                   <label>Due Time:</label>
-                  <input type="time" name="dateTime" class="form-control" value="'.$task->date_time.'">
+                  <input required type="time" name="dateTime" class="form-control" value="'.$task->date_time.' ">
                 </div>
               </div>
               

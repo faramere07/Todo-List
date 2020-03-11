@@ -173,7 +173,7 @@
     //show Modal view user details
   $(document).on('click','.view',function(){
           var id = $(this).attr('userId');
-
+          alert(id);
           $.ajax({
             url:"{{ route('viewUserDetails') }}",
             method:"POST",

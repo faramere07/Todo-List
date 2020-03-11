@@ -22,7 +22,7 @@
         <div class="form-row"  >
 
             <div class="col-md-8">
-              <h1 class="lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}, You have # Projects</h1>
+              <h1 class="lead">Welcome {{ $userDetails->first_name }} {{ $userDetails->last_name }}, You have {{$countProject}} Projects</h1>
             </div>
 
             <div class="col-md-4">
