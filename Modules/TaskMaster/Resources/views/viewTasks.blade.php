@@ -153,12 +153,13 @@
        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-          var token = $("input[name='_token']").val();
-
-    $(document).ready(function(){
-        $('.alert').hide();
+    var token = $("input[name='_token']").val();
+    $('.alert').hide();
         $('.empty').hide();
         $('.emptyUpdate').hide();
+
+    $(document).ready(function(){
+        
 
 
         // const date = new Date();

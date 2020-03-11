@@ -1,12 +1,7 @@
 @extends('taskmaster::layouts.master')
 
 @section('content')
-<style type="text/css">
-  tr{
-    height: 70px;
-  }
 
-</style>
 
 <div class="alert alertOld alert-info alert-dismissible fade show alertOld" role="alert">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -31,7 +26,7 @@
         </div>
         <hr>
     	<table id="table_id" class="table table-bordered">
-		    <thead class="thead thead-dark">
+		    <thead class="thead">
 	            <tr>
 	                <th>Project Name</th>
                   <th>Project Description</th>
@@ -115,11 +110,10 @@
           });
           var token = $("input[name='_token']").val();
 
-    $(document).ready(function(){
-
         $('.alertOld').hide();
         $('.empty').hide();
         $('.emptyUpdate').hide();
+    $(document).ready(function(){
 
         var dataTable= $('#table_id').DataTable( {
         "ajax": "{{route('project_dtb')}}",
@@ -128,7 +122,14 @@
             { "data": "project_desc" },
             { "data": "actions" },
            
-        ]
+        ],
+        'columnDefs': [ {
+
+            'targets': [2], /* column index */
+            'max-width': '10%',
+            'orderable': false, /* true or false */
+
+         }]
         } );
 
         //Adding
