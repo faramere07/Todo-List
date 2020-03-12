@@ -9,7 +9,8 @@
               
                   <div class="row">
                     <div class="col-md-8">
-                       <h1 class="lead">Generate Report</h1>
+                      <h1 class="lead my-3 ml-1">Generate Report</h1>
+                       
                   
                     </div>
                   
@@ -44,7 +45,7 @@
                               </div>
                             </div>
                             <div class="row d-flex justify-content-center mt-2">
-                              <div class="col-md-8">
+                              <div class="col-md-6">
                                  <button type="submit" class="btn btn-outline-danger col-md-12 " id="addBtn" data-target="#addModal" data-toggle="modal" >Export as PDF</button>
                               </div>
                             </div>

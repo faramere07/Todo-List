@@ -2,8 +2,10 @@
 
 @section('content')
 
-<div class="container mb-2" style="margin-top: 70px;">
-    <div class="row justify-content-center">
+ <div class="container-fluid" style="margin-top: 90px;">
+        
+      
+    <div class="row justify-content-center mt-2">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Change Password') }}</div>

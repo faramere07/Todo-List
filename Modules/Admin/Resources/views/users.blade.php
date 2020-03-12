@@ -1,9 +1,6 @@
 @extends('admin::layouts.master')
 
 @section('content')
-  <style type="text/css">
-    
-  </style>
 
   <div class="container-fluid" style="margin-top: 70px; margin-bottom: 150px;">
       <div class="form-row col-md-12"> 
@@ -24,10 +21,13 @@
               </div>
           @endif
           <div class="form-row col-md-12" style="padding:10px;"> 
-              <button type="button" class="col-md-3 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
+            <h1 class="lead my-3 ml-1">Task Types</h1>
+
+            <button type="button" class="col-md-3 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
                   Add New User Account
-              </button>
+            </button>
           </div>
+          <hr>
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
               <div class="col-md-12">
                   <table id="user_table" class="display table-bordered" style="width: 100%;">

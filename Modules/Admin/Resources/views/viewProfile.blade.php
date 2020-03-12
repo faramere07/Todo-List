@@ -11,8 +11,9 @@
 @endif
 
    
-  <div class="container" style="margin-top: 70px;">
-        <div class="form-row">
+  <div class="container-fluid" style="margin-top: 90px;">
+        
+        <div class="form-row mt-2">
           <div class="col-md-2">
           </div>
           <div class="col-md-8">

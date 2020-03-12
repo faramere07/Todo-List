@@ -221,11 +221,29 @@ class AdminController extends Controller
             ->addColumn('actions', function($project) {
                     return '
                     
-                    <button class="btn btn-outline-info col-md-5 edit float-center" typeId="'.$project->id.'">
+                    <a href='.route('viewProjectTasks', 4).' class="btn btn-outline-info col-md-5 edit float-center" typeId="'.$project->id.'">
                         <i class="fas fa-eye"></i>
-                    </button>';
+                    </a>';
                 })
             ->rawColumns(['actions','name'])
+            ->make(true);
+    }
+
+    public function tasksShow($id)
+    {
+        $tasks = Tasks::with(['user', 'user.userDetail'])->where('project_id',$id)->get();
+
+         return DataTables::of($tasks)
+            ->addColumn('actions', function($task) {
+                    return '<button class="btn btn-outline-danger col-md-5 float-right mx-2 destroy" taskId="'.$task->id.'" >Delete</button>
+                            <button class="btn btn-outline-primary col-md-5 float-right edit" taskId="'.$task->id.'">Edit</button>
+                            
+                            ';
+                })
+            ->addColumn('assignee', function($task) {
+                    return $task->user->userDetail->first_name.' '.$task->user->userDetail->last_name;
+                })
+            ->rawColumns(['actions', 'assignee'])
             ->make(true);
     }
 
@@ -513,6 +531,12 @@ class AdminController extends Controller
         return $pdf->stream('users_.pdf');
 
         // return view('admin::pdf.userReportPDF', compact('query', 'min', 'max' ,'type', 'gen'));
+    }
+
+    public function viewProjectTasks($id){
+        
+        $project = Project::where('id', $id)->first();
+        return view('admin::tasks', compact('project'));
     }
 
 }

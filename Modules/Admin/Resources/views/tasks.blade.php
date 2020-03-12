@@ -23,17 +23,21 @@
                 </button>
               </div>
           @endif
-          <h1 class="lead my-3 ml-1">Projects</h1>
+          <h1 class="lead my-3 ml-1">Tasks for {{$project->project_name}}</h1>
           <hr>  
           <div class="form-row col-md-12" style="padding:10px; border:1px solid #FFF0F5;">
               <div class="col-md-12">
                   <table id="project_table" class="display table-bordered" style="width: 100%;">
                       <thead class="thead thead-dark">
                           <tr>
-                              <th>Project Name</th>
-                              <th>Project Description</th>
-                              <th>Creator</th>
-                              <th>Actions</th>
+                              <th>Assignee</th>
+                              <th>Title</th>
+                              <th>Description</th>
+                              <th>Time</th>
+                              <th>Due Date</th>
+                              <th>Status</th>
+                              <th>Remarks</th>
+
                           </tr>
                       </thead>       
                   </table>
@@ -61,12 +65,16 @@
             language:{
               emptyTable: "No Project Added.",
             },
-            "ajax": "{{route('projectShow')}}",
+            "ajax": "{{route('tasksShow', $project->id)}}",
             "columns": [
-                { "data": "project_name"},
-                { "data": "project_desc" },
-                { "data": "name"},
-                { "data": "actions" },
+              { "data": "assignee" },
+              { "data": "task_title" },
+              { "data": "task_description" },
+              { "data": "date_time" },
+              { "data": "due_date" },
+              { "data": "status" },
+              { "data": "remarks" },
+             
             ],
         });
 
