@@ -15,6 +15,8 @@ Route::prefix('admin')->group(function() {
     Route::get('/', 'AdminController@index')->name('adminHome')->middleware('admin');
     Route::get('/Users', 'AdminController@viewUsers')->name('viewUsers')->middleware('admin');
     Route::get('/TaskTypes', 'AdminController@viewTaskTypes')->name('viewTaskTypes')->middleware('admin');
+    Route::get('/Projects', 'AdminController@viewProjects')->name('viewProjects')->middleware('admin');
+
     Route::get('/tasks', 'AdminController@viewTask')->name('viewTask')->middleware('admin');
     Route::post('/AddUser', 'AdminController@addUser')->name('addUser')->middleware('admin');
     Route::post('/addTaskType', 'AdminController@addTaskType')->name('addTaskType')->middleware('admin');
@@ -25,6 +27,8 @@ Route::prefix('admin')->group(function() {
     Route::post('/viewUserDetails', 'AdminController@viewUserDetails')->name('viewUserDetails')->middleware('admin');
     Route::get('/people_dtb', 'AdminController@usersShow')->name('usersShow')->middleware('admin');
     Route::get('/task_dtb', 'AdminController@taskShow')->name('taskShow')->middleware('admin');
+    Route::get('/project_dtb', 'AdminController@projectShow')->name('projectShow')->middleware('admin');
+
     Route::post('/storeAdd', 'AdminController@storeAdd')->name('storeAdd')->middleware('admin');
     Route::post('/editUser', 'AdminController@editUser')->name('editUser')->middleware('admin');
     Route::post('/saveEditUser', 'AdminController@saveEditUser')->name('saveEditUser')->middleware('admin');

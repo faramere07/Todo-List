@@ -136,6 +136,12 @@ class AdminController extends Controller
         return view('admin::taskTypes');
     }
 
+    public function viewProjects()
+    {
+
+        return view('admin::projects');
+    }
+
     public function usersShow()
     {
         $users = User::with(['userDetail','userType'])->where('users.id','!=',Auth::id());
@@ -201,6 +207,25 @@ class AdminController extends Controller
                     </button>';
                 })
             ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function projectShow()
+    {
+        $projects = Project::where('archive_status', '!=', 'Archived');
+
+        return DataTables::of($projects)
+            ->addColumn('name', function($project){
+                return $project->user->userDetail->first_name.' '.$project->user->userDetail->last_name;
+            })
+            ->addColumn('actions', function($project) {
+                    return '
+                    
+                    <button class="btn btn-outline-info col-md-5 edit float-center" typeId="'.$project->id.'">
+                        <i class="fas fa-eye"></i>
+                    </button>';
+                })
+            ->rawColumns(['actions','name'])
             ->make(true);
     }
 

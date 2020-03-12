@@ -15,7 +15,7 @@
         <a class="nav-item nav-link active" href="{{route('viewTaskTypes')}}">
             <i class="fas fa-tasks"></i> Task Types
         </a>
-        <a class="nav-item nav-link active" href="">
+        <a class="nav-item nav-link active" href="{{ route('viewProjects') }}">
             <i class="fas fa-project-diagram"></i> Projects
         </a>
         <a class="nav-item nav-link active" href="{{ route('viewAdminReport') }}">

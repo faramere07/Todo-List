@@ -24,7 +24,7 @@
               </div>
           @endif
           <div class="form-row col-md-12" style="padding:10px;"> 
-              <button type="button" class="form-control col-md-3 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
+              <button type="button" class="col-md-3 ml-auto btn btn-outline-info" data-toggle="modal" data-target="#addUser">
                   Add New User Account
               </button>
           </div>
