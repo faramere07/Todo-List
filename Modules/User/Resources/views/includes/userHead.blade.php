@@ -19,6 +19,9 @@
        <!-- bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
+
 
         <!-- JS, Popper.js, and jQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>

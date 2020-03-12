@@ -47,7 +47,7 @@
   <!-- Add Task Type modal -->
   <div class="modal fade" id="addTaskType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <form method="POST" action="{{ route('addTaskType') }}">
+      <form method="POST" action="{{ route('addTaskType') }}" id="addform">
         @csrf
           <div class="modal-content">
             <div class="modal-header">
@@ -70,7 +70,7 @@
             </div>
             <div class="modal-footer">
               <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-outline-primary col-md-12">Create Task Type</button>
+              <button type="submit" class="btn btn-outline-primary col-md-12 add">Create Task Type</button>
             </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" action="{{ route('updateTaskType') }}">
+            <form method="POST" action="{{ route('updateTaskType') }}" id="editform">
               @csrf
             <div class="modal-body" id="editBody">
 
@@ -98,7 +98,7 @@
             </div>
             <div class="modal-footer">
               <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-outline-primary col-md-12">Update</button>
+              <button type="submit" class="btn btn-outline-primary col-md-12 update">Update</button>
             </div>
             </div>
             </form>
@@ -184,7 +184,15 @@
             }   
           });  
         });
+  // $(document).on('click','.update',function(){
+  $( "#editform" ).submit(function( event ) {
+    $('.update').prop('disabled', true);
+  });
 
+
+  $( "#addform" ).submit(function( event ) {
+    $('.add').prop('disabled', true);
+  });
       
 
 </script>

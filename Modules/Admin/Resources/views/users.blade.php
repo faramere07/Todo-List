@@ -80,7 +80,7 @@
             </div>
             <div class="modal-footer">
               <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-outline-primary col-md-12">Create User Account</button>
+              <button type="submit" class="btn btn-outline-primary col-md-12" id="add">Create User Account</button>
             </div>
             </div>
           </div>
@@ -184,14 +184,18 @@
             success:function(data){
               $('#viewUserDetails').modal('show');
               $('#viewBody').html(data);
-             
+            
             },
           error: function(jqxhr, status, exception) {
              alert('User still needs to fill his/her details.');
          }
           });  
         });
-      
+
+ 
+      $( "#addUser" ).submit(function( event ) {
+        $('#add').prop('disabled', true);
+      });
 
 </script>
 

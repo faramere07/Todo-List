@@ -217,7 +217,7 @@ class AdminController extends Controller
                     </div>
                     <div class="form-group col-md-12">
                       <label>Type Description</label>
-                      <textarea class="form-control" name="type_desc" rows="3" cols="50">'.$types->type_desc.'</textarea>
+                      <textarea class="form-control" name="type_desc" rows="3" cols="50" required>'.$types->type_desc.'</textarea>
                     </div>
                 </div>
                 ';
