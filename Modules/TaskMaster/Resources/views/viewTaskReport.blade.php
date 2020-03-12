@@ -10,7 +10,7 @@
 
 <form method="POST" id="topdf"  action="{{route('taskReport')}}" target="_blank"> 
 @csrf 
-            <div class="form-row">
+            <div class="form-row  my-3 ">
               <div class="col-md-12">
               
 

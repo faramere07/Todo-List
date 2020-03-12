@@ -10,7 +10,7 @@
               
 
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-8 my-3">
                   <h2 class="lead">Tasks for <b>{{ $project->project_name}}</b></h2>
                 </div>
                   <div class="col-md-4">

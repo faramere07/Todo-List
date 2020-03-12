@@ -13,9 +13,9 @@
     </head>
     <body>
         @include('taskmaster::includes.taskNav')
-        <hr>
+            <div class="mt-4">
             @include('taskmaster::includes.taskMain')
-
+            </div>
 
             @include('taskmaster::includes.taskFooter')
         {{-- Laravel Mix - JS File --}}

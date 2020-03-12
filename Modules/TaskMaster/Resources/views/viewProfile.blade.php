@@ -12,10 +12,10 @@
 
    
   <div class="container" >
-        <div class="form-row">
+        <div class="form-row ">
           <div class="col-md-2">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8  my-3 ">
             <div class="card" style="width: 100%;">
               <h5 class="card-header">About Me <button type="button" class="btn btn-outline-primary float-right editProfile" id="addBtn"  >Edit profile</button></h5>
               <div class="card-body" style="width: 100%;">
